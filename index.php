@@ -32,10 +32,5 @@
                 </div>
             </div>
         </section>
-        <footer>
-            <div>
-                &copy; MyJournal
-            </div>
-        </footer>
-    </body>
-</html>
+
+<?php include 'inc/footer.php'; ?>
