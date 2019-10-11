@@ -5,5 +5,6 @@
         echo "connected to the database"; //testing
     } catch (Exception $e) {
         echo $e->getMessage();
+        exit;
     }
 ?>
