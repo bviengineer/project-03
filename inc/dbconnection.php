@@ -1,6 +1,6 @@
 <?php 
     try {
-        $db = new PDO('sqlite:__DIR__journaAAAAAAAAAl.db');
+        $db = new PDO('sqlite:__DIR__journal.db');
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);    
         echo "connected to the database"; //testing
     } catch (Exception $e) {
