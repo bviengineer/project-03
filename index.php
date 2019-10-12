@@ -18,35 +18,37 @@
 	echo '</pre>';
 
 	// Looping through the array of entries & printing title and date to the index page
-	function print_entries(){	
-		global $entries;
+	// function print_entries(){	
+	// 	global $entries;
+	
+	// 	foreach ($entries as $entry) {	
+	// 		$title = strtolower($entry['title']);
 
-		foreach ($entries as $entry) {	
-			$title = strtolower($entry['title']);
-			echo $title . "<br>";
-			echo "<h2><a href='";
+	// 		echo "<h2><a href=' ";
+	// 		if ($title == strtolower("The best day I ever had") ) {
+	// 				echo "detail.php' >";
 
-			if ($title == strtolower("The best day I ever had")) {
-				echo "detail.php' >";
+	// 		} elseif ($title == strtolower("The absolute worst day I’ve ever had")) {
+	// 				echo "detail_2.php' >";
 
-			} elseif ($title == strtolower("The absolute worst day I’ve ever had")) {
-				echo "detail_2.php' >";
+		 //} elseif ($title == strtolower("That time at the mall")) {
+			// 	echo "detail_3.php' >";
 
-			} elseif ($title == strtolower("That time at the mall")) {
-				echo "detail_3.php' >";
+			// } elseif ($title == strtolower("Dude, where’s my car?")) {
+			// 	echo "detail_4.php' >";
+			// } else {
+			// 		echo "#";
+			// }
+			//echo "detail.php' >";
+			//echo $entry['title'];
+			//echo $entry["title"] . "</a></h2>";
+			//echo "</a></h2>";
+			// echo "<time datetime=" . $entry["date"] . '>' . $entry["date"] . "</time> <br>";
+			//}
+		//}
+	//}
 
-			} elseif ($title == strtolower("Dude, where’s my car?")) {
-				echo "detail_4.php' >";
-			} else {
-					echo "#";
-			}
-
-			echo $entry["title"] . "</a></h2> <br>";
-			echo "<time datetime=" . $entry["date"] . '>' . $entry["date"] . "</time> <br>";
-		}
-	}
-
-	print_entries();
+	//print_entries();
 
 ?>
     <body>
@@ -62,19 +64,19 @@
             <div class="container">
                 <div class="entry-list">
                     <article>
-										<h2><a href="detail.php">The best day I ever had</a></h2>
+										<h2><a href="detail.php"><?php echo $entries[0]['title']; ?> </a></h2>
                         <time datetime="2018-01-31">January 31, 2016</time>
                     </article>
                     <article>
-                        <h2><a href="detail_2.html">The absolute worst day I’ve ever had</a></h2>
+                        <h2><a href="detail_2.html"><?php echo $entries[1]['title']; ?></a></h2>
                         <time datetime="2016-01-31">January 31, 2016</time>
                     </article>
                     <article>
-                        <h2><a href="detail_3.php">That time at the mall</a></h2>
+                        <h2><a href="detail_3.php"> <?php echo $entries[2]['title']; ?></a></h2>
                         <time datetime="2016-01-31">January 31, 2016</time>
                     </article>
                     <article>
-                        <h2><a href="detail_4.php">Dude, where’s my car?</a></h2>
+                        <h2><a href="detail_4.php"><?php echo $entries[3]['title']; ?></a></h2>
                         <time datetime="2016-01-31">January 31, 2016</time>
                     </article>
                 </div>
