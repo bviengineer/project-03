@@ -65,7 +65,7 @@
                 <div class="entry-list">
                     <article>
 										<h2><a href="detail.php"><?php echo $entries[0]['title']; ?> </a></h2>
-                        <time datetime="2018-01-31">January 31, 2016</time>
+                        <time datetime=<?php echo $entries[0]['date']; ?> > <?php strtotime($entries[0]['date']); ?></time> <!-- "2018-01-31" January 31, 2016-->
                     </article>
                     <article>
                         <h2><a href="detail_2.html"><?php echo $entries[1]['title']; ?></a></h2>
