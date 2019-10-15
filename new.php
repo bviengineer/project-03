@@ -1,9 +1,35 @@
-<?php include 'inc/header.php'; ?>
+<?php include 'inc/header.php'; 
+
+// Use prepared statements to add/edit/delete journal entries in the database.
+// Create “add/edit” view for the "entry" page that allows the user to add or edit journal entries with the following fields: title, date, time_spent, learned, and resources. Each journal entry should have a unique primary key.
+
+    if ($_POST && $_POST !='') {
+        //use trim() function to remove whites pace before and after 
+      $title = $_POST['title'];
+      $title = $_POST['date'];
+      $title = $_POST['timeSpent'];
+      $title = $_POST['whatILearned'];
+      $title = $_POST['ResourcesToRemember'];
+			echo '<pre>';
+				var_dump($_POST);
+			echo '</pre>';
+      //echo "<br>Your title is: " . $title . "<br>";
+    } elseif($_POST && $_POST == '') {
+				echo "you didn't enter any data";
+		}
+
+//     // Function will add a new journal entry to the database
+//     function add_journal_entry($title, $date, $time_spent, $learned, $resources){
+//         include 'inc/dbconnection.php';
+        
+//         $addEntry = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUES($title, $date, $time_spent, $learned, $resources)";
+//     }
+?>
     <body>
         <header>
             <div class="container">
                 <div class="site-header">
-                    <a class="logo" href="index.html"><i class="material-icons">library_books</i></a>
+                    <a class="logo" href="index.php"><i class="material-icons">library_books</i></a>
                     <a class="button icon-right" href="new.html"><span>New Entry</span> <i class="material-icons">add</i></a>
                 </div>
             </div>
@@ -12,7 +38,7 @@
             <div class="container">
                 <div class="new-entry">
                     <h2>New Entry</h2>
-                    <form method="POST">
+                    <form method="POST" action="#">
                         <label for="title"> Title</label>
                         <input id="title" type="text" name="title"><br>
                         <label for="date">Date</label>
