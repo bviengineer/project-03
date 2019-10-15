@@ -3,27 +3,34 @@
 // Use prepared statements to add/edit/delete journal entries in the database.
 // Create “add/edit” view for the "entry" page that allows the user to add or edit journal entries with the following fields: title, date, time_spent, learned, and resources. Each journal entry should have a unique primary key.
 
-    if ($_POST && $_POST !='') {
+    if (!empty($_POST['title'])) {
         //use trim() function to remove whites pace before and after 
       $title = $_POST['title'];
-      $title = $_POST['date'];
-      $title = $_POST['timeSpent'];
-      $title = $_POST['whatILearned'];
-      $title = $_POST['ResourcesToRemember'];
-			echo '<pre>';
-				var_dump($_POST);
-			echo '</pre>';
+      $date = $_POST['date'];
+      $time_spent = $_POST['timeSpent'];
+      $learned = $_POST['whatILearned'];
+			$resources = $_POST['ResourcesToRemember'];
+			add_journal_entry();
+			// echo '<pre>';
+			// 	var_dump($_POST['title']);
+			// 	var_dump($_POST['date']);
+			// 	var_dump($_POST['timeSpent']);
+			// 	var_dump($_POST['whatILearned']);
+			// 	var_dump($_POST['ResourcesToRemember']);
+			// echo '</pre>';
       //echo "<br>Your title is: " . $title . "<br>";
-    } elseif($_POST && $_POST == '') {
+    } elseif($_POST && empty($_POST['title'])) {
 				echo "you didn't enter any data";
 		}
 
-//     // Function will add a new journal entry to the database
-//     function add_journal_entry($title, $date, $time_spent, $learned, $resources){
-//         include 'inc/dbconnection.php';
+		// Function will add a new journal entry to the database
+    function add_journal_entry($title, $date, $time_spent, $learned, $resources){
+        include 'inc/dbconnection.php';
         
-//         $addEntry = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUES($title, $date, $time_spent, $learned, $resources)";
-//     }
+				// $addEntry = "INSERT INTO entries ($title, $date, $time_spent, $learned, $resources) VALUES($title, $date, $time_spent, $learned, $resources)";
+				
+				"INSERT INTO entries ($title, $date, $time_spent, $learned, $resources) VALUES($title, $date, $time_spent, $learned, $resources)";
+    }
 ?>
     <body>
         <header>
