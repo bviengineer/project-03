@@ -1,5 +1,5 @@
 <?php 
-	// Including the file with the header tags and the database connection
+	// Inclusion of files containing header tags and the database connection
 	include 'inc/header.php';
 	include 'inc/dbconnection.php';
 
@@ -11,7 +11,7 @@
 			die();
 	}
 
-	// Assigning PDOStatement object result set to a variable
+	// Assignment of return values or PDOStatement object result set to a variable
 	$entries = $results->fetchAll(PDO::FETCH_ASSOC);
 	echo '<pre>';
 	//var_dump($entries);
@@ -64,7 +64,7 @@
             <div class="container">
                 <div class="entry-list">
                     <article>
-										<h2><a href="detail.php"><?php echo $entries[0]['title']; ?> </a></h2>
+						<h2><a href="detail.php"><?php echo $entries[0]['title']; ?> </a></h2>
                         <time datetime=<?php echo $entries[0]['date']; ?> > <?php strtotime($entries[0]['date']); ?></time> <!-- "2018-01-31" January 31, 2016-->
                     </article>
                     <article>
