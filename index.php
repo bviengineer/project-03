@@ -17,6 +17,7 @@
 	//var_dump($entries);
 	echo '</pre>';
 
+	// Print journal entries to the index page
 	function get_journal_entries() {
 		global $entries; // Grants function access to the $entries variable 
 
@@ -25,6 +26,10 @@
 			echo $entry['id'] . '>';
 			echo $entry['title'];
 			echo "</a></h2>";
+			echo "<time>";
+			echo $entry['date'];
+			echo "</time>";
+			echo "<hr>";
 		}
 	}
 ?>
