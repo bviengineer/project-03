@@ -6,7 +6,7 @@
     if (!empty($_POST['title'])) {
         //use trim() function to remove whites pace before and after 
       $title = $_POST['title'];
-      $date_written = $_POST['date'];
+      $date = $_POST['date'];
       $time_spent = $_POST['timeSpent'];
       $learned = $_POST['whatILearned'];
 			$resources = $_POST['ResourcesToRemember'];
@@ -24,15 +24,15 @@
 		}
 
 		// Function will add a new journal entry to the database
-    function add_journal_entry($title, $date, $time_spent, $learned, $resources){
+    function add_journal_entry($title, $date_written, $time_spent, $learned, $resources){
         include 'inc/dbconnection.php';
         
-				$addEntry = "INSERT INTO entries (title, date_written, time_spent, learned, resources) VALUE(?, ?, ?, ?, ?)";
+				$addEntry = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUE(?, ?, ?, ?, ?)";
 
 				try {
 					$results = $db->prepare($addEntry);
 					$results->bindValue(1, $title, PDO::PARAM_STR);
-					$results->bindValue(2, $date_written, PDO::PARAM_STR);
+					$results->bindValue(2, $date, PDO::PARAM_STR);
 					$results->bindValue(3, $time_spent, PDO::PARAM_INT);
 					$results->bindValue(4, $learned, PDO::PARAM_STR);
 					$results->bindValue(5, $resources, PDO::PARAM_STR);
