@@ -35,6 +35,7 @@
 
 				} catch (Exception $e) {
 						$e->getMessage();
+						return array();
 				}
     }
 ?>
