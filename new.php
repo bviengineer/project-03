@@ -6,10 +6,10 @@
 	if (!empty($_POST['title'])) {
 			//use trim() function to remove whites pace before and after 
 		$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-		$date = $_POST['date'];
-		$time_spent = $_POST['timeSpent'];
-		$learned = $_POST['whatILearned'];
-		$resources = $_POST['ResourcesToRemember'];
+		$date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
+		$time_spent = filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT);
+		$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
+		$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
 		add_journal_entry($title, $date, $time_spent, $learned, $resources);
 	} elseif($_POST && empty($_POST['title'])) {
 			$blank_form_err = "You didn't enter any data";
