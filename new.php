@@ -3,17 +3,17 @@
 // Use prepared statements to add/edit/delete journal entries in the database.
 // Create “add/edit” view for the "entry" page that allows the user to add or edit journal entries with the following fields: title, date, time_spent, learned, and resources. Each journal entry should have a unique primary key.
 
-    if (!empty($_POST['title'])) {
-        //use trim() function to remove whites pace before and after 
-      $title = $_POST['title'];
-      $date = $_POST['date'];
-      $time_spent = $_POST['timeSpent'];
-      $learned = $_POST['whatILearned'];
-			$resources = $_POST['ResourcesToRemember'];
-			add_journal_entry($title, $date, $time_spent, $learned, $resources);
-    } elseif($_POST && empty($_POST['title'])) {
-				$blank_form_err = "You didn't enter any data";
-		}
+	if (!empty($_POST['title'])) {
+			//use trim() function to remove whites pace before and after 
+		$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+		$date = $_POST['date'];
+		$time_spent = $_POST['timeSpent'];
+		$learned = $_POST['whatILearned'];
+		$resources = $_POST['ResourcesToRemember'];
+		add_journal_entry($title, $date, $time_spent, $learned, $resources);
+	} elseif($_POST && empty($_POST['title'])) {
+			$blank_form_err = "You didn't enter any data";
+	}
 
 		// Function will add a new journal entry to the database
     function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
@@ -29,7 +29,7 @@
 					$results->bindValue(4, $learned, PDO::PARAM_STR);
 					$results->bindValue(5, $resources, PDO::PARAM_STR);
 					$results->execute();
-					echo "entry added successfully";
+				 	echo "Your journal entry was added successfully!";
 
 				} catch (Exception $e) {
 						$e->getMessage();
