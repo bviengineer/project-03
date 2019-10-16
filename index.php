@@ -23,7 +23,7 @@
 
 		foreach ($entries as $entry) {
 			echo "<h2><a href='detail.php?id= ";
-			echo $entry['id'] . '>';
+			echo $entry['id'] . " '> ";
 			echo $entry['title'];
 			echo "</a></h2>";
 			echo "<time>";
