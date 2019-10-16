@@ -1,4 +1,8 @@
-<?php include 'inc/header.php'; ?>
+<?php 
+    include 'inc/header.php'; 
+    include 'inc/dbconnection.php';
+    //var_dump($db);
+?>
     <body>
         <header>
             <div class="container">
