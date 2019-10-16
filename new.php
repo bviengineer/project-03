@@ -11,7 +11,7 @@
 		add_journal_entry($title, $date, $time_spent, $learned, $resources);
 
 	} elseif($_POST && empty($_POST['title'])) {
-			$blank_form_err = "You need at least a title in order to save an entry.";
+			$blank_title_err = "You need at least a title in order to save an entry.";
 	}
 
 		// Function will add a new journal entry to the database
@@ -49,7 +49,7 @@
                 <div class="new-entry">
                     <h2>New Entry</h2>
 										<!-- Print message to the screen if the form is blank -->
-										<?php echo $blank_form_err; ?>
+										<?php echo $blank_title_err; ?>
                     <form method="POST" action="#">
                         <label for="title"> Title</label>
                         <input id="title" type="text" name="title"><br>
