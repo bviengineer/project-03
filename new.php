@@ -1,18 +1,17 @@
 <?php include 'inc/header.php'; 
 
-// Use prepared statements to add/edit/delete journal entries in the database.
-// Create “add/edit” view for the "entry" page that allows the user to add or edit journal entries with the following fields: title, date, time_spent, learned, and resources. Each journal entry should have a unique primary key.
-
+	// Conditional will ensure there is at least a title for a given entry before adding it to the database
 	if (!empty($_POST['title'])) {
-			//use trim() function to remove whites pace before and after 
+			//use trim() function to remove whites pace before and after ?
 		$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
 		$date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
 		$time_spent = filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT);
 		$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
 		$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
 		add_journal_entry($title, $date, $time_spent, $learned, $resources);
+
 	} elseif($_POST && empty($_POST['title'])) {
-			$blank_form_err = "You didn't enter any data";
+			$blank_form_err = "You need at least a title in order to save an entry.";
 	}
 
 		// Function will add a new journal entry to the database
@@ -23,13 +22,13 @@
 
 				try {
 					$results = $db->prepare($add_entry); // Places the results of the prepare statement into the variable $results
-					$results->bindValue(1, $title, PDO::PARAM_STR);
-					$results->bindValue(2, $date, PDO::PARAM_STR);
-					$results->bindValue(3, $time_spent, PDO::PARAM_INT);
-					$results->bindValue(4, $learned, PDO::PARAM_STR);
-					$results->bindValue(5, $resources, PDO::PARAM_STR);
-					$results->execute();
-				 	echo "Your journal entry was added successfully!";
+					$results->bindValue(1, $title, PDO::PARAM_STR); // Associates the 1st ? with the $title var
+					$results->bindValue(2, $date, PDO::PARAM_STR); // Associates the 2nd ? with the $date var
+					$results->bindValue(3, $time_spent, PDO::PARAM_INT); // Associates the 3rd ? with the $time_spent var
+					$results->bindValue(4, $learned, PDO::PARAM_STR); // Associates the 4th ? with the $learned var
+					$results->bindValue(5, $resources, PDO::PARAM_STR); // Associates the 5th ? with the $resources var
+					$results->execute(); // Executes the insert query after filtering & binding the input
+				 	echo "Your journal entry was added successfully!"; // Prints confiramtion messaeg to the screen after adding entry to database
 
 				} catch (Exception $e) {
 						$e->getMessage();
@@ -49,6 +48,7 @@
             <div class="container">
                 <div class="new-entry">
                     <h2>New Entry</h2>
+										<!-- Print message to the screen if the form is blank -->
 										<?php echo $blank_form_err; ?>
                     <form method="POST" action="#">
                         <label for="title"> Title</label>
