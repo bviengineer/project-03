@@ -8,7 +8,7 @@
 			$results = $db->query("SELECT * FROM entries"); //TRY ADDING LIMIT 2 
 	} catch (Exception $e) {
 			echo $e->getMessage();
-			die();
+			return array();
 	}
 
 	// Assignment of return values or PDOStatement object result set to a variable
