@@ -24,13 +24,13 @@
 		}
 
 		// Function will add a new journal entry to the database
-    function add_journal_entry($title, $date_written, $time_spent, $learned, $resources){
-        include 'inc/dbconnection.php';
+    function add_journal_entry($title, $date, $time_spent, $learned, $resources){
+				include 'inc/dbconnection.php';
         
-				$addEntry = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUE(?, ?, ?, ?, ?)";
+				$add_entry = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUE(?, ?, ?, ?, ?)";
 
 				try {
-					$results = $db->prepare($addEntry);
+					$results = $db->prepare($add_entry);
 					$results->bindValue(1, $title, PDO::PARAM_STR);
 					$results->bindValue(2, $date, PDO::PARAM_STR);
 					$results->bindValue(3, $time_spent, PDO::PARAM_INT);
