@@ -1,4 +1,9 @@
-<?php include 'inc/header.php'; ?>
+<?php include 'inc/header.php'; 
+
+    // Use prepared statements to add/edit/delete journal entries in the database.
+// Create “add/edit” view for the "entry" page that allows the user to add or edit journal entries with the following fields: title, date, time_spent, learned, and resources. Each journal entry should have a unique primary key.
+
+?>
     <body>
         <header>
             <div class="container">
