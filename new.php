@@ -10,21 +10,21 @@
       $time_spent = $_POST['timeSpent'];
       $learned = $_POST['whatILearned'];
 			$resources = $_POST['ResourcesToRemember'];
-			add_journal_entry();
+			add_journal_entry($title, $date, $time_spent, $learned, $resources);
 			echo '<pre>';
-				var_dump($_POST['title']);
+				echo($_POST['title']);
 				var_dump($_POST['date']);
 				var_dump($_POST['timeSpent']);
 				var_dump($_POST['whatILearned']);
 				var_dump($_POST['ResourcesToRemember']);
 			echo '</pre>';
-      echo "<br>Your title is: " . $title . "<br>";
+      //echo "<br>Your title is: " . $title . "<br>";
     } elseif($_POST && empty($_POST['title'])) {
 				$blank_form_err = "You didn't enter any data";
 		}
 
 		// Function will add a new journal entry to the database
-    function add_journal_entry($title, $date, $time_spent = NULL, $learned, $resources = NULL){
+    function add_journal_entry($title, $date, $time_spent, $learned, $resources){
         include 'inc/dbconnection.php';
         
 				$addEntry = "INSERT INTO entries (title, date_written, time_spent, learned, resources) VALUE(?, ?, ?, ?, ?)";
