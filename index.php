@@ -47,6 +47,7 @@
                 <div class="entry-list">
                     <article>
 					<?php 
+						// Will print the journal entries to the page
 						get_journal_entries();
 					?>	
                     </article>
