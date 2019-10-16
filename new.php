@@ -11,13 +11,13 @@
       $learned = $_POST['whatILearned'];
 			$resources = $_POST['ResourcesToRemember'];
 			add_journal_entry($title, $date, $time_spent, $learned, $resources);
-			echo '<pre>';
-				echo($_POST['title']);
-				var_dump($_POST['date']);
-				var_dump($_POST['timeSpent']);
-				var_dump($_POST['whatILearned']);
-				var_dump($_POST['ResourcesToRemember']);
-			echo '</pre>';
+			// echo '<pre>';
+			// 	echo($_POST['title']);
+			// 	var_dump($_POST['date']);
+			// 	var_dump($_POST['timeSpent']);
+			// 	var_dump($_POST['whatILearned']);
+			// 	var_dump($_POST['ResourcesToRemember']);
+			// echo '</pre>';
       //echo "<br>Your title is: " . $title . "<br>";
     } elseif($_POST && empty($_POST['title'])) {
 				$blank_form_err = "You didn't enter any data";
@@ -37,7 +37,7 @@
 					$results->bindValue(4, $learned, PDO::PARAM_STR);
 					$results->bindValue(5, $resources, PDO::PARAM_STR);
 					$results->execute();
-					echo "addition successful";
+					echo "entry added successfully";
 
 				} catch (Exception $e) {
 						$e->getMessage();
