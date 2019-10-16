@@ -8,6 +8,8 @@
 		$time_spent = filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT);
 		$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
 		$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
+		
+		// Call function to add entry to database
 		add_journal_entry($title, $date, $time_spent, $learned, $resources);
 
 	} elseif($_POST && empty($_POST['title'])) {
@@ -17,7 +19,8 @@
 		// Function will add a new journal entry to the database
     function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
 				include 'inc/dbconnection.php';
-        
+				
+				// Insert journal entry into database 
 				$add_entry = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUES(?, ?, ?, ?, ?)";
 
 				try {
@@ -28,7 +31,7 @@
 					$results->bindValue(4, $learned, PDO::PARAM_STR); // Associates the 4th ? with the $learned var
 					$results->bindValue(5, $resources, PDO::PARAM_STR); // Associates the 5th ? with the $resources var
 					$results->execute(); // Executes the insert query after filtering & binding the input
-				 	echo "Your journal entry was added successfully!"; // Prints confiramtion messaeg to the screen after adding entry to database
+				 	echo "Your journal entry was added successfully!"; // Prints confiramtion msg to the screen after adding entry to database
 
 				} catch (Exception $e) {
 						$e->getMessage();
@@ -48,7 +51,7 @@
             <div class="container">
                 <div class="new-entry">
                     <h2>New Entry</h2>
-										<!-- Print message to the screen if the form is blank -->
+										<!-- Print error message to the screen if the form is blank -->
 										<?php echo $blank_title_err; ?>
                     <form method="POST" action="#">
                         <label for="title"> Title</label>
