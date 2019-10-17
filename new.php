@@ -1,4 +1,5 @@
 <?php 
+// Inclusion of files containing header tags and all functions need to run the application
 	include 'inc/header.php'; 
 	include 'inc/functions.php';
 
