@@ -1,4 +1,7 @@
-<?php ob_start(); ?>
+<?php 
+	// Allows page header() to redirect without throwing an error
+	ob_start(); 
+?>
 <!DOCTYPE html>
 <html>
 <head>
