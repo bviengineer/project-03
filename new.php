@@ -10,11 +10,16 @@
 		$time_spent = filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT);
 		$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
 		$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
-		
-		// Call to add_journal_entry func in functions.php
-		add_journal_entry($title, $date, $time_spent, $learned, $resources);
 
-	} elseif($_POST && empty($_POST['title'])) {
+			// Call to add_journal_entry func in functions.php
+			// add_journal_entry($title, $date, $time_spent, $learned, $resources);
+
+			if (add_journal_entry($title, $date, $time_spent, $learned, $resources)) {
+						 header('Location: index.php');
+						 exit;
+			 }
+
+	} elseif ($_POST && empty($_POST['title'])) {
 			$blank_title_err = "You need at least a title in order to save an entry.";
 	}
 ?>
@@ -33,7 +38,7 @@
                     <h2>New Entry</h2>
 										<!-- Print error message to the screen if the form is blank -->
 										<?php echo $blank_title_err; ?>
-                    <form method="POST" action="#">
+                    <form method="POST" action="">
                         <label for="title"> Title</label>
                         <input id="title" type="text" name="title"><br>
                         <label for="date">Date</label>
