@@ -1,6 +1,6 @@
-<?php 
+<?php
 // Inclusion of files containing header tags and all functions need to run the application
-	include 'inc/header.php'; 
+	require 'inc/head.php'; 
 	include 'inc/functions.php';
 
 	// Conditional will ensure there is at least a title for a given entry before adding it to the database
@@ -12,19 +12,16 @@
 		$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
 		$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
 
-			// Call to add_journal_entry func in functions.php
-			// add_journal_entry($title, $date, $time_spent, $learned, $resources);
-
 			if (add_journal_entry($title, $date, $time_spent, $learned, $resources)) {
-						 header('Location: index.php');
-						 exit;
-			 }
+						header('Location: index.php');
+						exit;
+		 	}
 
 	} elseif ($_POST && empty($_POST['title'])) {
 			$blank_title_err = "You need at least a title in order to save an entry.";
 	}
 ?>
-    <body>
+	<body>
         <header>
             <div class="container">
                 <div class="site-header">
@@ -56,4 +53,4 @@
                 </div>
             </div>
         </section>
-        <?php include 'inc/footer.php'; ?>
+<?php include 'inc/footer.php';?>
