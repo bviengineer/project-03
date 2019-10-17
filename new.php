@@ -16,9 +16,6 @@
 						header('Location: index.php');
 						exit;
 		 	}
-
-	} elseif ($_POST && empty($_POST['title'])) {
-			$blank_title_err = "You need at least a title in order to save an entry.";
 	}
 ?>
 	<body>
@@ -35,7 +32,11 @@
                 <div class="new-entry">
                     <h2>New Entry</h2>
 										<!-- Print error message to the screen if the form is blank -->
-										<?php echo $blank_title_err; ?>
+										<?php 
+											if ($_POST && empty($_POST['title'])) {
+												echo print_blank_err_msg("You need at least a title in order to save an entry.");
+											} 
+										?>
                     <form method="POST" action="">
                         <label for="title"> Title</label>
                         <input id="title" type="text" name="title"><br>
