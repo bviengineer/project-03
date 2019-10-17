@@ -18,6 +18,21 @@ function get_journal_entries() {
 }
 
 
+// Print journal entries to the page
+function print_journal_entries() {
+
+	foreach (get_journal_entries() as $entry) {
+		echo "<h2><a href='detail.php?id= ";
+		echo $entry['id'] . " '> ";
+		echo $entry['title'];
+		echo "</a></h2>";
+		echo "<time>";
+		echo $entry['date'];
+		echo "</time>";
+		echo "<hr>";
+	}
+}
+
 
 // Add a new journal entry to the database
 function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
