@@ -49,12 +49,12 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
         $results->bindValue(4, $learned, PDO::PARAM_STR); // Associates the 4th ? with the $learned var
         $results->bindValue(5, $resources, PDO::PARAM_STR); // Associates the 5th ? with the $resources var
         $results->execute(); // Executes the insert query after filtering & binding the inputs
-				 //echo "Your journal entry was added successfully!"; // Prints confiramtion msg to the screen after adding entry to database
-				// header("Location: index.php"); // will return to the index page where all the entires are listed
+				 //echo "Your journal entry was added successfully!"; // Prints confiramtion msg to the screen after adding
 
     } catch (Exception $e) {
             $e->getMessage();
             return array();
 		} 
+		// Will return true once if no error is encountered & pass the value to the call of add_journal_entry inside new.php
+		return true; 
 }
-
