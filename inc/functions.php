@@ -4,6 +4,21 @@
 */
 
 
+// Retrieve all journal entries from database 
+function get_journal_entries() {
+	include 'inc/dbconnection.php';
+
+	try {
+		$results = $db->query("SELECT * FROM entries"); //TRY ADDING LIMIT 2 
+	} catch (Exception $e) {
+		echo $e->getMessage();
+		return array();
+	}
+	return $results->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+
 // Add a new journal entry to the database
 function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
     include 'inc/dbconnection.php';
