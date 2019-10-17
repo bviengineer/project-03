@@ -1,9 +1,9 @@
 <?php 
-	// Inclusion of files containing header tags and all functions need to run the application
-	include 'inc/header.php';
+// Inclusion of files containing header tags and all functions need to run the application
+	include 'inc/head.php';
 	include 'inc/functions.php';
 ?>
-    <body>
+  <body>
         <header>
             <div class="container">
                 <div class="site-header">
@@ -24,5 +24,4 @@
                 </div>
             </div>
         </section>
-
-<?php include 'inc/footer.php'; ?>
+<?php include 'inc/footer.php';?>
