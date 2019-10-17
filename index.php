@@ -18,7 +18,7 @@
 	echo '</pre>';
 
 	// Print journal entries to the index page
-	function get_journal_entries() {
+	function print_journal_entries() {
 		global $entries; // Grants function access to the $entries variable 
 
 		foreach ($entries as $entry) {
@@ -48,7 +48,7 @@
                     <article>
 					<?php 
 						// Will print the journal entries to the page
-						get_journal_entries();
+						print_journal_entries();
 					?>	
                     </article>
                 </div>
