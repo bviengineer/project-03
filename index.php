@@ -1,27 +1,19 @@
 <?php 
 	// Inclusion of files containing header tags and the database connection
 	include 'inc/header.php';
-	include 'inc/dbconnection.php';
-
-	// Retrieving entries from the database
-	try {
-			$results = $db->query("SELECT * FROM entries"); //TRY ADDING LIMIT 2 
-	} catch (Exception $e) {
-			echo $e->getMessage();
-			return array();
-	}
+	include 'inc/functions.php';
 
 	// Assignment of return values or PDOStatement object result set to a variable
-	$entries = $results->fetchAll(PDO::FETCH_ASSOC);
+	//$entries = $results->fetchAll(PDO::FETCH_ASSOC);
 	echo '<pre>';
 	//var_dump($entries);
 	echo '</pre>';
 
 	// Print journal entries to the index page
 	function print_journal_entries() {
-		global $entries; // Grants function access to the $entries variable 
+		//global $entries; // Grants function access to the $entries variable 
 
-		foreach ($entries as $entry) {
+		foreach (get_journal_entries() as $entry) {
 			echo "<h2><a href='detail.php?id= ";
 			echo $entry['id'] . " '> ";
 			echo $entry['title'];
