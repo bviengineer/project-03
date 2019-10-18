@@ -18,23 +18,19 @@
                 <div class="entry-list single">
                     <article>
 												<h1><?php echo $single_entry['title']; ?></h1>
-                        <time datetime="2016-01-31">January 31, 2016</time>
+                        <time datetime="2016-01-31"><?php echo $single_entry['date']; ?></time>
                         <div class="entry">
                             <h3>Time Spent: </h3>
                             <p><?php echo $single_entry['time_spent']; ?></p>
                         </div>
                         <div class="entry">
                             <h3>What I Learned:</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut rhoncus felis, vel tincidunt neque.</p>
-                            <p>Cras egestas ac ipsum in posuere. Fusce suscipit, libero id malesuada placerat, orci velit semper metus, quis pulvinar sem nunc vel augue. In ornare tempor metus, sit amet congue justo porta et. Etiam pretium, sapien non fermentum consequat, <a href="">dolor augue</a> gravida lacus, non accumsan. Vestibulum ut metus eleifend, malesuada nisl at, scelerisque sapien.</p>
+                            <p><?php echo $single_entry['learned']; ?></p>
                         </div>
                         <div class="entry">
                             <h3>Resources to Remember:</h3>
                             <ul>
-                                <li><a href="">Lorem ipsum dolor sit amet</a></li>
-                                <li><a href="">Cras accumsan cursus ante, non dapibus tempor</a></li>
-                                <li>Nunc ut rhoncus felis, vel tincidunt neque</li>
-                                <li><a href="">Ipsum dolor sit amet</a></li>
+                                <li><?php echo $single_entry['resources']; ?></li>
                             </ul>
                         </div>
                     </article>
