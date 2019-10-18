@@ -17,6 +17,7 @@ function get_journal_entries() {
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
 
+
 // Print journal entries to the page
 function print_journal_entries() {
 
@@ -31,6 +32,7 @@ function print_journal_entries() {
 		echo "<hr>";
 	}
 }
+
 
 // Add a new journal entry to the database
 function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
@@ -57,15 +59,17 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 		return true; 
 }
 
+
 // Will print message to page if submitted journal entry form is missing the title
 function print_blank_err_msg($message) {
 	$blank_title_err = $message;
 	return $blank_title_err;
 }
 
-// Will return the id of the journal entry that was selected on the index page
+
+// Will get the id & return the specific journal entry that was selected on the index page
 function get_single_entry($id) {
-	include "inc/dbconnection.php";
+	include 'inc/dbconnection.php';
 
 	// Retrieve single entry & related details from database
 	$get_entry = "SELECT id, title, date, time_spent, learned, resources 
@@ -84,3 +88,34 @@ function get_single_entry($id) {
 	}
 	return $results->fetch(PDO::FETCH_ASSOC);
 }
+
+// Will print selected journal entry to the details page
+function print_single_entry(){
+	foreach (get_single_entry($id) as $choice) {
+		echo "<h1>" . $choice['title'] . "</h1>";
+
+
+		// h1>The best day I’ve ever had</h1>
+    //                     <time datetime="2016-01-31">January 31, 2016</time>
+    //                     <div class="entry">
+    //                         <h3>Time Spent: </h3>
+    //                         <p>15 Hours</p>
+    //                     </div>
+    //                     <div class="entry">
+    //                         <h3>What I Learned:</h3>
+    //                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut rhoncus felis, vel tincidunt neque.</p>
+    //                         <p>Cras egestas ac ipsum in posuere. Fusce suscipit, libero id malesuada placerat, orci velit semper metus, quis pulvinar sem nunc vel augue. In ornare tempor metus, sit amet congue justo porta et. Etiam pretium, sapien non fermentum consequat, <a href="">dolor augue</a> gravida lacus, non accumsan. Vestibulum ut metus eleifend, malesuada nisl at, scelerisque sapien.</p>
+    //                     </div>
+    //                     <div class="entry">
+    //                         <h3>Resources to Remember:</h3>
+    //                         <ul>
+    //                             <li><a href="">Lorem ipsum dolor sit amet</a></li>
+    //                             <li><a href="">Cras accumsan cursus ante, non dapibus tempor</a></li>
+    //                             <li>Nunc ut rhoncus felis, vel tincidunt neque</li>
+    //                             <li><a href="">Ipsum dolor sit amet</a></li>
+    //                         </ul>
+    //                     </div>
+	}
+}
+
+print_single_entry();
