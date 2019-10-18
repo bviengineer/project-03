@@ -1,6 +1,6 @@
 <?php
 // Inclusion of files containing header tags and all functions need to run the application
-	require 'inc/head.php'; 
+	include 'inc/head.php'; 
 	include 'inc/functions.php';
 
 	// Conditional will ensure there is at least a title for a given entry before adding it to the database
