@@ -68,6 +68,7 @@ function print_blank_err_msg($message) {
 
 
 // Will get the id & return the specific journal entry that was selected on the index page
+$id = '';
 function get_single_entry($id) {
 	include 'inc/dbconnection.php';
 
@@ -77,6 +78,7 @@ function get_single_entry($id) {
 								WHERE id = ?"; 
 	
 	if (isset($_GET)) {
+		$id = $_GET['id'];
 		try {
 			$results = $db->prepare($get_entry);
 			$results->bindValue(1, $id, PDO::PARAM_INT);
@@ -118,4 +120,4 @@ function print_single_entry(){
 	}
 }
 
-print_single_entry();
+//print_single_entry();
