@@ -68,7 +68,9 @@ function print_blank_err_msg($message) {
 
 
 // Will get the id & return the specific journal entry that was selected on the index page
-$id = '';
+// $id = $_GET;
+// var_dump($id);
+
 function get_single_entry($id) {
 	include 'inc/dbconnection.php';
 
@@ -77,8 +79,8 @@ function get_single_entry($id) {
 								FROM entries 
 								WHERE id = ?"; 
 	
-	if (isset($_GET)) {
-		$id = $_GET['id'];
+	if (isset($_GET['id'])) {
+		//$id = $_GET['id'];
 		try {
 			$results = $db->prepare($get_entry);
 			$results->bindValue(1, $id, PDO::PARAM_INT);
@@ -93,10 +95,12 @@ function get_single_entry($id) {
 
 // Will print selected journal entry to the details page
 function print_single_entry(){
-	foreach (get_single_entry($id) as $choice) {
-		echo "<h1>" . $choice['title'] . "</h1>";
-
-
+	//global $id;
+	// foreach (get_single_entry($id) as $choice) {
+	// 	echo "<h1>" . $choice['id'] . "</h1>";
+		// echo "<pre>";
+		// var_dump($choice);
+		// echo "</pre>";
 		// h1>The best day I’ve ever had</h1>
     //                     <time datetime="2016-01-31">January 31, 2016</time>
     //                     <div class="entry">
@@ -117,7 +121,7 @@ function print_single_entry(){
     //                             <li><a href="">Ipsum dolor sit amet</a></li>
     //                         </ul>
     //                     </div>
-	}
+	//}
 }
 
 //print_single_entry();

@@ -3,7 +3,7 @@
 	include 'inc/functions.php';
 	echo "<pre>";
 	//var_dump(get_journal_entries());
-	var_dump(get_single_entry($id));
+	var_dump(get_single_entry($_GET['id']));
 	echo "</pre>";
 ?>
     <body>
