@@ -1,8 +1,16 @@
-<?php include 'inc/header.php'; 
+<?php 
+	include 'inc/header.php'; 
+	include 'inc/functions.php';
 
-    // Use prepared statements to add/edit/delete journal entries in the database.
-    // Create “add/edit” view for the "entry" page that allows the user to add or edit journal entries with the following fields: title, date, time_spent, learned, and resources. Each journal entry should have a unique primary key.
-
+    // Use prepared statements to edit/delete journal entries in the database.
+    
+    function edit_journal_entry() {
+      try {
+				$results = $db->query("SELECT title, date, time_spent, learned, resources FROM entries WHERE title LIKE '%Today%");
+			} catch (Exception $e) {
+        $e->getMessage();
+       }
+    }
 ?>
     <body>
         <header>
