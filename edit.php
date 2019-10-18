@@ -1,9 +1,10 @@
 <?php 
-	include 'inc/header.php'; 
+	include 'inc/head.php'; 
 	include 'inc/functions.php';
 
     // Use prepared statements to edit/delete journal entries in the database.
-    
+    var_dump(get_single_entry($_GET['id']));
+
     function edit_journal_entry() {
       try {
 				$results = $db->query("SELECT title, date, time_spent, learned, resources FROM entries WHERE title LIKE '%Today%");
