@@ -3,11 +3,6 @@
 	This file will hold all functions needed to run the application
 */
 
-// Will print message to page if journal entry form is missing a title
-function print_blank_err_msg($message) {
-	$blank_title_err = $message;
-	return $blank_title_err;
-}
 
 // Retrieve all journal entries from database 
 function get_journal_entries() {
@@ -38,6 +33,12 @@ function print_journal_entries() {
 	}
 }
 
+
+// Will print message to page if submitted journal entry form is missing the title
+function print_blank_err_msg($message) {
+	$blank_title_err = $message;
+	return $blank_title_err;
+}
 
 // Add a new journal entry to the database
 function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
