@@ -1,7 +1,6 @@
 <?php 
-    include 'inc/header.php'; 
-    include 'inc/dbconnection.php';
-    //var_dump($db);
+	include 'inc/head.php'; 
+	include 'inc/functions.php';
 ?>
     <body>
         <header>
