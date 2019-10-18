@@ -66,14 +66,18 @@ function print_blank_err_msg($message) {
 // Will return the id of the journal entry that was selected on the index page
 function get_single_entry($id) {
 	include "inc/dbconnection.php";
+
+	$get_entry = "SELECT id FROM entries WHERE id = ?"; // Retrieve single entry selected from index.php
 	
 	if (isset($_GET)) {
 		try {
-			$get_entry = $db->query("SELECT id FROM entries WHERE id = $id");
+			$results = $db->prepare($get_entry);
+			$results->bindValue(1, $id, PDO::PARAM_INT);
+			$results->execute();
 		} catch (Connection $e) {
 				$e->getMessage();
 				return array();
 		}
 	}
-	return $get_entry->fetch(PDO::FETCH_ASSOC);
+	return $results->fetch(PDO::FETCH_ASSOC);
 }
