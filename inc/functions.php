@@ -67,7 +67,10 @@ function print_blank_err_msg($message) {
 function get_single_entry($id) {
 	include "inc/dbconnection.php";
 
-	$get_entry = "SELECT id FROM entries WHERE id = ?"; // Retrieve single entry selected from index.php
+	// Retrieve single entry & related details from database
+	$get_entry = "SELECT id, title, date, time_spent, learned, resources 
+								FROM entries 
+								WHERE id = ?"; 
 	
 	if (isset($_GET)) {
 		try {
