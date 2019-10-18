@@ -1,7 +1,7 @@
 <?php 
 // Inclusion of files containing header tags and all functions need to run the application
 	include 'inc/head.php';
-	include 'inc/functions.php';
+  include 'inc/functions.php';
 ?>
   <body>
         <header>
