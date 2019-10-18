@@ -30,14 +30,14 @@
                         <div class="entry">
                             <h3>Resources to Remember:</h3>
                             <ul>
-                                <li><?php echo $single_entry['resources']; ?></li>
+                                <li><?php echo $single_entry['resources']; echo $single_entry['id'];?></li>
                             </ul>
                         </div>
                     </article>
                 </div>
             </div>
             <div class="edit">
-                <p><a href="edit.php">Edit Entry</a></p>
+                <p><a href="edit.php?=<?php echo $single_entry['id']; ?>">Edit Entry</a></p>
             </div>
         </section>
-        <?php include 'inc/footer.php'; ?>
+				<?php include 'inc/footer.php'; ?>
