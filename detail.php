@@ -1,6 +1,10 @@
 <?php 
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
+	echo "<pre>";
+	//var_dump(get_journal_entries());
+	var_dump(get_single_entry($id));
+	echo "</pre>";
 ?>
     <body>
         <header>
@@ -15,7 +19,9 @@
             <div class="container">
                 <div class="entry-list single">
                     <article>
-                        <h1>The best day I’ve ever had</h1>
+											
+                        <!-- <h1>The best day I’ve ever had</h1> -->
+												<!-- <h1><//?php print_single_entry(); ?></h1> -->
                         <time datetime="2016-01-31">January 31, 2016</time>
                         <div class="entry">
                             <h3>Time Spent: </h3>
