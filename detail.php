@@ -1,10 +1,8 @@
 <?php 
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
-	echo "<pre>";
-	//var_dump(get_journal_entries());
-	var_dump(get_single_entry($_GET['id']));
-	echo "</pre>";
+	
+	$single_entry = get_single_entry($_GET['id']); // Will hold selected journal entry
 ?>
     <body>
         <header>
@@ -19,13 +17,11 @@
             <div class="container">
                 <div class="entry-list single">
                     <article>
-											
-                        <!-- <h1>The best day I’ve ever had</h1> -->
-												<!-- <h1><//?php print_single_entry(); ?></h1> -->
+												<h1><?php echo $single_entry['title']; ?></h1>
                         <time datetime="2016-01-31">January 31, 2016</time>
                         <div class="entry">
                             <h3>Time Spent: </h3>
-                            <p>15 Hours</p>
+                            <p><?php echo $single_entry['time_spent']; ?></p>
                         </div>
                         <div class="entry">
                             <h3>What I Learned:</h3>
