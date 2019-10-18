@@ -17,7 +17,6 @@ function get_journal_entries() {
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
 // Print journal entries to the page
 function print_journal_entries() {
 
@@ -31,13 +30,6 @@ function print_journal_entries() {
 		echo "</time>";
 		echo "<hr>";
 	}
-}
-
-
-// Will print message to page if submitted journal entry form is missing the title
-function print_blank_err_msg($message) {
-	$blank_title_err = $message;
-	return $blank_title_err;
 }
 
 // Add a new journal entry to the database
@@ -63,4 +55,25 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 		} 
 		// Will return true once if no error is encountered & pass the value to the call of add_journal_entry inside new.php
 		return true; 
+}
+
+// Will print message to page if submitted journal entry form is missing the title
+function print_blank_err_msg($message) {
+	$blank_title_err = $message;
+	return $blank_title_err;
+}
+
+// Will return the id of the journal entry that was selected on the index page
+function get_single_entry($id) {
+	include "inc/dbconnection.php";
+	
+	if (isset($_GET)) {
+		try {
+			$get_entry = $db->query("SELECT id FROM entries WHERE id = $id");
+		} catch (Connection $e) {
+				$e->getMessage();
+				return array();
+		}
+	}
+	return $get_entry->fetch(PDO::FETCH_ASSOC);
 }
