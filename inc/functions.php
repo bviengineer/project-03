@@ -9,7 +9,7 @@ function get_journal_entries() {
 	include 'inc/dbconnection.php';
 
 	try {
-		$results = $db->query("SELECT * FROM entries"); //TRY ADDING LIMIT 2 
+		$results = $db->query("SELECT * FROM entries ORDER BY date DESC"); //TRY ADDING LIMIT 2 
 	} catch (Exception $e) {
 		echo $e->getMessage();
 		return array();
