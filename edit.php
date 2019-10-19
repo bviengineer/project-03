@@ -19,7 +19,7 @@
 			$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
 			$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
 		
-				// Calls the function to update the database and if it works, it executes the update 
+				// Calls the function to update the database & successful, executes the update & redirects to index page
 				if (update_journal_entry($title, $date, $time_spent, $learned, $resources)) { 
 					header('Location: index.php');
 					exit;
