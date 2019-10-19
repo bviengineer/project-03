@@ -88,3 +88,30 @@ function get_single_entry($id) {
 	}
 	return $results->fetch(PDO::FETCH_ASSOC);
 }
+
+
+// Update journal entry to the database
+function update_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
+	include 'inc/dbconnection.php';
+	
+	// Update journal entry in database sql statement 
+	$update_entry = "UPDATE entries SET title = ?, date = ?, time_spent = ?, learned = ?, resources = ? WHERE id = ?";
+
+	try {
+			$results = $db->prepare($update_entry); // Prepare sql statenebt abd palace the results into the variable $results
+			$results->bindValue(1, $title, PDO::PARAM_STR); // Associates the 1st ? with the $title var
+			$results->bindValue(2, $date, PDO::PARAM_STR); // Associates the 2nd ? with the $date var
+			$results->bindValue(3, $time_spent, PDO::PARAM_INT); // Associates the 3rd ? with the $time_spent var
+			$results->bindValue(4, $learned, PDO::PARAM_STR); // Associates the 4th ? with the $learned var
+			$results->bindValue(5, $resources, PDO::PARAM_STR); // Associates the 5th ? with the $resources var
+			$results->bindValue(6, $id, PDO::PARAM_INT); // Associates the 6th ? with the $id var
+			$results->execute(); // Executes the insert query after filtering & binding the inputs
+			 //echo "Your journal entry was added successfully!"; // Prints confiramtion msg to the screen after adding
+
+	} catch (Exception $e) {
+					$e->getMessage();
+					return array();
+	} 
+	// Will return true once if no error is encountered & pass the value to the call of add_journal_entry inside new.php
+	return true; 
+}
