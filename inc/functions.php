@@ -18,7 +18,7 @@ function get_journal_entries() {
 }
 
 
-// Print journal entries to the page
+// Print journal entries on the [index] page & creates hyperlinks to respective entries 
 function print_journal_entries() {
 
 	foreach (get_journal_entries() as $entry) {
@@ -42,32 +42,31 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
     $add_entry = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUES(?, ?, ?, ?, ?)";
 
     try {
-        $results = $db->prepare($add_entry); // Prepare sql statenebt abd palace the results into the variable $results
+        $results = $db->prepare($add_entry); // Prepare sql statement & assigns results to the variable $results
         $results->bindValue(1, $title, PDO::PARAM_STR); // Associates the 1st ? with the $title var
         $results->bindValue(2, $date, PDO::PARAM_STR); // Associates the 2nd ? with the $date var
         $results->bindValue(3, $time_spent, PDO::PARAM_INT); // Associates the 3rd ? with the $time_spent var
         $results->bindValue(4, $learned, PDO::PARAM_STR); // Associates the 4th ? with the $learned var
         $results->bindValue(5, $resources, PDO::PARAM_STR); // Associates the 5th ? with the $resources var
         $results->execute(); // Executes the insert query after filtering & binding the inputs
-				 //echo "Your journal entry was added successfully!"; // Prints confiramtion msg to the screen after adding
 
     } catch (Exception $e) {
             $e->getMessage();
             return array();
 		} 
-		// Will return true once if no error is encountered & pass the value to the call of add_journal_entry inside new.php
+		// Will return true if no error is encountered & pass the value to the call of add_journal_entry inside new.php
 		return true; 
 }
 
 
-// Will print message to page if submitted journal entry form is missing the title
+// Will halt submission & print message on page if submitted journal entry form is missing the title
 function print_blank_err_msg($message) {
 	$blank_title_err = $message;
 	return $blank_title_err;
 }
 
 
-// Will get the id & return the specific journal entry that was selected on the index page
+// Will get the ID & return the specific journal entry that was selected [while on the index page]
 function get_single_entry($id) {
 	include 'inc/dbconnection.php';
 
