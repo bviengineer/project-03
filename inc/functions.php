@@ -123,7 +123,7 @@ function delete_single_entry($id) {
 	include 'inc/dbconnection.php';
 
 	// Retrieve single entry & related details from database
-	$delete_entry = "SELECT id, title, date, time_spent, learned, resources 
+	$delete_entry = "DELETE id, title, date, time_spent, learned, resources 
 										FROM entries 
 										WHERE id = ?"; 
 	
