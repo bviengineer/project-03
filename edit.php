@@ -2,16 +2,17 @@
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
 
+	//$id = $_GET['id'];
+	//get_single_entry($id=null);
+	//var_dump($db);
 	// Use prepared statements to edit/delete journal entries in the database.
 	if (isset($_GET['id'])) {
-			echo "it is";
+			echo "it is " . $_GET['id'];
 	} else {
 			echo "no id passed";
 	}
 
-	get_journal_entires();
-
-	//get_single_entry($_GET);
+	//get_single_entry($_POST['id']);
 
 	// function edit_journal_entry() {
 	//   try {
