@@ -2,7 +2,7 @@
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
 	
-	$single_entry = get_single_entry($_GET['id']); // Will hold selected journal entry
+	$single_entry = get_single_entry($_GET['id']); // Variable will hold selected journal entry
 ?>
     <body>
         <header>
@@ -17,6 +17,7 @@
             <div class="container">
                 <div class="entry-list single">
                     <article>
+												<!-- Printing of journal entry details to the page  -->
 												<h1><?php echo $single_entry['title']; ?></h1>
                         <time datetime="2016-01-31"><?php echo $single_entry['date']; ?></time>
                         <div class="entry">
@@ -37,6 +38,7 @@
                 </div>
             </div>
             <div class="edit">
+								<!-- Pass request to edit journal entry to the edit.php page -->
                 <p><a href="edit.php?id=<?php echo $single_entry['id'];?>">Edit Entry</a></p>
             </div>
         </section>
