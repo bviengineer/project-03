@@ -9,8 +9,11 @@
 	if ($_POST) {
 		$_POST['id'] = $single_entry['id'];
 		if (delete_single_entry($_POST['id'])) {
-			header("Location: index.php");
-			exit;
+				header("Location: index.php?msg=Entry+Deleted");
+				exit;
+		} else {
+				header("Location: index.php?msg=Entry+was+NOT+deleted");
+				exit;
 		}
 	}
 ?>
@@ -52,9 +55,9 @@
                 <p><a href="edit.php?id=<?php echo $single_entry['id'];?>">Edit Entry</a></p>
 
 								<!-- From with delete button -->
-								<form method="POST" action="">
-									<label for="delete-entry">CANNOT BE UNDONE!</label>
-									<input type="submit" id="delete-btn" name="deleteEntry" value="DELETE"> 
+								<form class='delete-form' method="POST" action="">
+									<label for="delete-entry"></label>
+									<input type="submit" class="delete-btn" name="deleteEntry" value="Delete Entry"> 
 								</form>
             </div>
         </section>

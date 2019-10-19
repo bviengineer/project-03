@@ -13,8 +13,11 @@
 	$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
 
 		if (add_journal_entry($title, $date, $time_spent, $learned, $resources)) {
-			header('Location: index.php');
-			exit;
+				header('Location: index.php?msg=Your+journal+entry+was+added+!');
+				exit;
+		} else {
+				header('Location: index.php?msg="Could+not+add+journal+entry+.+Please+try+again!');
+				exit;
 		}
 	}
 ?>

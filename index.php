@@ -14,6 +14,16 @@
         </header>
         <section>
             <div class="container">
+									<?php
+										if (isset($_GET['msg'])) {
+											echo "<h3>";
+											echo $_GET['msg'];
+											echo "</h3>";
+										} else {
+												echo '';
+										}
+										
+									?>
                 <div class="entry-list">
                     <article>
 											<?php 
