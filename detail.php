@@ -40,6 +40,7 @@
             <div class="edit">
 								<!-- Pass request to edit journal entry to the edit.php page -->
                 <p><a href="edit.php?id=<?php echo $single_entry['id'];?>">Edit Entry</a></p>
+								<p><a href='#'>Delete Entry</a></p>
             </div>
         </section>
 				<?php include 'inc/footer.php'; ?>
