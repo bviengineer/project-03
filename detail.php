@@ -40,7 +40,10 @@
             <div class="edit">
 								<!-- Pass request to edit journal entry to the edit.php page -->
                 <p><a href="edit.php?id=<?php echo $single_entry['id'];?>">Edit Entry</a></p>
-								<p><a href='#'>Delete Entry</a></p>
+								<form method="POST" action="index.php">
+									<label for="delete-entry">CANNOT BE UNDONE!</label>
+									<input type="submit" id="delete-btn" name="deleteEntry" value="DELETE"> 
+								</form>
             </div>
         </section>
 				<?php include 'inc/footer.php'; ?>
