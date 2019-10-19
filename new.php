@@ -1,21 +1,21 @@
 <?php
-// Inclusion of files containing header tags and all functions need to run the application
+	// Inclusion of files containing header tags and all functions need to run the application
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
 
 	// Conditional will ensure there is at least a title for a given entry before adding it to the database
 	if (!empty($_POST['title'])) {
-			//use trim() function to remove whites pace before and after ?
-		$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-		$date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
-		$time_spent = filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT);
-		$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
-		$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
+	//use trim() function to remove whites pace before and after ?
+	$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+	$date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
+	$time_spent = filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT);
+	$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
+	$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
 
-			if (add_journal_entry($title, $date, $time_spent, $learned, $resources)) {
-						header('Location: index.php');
-						exit;
-		 	}
+		if (add_journal_entry($title, $date, $time_spent, $learned, $resources)) {
+			header('Location: index.php');
+			exit;
+		}
 	}
 ?>
 	<body>
