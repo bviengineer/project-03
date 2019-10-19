@@ -2,7 +2,17 @@
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
 	
-	$single_entry = get_single_entry($_GET['id']); // Variable will hold selected journal entry
+	// Variable will hold selected journal entry
+	$single_entry = get_single_entry($_GET['id']);
+	
+	// Will check whether the form with the delete button was submitted & delete the journal entry 
+	if ($_POST) {
+		$_POST['id'] = $single_entry['id'];
+		if (delete_single_entry($_POST['id'])) {
+			header("Location: index.php");
+			exit;
+		}
+	}
 ?>
     <body>
         <header>
@@ -40,7 +50,9 @@
             <div class="edit">
 								<!-- Pass request to edit journal entry to the edit.php page -->
                 <p><a href="edit.php?id=<?php echo $single_entry['id'];?>">Edit Entry</a></p>
-								<form method="POST" action="index.php">
+
+								<!-- From with delete button -->
+								<form method="POST" action="">
 									<label for="delete-entry">CANNOT BE UNDONE!</label>
 									<input type="submit" id="delete-btn" name="deleteEntry" value="DELETE"> 
 								</form>
