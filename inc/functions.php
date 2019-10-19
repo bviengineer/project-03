@@ -22,7 +22,7 @@ function get_journal_entries() {
 function print_journal_entries() {
 
 	foreach (get_journal_entries() as $entry) {
-		echo "<h2><a href='detail.php?id= ";
+		echo "<h2><a href='detail.php?id=";
 		echo $entry['id'] . " '> ";
 		echo $entry['title'];
 		echo "</a></h2>";
