@@ -1,9 +1,9 @@
 <?php
-	// Inclusion of files containing header tags and all functions need to run the application
+	// Inclusion of files containing header tags and all functions needed to run the application
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
 
-	// Conditional will ensure there is at least a title for a given entry before adding it to the database
+	// Conditional will ensure there's at least a title for a given entry before adding it to the database
 	if (!empty($_POST['title'])) {
 	//use trim() function to remove whites pace before and after ?
 	$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
@@ -31,7 +31,7 @@
             <div class="container">
                 <div class="new-entry">
                     <h2>New Entry</h2>
-										<!-- Print error message to the screen if the form is blank -->
+										<!-- Will print error message to the screen if title field of the form is blank -->
 										<?php 
 											if ($_POST && empty($_POST['title'])) {
 												echo print_blank_err_msg("You need at least a title in order to save an entry.");
