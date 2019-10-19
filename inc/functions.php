@@ -116,3 +116,26 @@ function update_journal_entry($title, $date = NULL, $time_spent = NULL, $learned
 	// Will return true if no error is encountered & pass the return value to the call of update_journal_entry inside edit.php
 	return true; 
 }
+
+
+// Will get the ID & return the specific journal entry that was selected [while on the index page]
+function delete_single_entry($id) {
+	include 'inc/dbconnection.php';
+
+	// Retrieve single entry & related details from database
+	$delete_entry = "SELECT id, title, date, time_spent, learned, resources 
+										FROM entries 
+										WHERE id = ?"; 
+	
+	if (isset($_GET['id'])) {
+		try {
+			$results = $db->prepare($get_entry);
+			$results->bindValue(1, $id, PDO::PARAM_INT);
+			$results->execute();
+		} catch (Connection $e) {
+				$e->getMessage();
+				return array();
+		}
+	}
+	return true;
+}
