@@ -2,18 +2,9 @@
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
 
-	$edit_entry = get_single_entry($_GET['id']);
-
-	// Use prepared statements to edit/delete journal entries in the database.
 	if (isset($_GET['id'])) {
-			echo "it is " . $_GET['id'];
-	} else {
-			echo "no id passed";
+		$edit_entry = get_single_entry($_GET['id']);
 	}
-
-	echo "<pre>";
-	var_dump($edit_entry);
-	echo "</pre>";
 ?>
     <body>
         <header>
@@ -30,16 +21,21 @@
                     <h2>Edit Entry</h2>
                     <form method="POST" action="">
                         <label for="title"> Title</label>
-                        <input id="title" type="text" name="title"><br>
-                        <label for="date">Date</label>
-                        <input id="date" type="date" name="date"><br>
-                        <label for="time-spent"> Time Spent</label>
-                        <input id="time-spent" type="text" name="timeSpent"><br>
-                        <label for="what-i-learned">What I Learned</label>
-                        <textarea id="what-i-learned" rows="5" name="whatILearned"></textarea>
-                        <label for="resources-to-remember">Resources to Remember</label>
-                        <textarea id="resources-to-remember" rows="5" name="ResourcesToRemember"></textarea>
-                        <input type="submit" value="Publish Entry" class="button">
+                        <input id="title" type="text" name="title" value="<?php echo $edit_entry['title']; ?>"><br>
+                        
+												<label for="date">Date</label>
+                        <input id="date" type="date" name="date" value="<?php echo $edit_entry['date']; ?>"><br>
+                        
+												<label for="time-spent"> Time Spent</label>
+                        <input id="time-spent" type="text" name="timeSpent" value="<?php echo $edit_entry['time_spent']; ?>"><br>
+                        
+												<label for="what-i-learned">What I Learned</label>
+                        <textarea id="what-i-learned" rows="5" name="whatILearned"><?php echo $edit_entry['learned']; ?></textarea>
+                        
+												<label for="resources-to-remember">Resources to Remember</label>
+                        <textarea id="resources-to-remember" rows="5" name="ResourcesToRemember"><?php echo $edit_entry['resources']; ?></textarea>
+                       
+											  <input type="submit" value="Publish Entry" class="button">
                         <a href="#" class="button button-secondary">Cancel</a>
                     </form>
                 </div>
