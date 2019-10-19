@@ -2,48 +2,30 @@
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
 
+	// Get the ID of the journal entry to edited and aids in displaying it 
 	if (isset($_GET['id'])) {
 		$edit_entry = get_single_entry($_GET['id']);
 	}
-	// echo 'the get ID is: ';
-	// var_dump($_GET['id']);
-	// echo "<br> the title passed from GET is: ";
-	// var_dump($edit_entry['title']);
 
+	// Checks that an edited journal entry form has been submitted 
 	if ($_POST) {
-		$_POST['id'] = $edit_entry['id'];
-		var_dump($_POST['id']);
+		$_POST['id'] = $edit_entry['id']; // Passes the journal entry ID to the POST method 
+
+		// If edited journal entry form submitted, checks to ensure there's a title and the ID of the entry is set
+		if (!empty($edit_entry['title']) && isset($_POST['id'])) {
+			$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+			$date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
+			$time_spent = filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT);
+			$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
+			$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
 		
-		if (!empty($edit_entry['title']) && isset($edit_entry['id'])) {
-		echo "this is the ID the GET variable is holding: ";	
-		var_dump($edit_entry['id']);
-		//echo "i'm in side the POST PART";
-		//use trim() function to remove whites pace before and after ?
-		if ($_POST) {
-			echo "<pre>";
-			var_dump($_POST);
-			echo "</pre>";
-			
-			if (isset($_POST['id'])) {
-				echo "true, it is: ";
-				echo $_POST['id'];
-			} else {
-					echo "false";
+				// Calls the function to update the database and if it works, it executes the update 
+				if (update_journal_entry($title, $date, $time_spent, $learned, $resources)) { 
+					header('Location: index.php');
+					exit;
+				}
 			}
 		}
-	}
-		// $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-		// $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
-		// $time_spent = filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT);
-		// $learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
-		// $resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
-	
-			// if (update_journal_entry($title, $date, $time_spent, $learned, $resources)) {
-			// 	header('Location: index.php');
-			// 	exit;
-			// }
-		}
-	//}
 ?>
     <body>
         <header>
