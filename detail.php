@@ -32,7 +32,7 @@
                         <time datetime="2016-01-31"><?php echo $single_entry['date']; ?></time>
                         <div class="entry">
                             <h3>Time Spent: </h3>
-                            <p><?php echo $single_entry['time_spent']; ?></p>
+                            <p><?php echo $single_entry['time_spent']; ?> minutes</p>
                         </div>
                         <div class="entry">
                             <h3>What I Learned:</h3>
