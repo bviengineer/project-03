@@ -129,7 +129,7 @@ function delete_single_entry($id) {
 	
 	if (isset($_GET['id'])) {
 		try {
-			$results = $db->prepare($get_entry);
+			$results = $db->prepare($delete_entry);
 			$results->bindValue(1, $id, PDO::PARAM_INT);
 			$results->execute();
 		} catch (Connection $e) {
