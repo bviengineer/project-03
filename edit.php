@@ -2,16 +2,16 @@
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
 
-	// Get the ID of the journal entry to edited and aids in displaying it 
+	// Get the ID of the journal entry to be edited and aids in displaying it 
 	if (isset($_GET['id'])) {
 		$edit_entry = get_single_entry($_GET['id']);
 	}
 
-	// Checks that a journal entry [form with data] has been submitted for update 
+	// Checks whether a journal entry has been submitted for update via a form or POST 	request
 	if ($_POST) {
 		$_POST['id'] = $edit_entry['id']; // Passes the journal entry ID to the POST method 
 
-		// Checks to ensure the title & ID of the edited journal entry isset before executing 
+		// Checks to ensure the title & ID of the edited journal entry isset before executing the update
 		if (!empty($edit_entry['title']) && isset($_POST['id'])) {
 			$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
 			$date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
@@ -19,7 +19,7 @@
 			$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
 			$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
 		
-				// Calls the function to update the database & successful, executes the update & redirects to index page
+				// Calls the function to update the database, executes the update & redirects to index page
 				if (update_journal_entry($title, $date, $time_spent, $learned, $resources)) { 
 					header('Location: index.php');
 					exit;
@@ -42,13 +42,13 @@
                     <h2>Edit Entry</h2>
 										<!-- Will print error message to the screen if title field of the form is blank -->
 										<?php 
-											if ($_POST &&	$_POST['value'] = '') {
+											if ($_POST &&	!empty($_POST['placeholder'])) {
 												echo print_blank_err_msg("Your entry needs a title before you can submit the changes.");
 											}
 										?>
                     <form method="POST" action="#">
                         <label for="title"> Title</label>
-                        <input id="title" type="text" name="title" value="<?php echo $edit_entry['title']; ?>"><br>
+                        <input id="title" type="text" name="title" placeholder="<?php echo $edit_entry['title']; ?>"><br>
                         
 												<label for="date">Date</label>
                         <input id="date" type="date" name="date" value="<?php echo $edit_entry['date']; ?>"><br>
