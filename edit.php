@@ -2,9 +2,8 @@
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
 
-	//$id = $_GET['id'];
-	//get_single_entry($id=null);
-	//var_dump($db);
+	$edit_entry = get_single_entry($_GET['id']);
+
 	// Use prepared statements to edit/delete journal entries in the database.
 	if (isset($_GET['id'])) {
 			echo "it is " . $_GET['id'];
@@ -12,15 +11,9 @@
 			echo "no id passed";
 	}
 
-	//get_single_entry($_POST['id']);
-
-	// function edit_journal_entry() {
-	//   try {
-	// 			$results = $db->query("SELECT title, date, time_spent, learned, resources FROM entries WHERE title LIKE '%Today%");
-	// 		} catch (Exception $e) {
-	//     $e->getMessage();
-	//    }
-	// }
+	echo "<pre>";
+	var_dump($edit_entry);
+	echo "</pre>";
 ?>
     <body>
         <header>
