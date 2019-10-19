@@ -2,16 +2,24 @@
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
 
-    // Use prepared statements to edit/delete journal entries in the database.
-    var_dump(get_single_entry($_GET['id']));
+	// Use prepared statements to edit/delete journal entries in the database.
+	if (isset($_GET['id'])) {
+			echo "it is";
+	} else {
+			echo "no id passed";
+	}
 
-    function edit_journal_entry() {
-      try {
-				$results = $db->query("SELECT title, date, time_spent, learned, resources FROM entries WHERE title LIKE '%Today%");
-			} catch (Exception $e) {
-        $e->getMessage();
-       }
-    }
+	get_journal_entires();
+
+	//get_single_entry($_GET);
+
+	// function edit_journal_entry() {
+	//   try {
+	// 			$results = $db->query("SELECT title, date, time_spent, learned, resources FROM entries WHERE title LIKE '%Today%");
+	// 		} catch (Exception $e) {
+	//     $e->getMessage();
+	//    }
+	// }
 ?>
     <body>
         <header>
@@ -26,7 +34,7 @@
             <div class="container">
                 <div class="edit-entry">
                     <h2>Edit Entry</h2>
-                    <form>
+                    <form method="POST" action="">
                         <label for="title"> Title</label>
                         <input id="title" type="text" name="title"><br>
                         <label for="date">Date</label>
