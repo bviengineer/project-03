@@ -30,7 +30,7 @@
                         <div class="entry">
                             <h3>Resources to Remember:</h3>
                             <ul>
-                                <li><?php echo $single_entry['resources']; echo $single_entry['id'];?></li>
+                                <li><?php echo $single_entry['resources']; ?></li>
                             </ul>
                         </div>
                     </article>
