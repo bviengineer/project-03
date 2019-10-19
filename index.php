@@ -1,5 +1,5 @@
 <?php 
-// Inclusion of files containing header tags and all functions need to run the application
+// Inclusion of files containing header tags and all functions needed to run the application
 	include 'inc/head.php';
   include 'inc/functions.php';
 ?>
@@ -16,10 +16,10 @@
             <div class="container">
                 <div class="entry-list">
                     <article>
-					<?php 
-						// Will print the journal entries to the page
-						print_journal_entries();
-					?>	
+											<?php 
+												// Will print the journal entries from the database, to the page
+												print_journal_entries();
+											?>	
                     </article>
                 </div>
             </div>
