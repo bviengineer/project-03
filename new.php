@@ -45,7 +45,7 @@
                         <input id="title" type="text" name="title"><br>
                         <label for="date">Date</label>
                         <input id="date" type="date" name="date"><br>
-                        <label for="time-spent"> Time Spent</label>
+                        <label for="time-spent"> Time Spent (in minutes)</label>
                         <input id="time-spent" type="text" name="timeSpent"><br>
                         <label for="what-i-learned">What I Learned</label>
                         <textarea id="what-i-learned" rows="5" name="whatILearned"></textarea>

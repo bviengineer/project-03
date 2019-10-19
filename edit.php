@@ -53,7 +53,7 @@
 												<label for="date">Date</label>
                         <input id="date" type="date" name="date" value="<?php echo $edit_entry['date']; ?>"><br>
                         
-												<label for="time-spent"> Time Spent</label>
+												<label for="time-spent"> Time Spent (in minutes)</label>
                         <input id="time-spent" type="text" name="timeSpent" value="<?php echo $edit_entry['time_spent']; ?>"><br>
                         
 												<label for="what-i-learned">What I Learned</label>
