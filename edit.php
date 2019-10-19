@@ -10,11 +10,28 @@
 	// echo "<br> the title passed from GET is: ";
 	// var_dump($edit_entry['title']);
 
-	if (!empty($edit_entry['title']) && isset($edit_entry['id'])) {
+	if ($_POST) {
+		$_POST['id'] = $edit_entry['id'];
+		var_dump($_POST['id']);
+		
+		if (!empty($edit_entry['title']) && isset($edit_entry['id'])) {
+		echo "this is the ID the GET variable is holding: ";	
+		var_dump($edit_entry['id']);
 		//echo "i'm in side the POST PART";
 		//use trim() function to remove whites pace before and after ?
 		if ($_POST) {
+			echo "<pre>";
 			var_dump($_POST);
+			echo "</pre>";
+			
+			if (isset($_POST['id'])) {
+				echo "true, it is: ";
+				echo $_POST['id'];
+			} else {
+					echo "false";
+			}
+		}
+	}
 		// $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
 		// $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
 		// $time_spent = filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT);
@@ -26,7 +43,7 @@
 			// 	exit;
 			// }
 		}
-	}
+	//}
 ?>
     <body>
         <header>
