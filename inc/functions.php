@@ -4,7 +4,7 @@
 */
 
 
-// Retrieve all journal entries from database 
+// RETRIEVE ALL JOURNAL ENTRIES: will retrieve all journal entries from database 
 function get_journal_entries() {
 	include 'inc/dbconnection.php';
 
@@ -18,7 +18,7 @@ function get_journal_entries() {
 }
 
 
-// Print journal entries on the [index] page & creates hyperlinks to respective entries 
+// PRINT JOURNAL ENTRIES: will print journal entries on the [index] page & creates hyperlinks to respective entries 
 function print_journal_entries() {
 
 	foreach (get_journal_entries() as $entry) {
@@ -34,7 +34,7 @@ function print_journal_entries() {
 }
 
 
-// Add a new journal entry to the database
+// ADD JOURNAL ENTRY: will add a new journal entry to the database
 function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
     include 'inc/dbconnection.php';
     
@@ -59,14 +59,14 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 }
 
 
-// Will halt submission & print message on page if submitted journal entry form is missing the title
+// ERROR NOTIFICATION: Will halt a request & print error message if submitted journal entry form is missing the title
 function print_blank_err_msg($message) {
 	$blank_title_err = $message;
 	return $blank_title_err;
 }
 
 
-// Will get the ID & return the specific journal entry that was selected [while on the index page]
+// RETRIEVE SINGLE JOURNAL ENTRY: Will retrieve the specific journal entry that was selected [while on the index page]
 function get_single_entry($id) {
 	include 'inc/dbconnection.php';
 
@@ -89,7 +89,7 @@ function get_single_entry($id) {
 }
 
 
-// Update journal entry in the database
+// UPDATE JOURNAL ENTRY: will update a given journal entry
 function update_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL) {
 	include 'inc/dbconnection.php';
 	
@@ -118,7 +118,7 @@ function update_journal_entry($title, $date = NULL, $time_spent = NULL, $learned
 }
 
 
-// Will get the ID & return the specific journal entry that was selected [while on the index page]
+// DELETE JOURNAL ENTRY: Will get the associated ID & delete the specified journal entry
 function delete_single_entry($id) {
 	include 'inc/dbconnection.php';
 
