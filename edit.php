@@ -7,11 +7,11 @@
 		$edit_entry = get_single_entry($_GET['id']);
 	}
 
-	// Checks that an edited journal entry form has been submitted 
+	// Checks that a journal entry [form with data] has been submitted for update 
 	if ($_POST) {
 		$_POST['id'] = $edit_entry['id']; // Passes the journal entry ID to the POST method 
 
-		// If edited journal entry form submitted, checks to ensure there's a title and the ID of the entry is set
+		// Checks to ensure the title & ID of the edited journal entry isset before executing 
 		if (!empty($edit_entry['title']) && isset($_POST['id'])) {
 			$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
 			$date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
