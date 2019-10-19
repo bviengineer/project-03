@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="edit">
-                <p><a href="edit.php?=<?php echo $single_entry['id']; ?>">Edit Entry</a></p>
+                <p><a href="edit.php?id=<?php echo $single_entry['id'];?>">Edit Entry</a></p>
             </div>
         </section>
 				<?php include 'inc/footer.php'; ?>
