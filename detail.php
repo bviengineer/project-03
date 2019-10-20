@@ -9,10 +9,10 @@
 	if ($_POST) {
 		$_POST['id'] = $single_entry['id'];
 		if (delete_single_entry($_POST['id'])) {
-				header("Location: index.php?msg=Entry+Deleted");
+				header("Location: index.php?msg=Okie+dokie!+I+deleted+that+journal+entry+as+requested!");
 				exit;
 		} else {
-				header("Location: index.php?msg=Entry+was+NOT+deleted");
+				header("Location: index.php?msg=Entry+was+NOT+deleted!");
 				exit;
 		}
 	}
