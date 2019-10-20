@@ -50,13 +50,13 @@
 											?>
 										</h5>
                     <form method="POST" action="">
-                        <label for="title"> Title <span>*</span></label>
+                        <label for="title"> Title <span id="star">*</span></label>
                         <input id="title" type="text" name="title"><br>
-                        <label for="date">Date <span>*</span></label>
+                        <label for="date">Date <span id="star">*</span></label>
                         <input id="date" type="date" name="date"><br>
-                        <label for="time-spent"> Time Spent (in minutes) <span>*</span></label>
+                        <label for="time-spent"> Time Spent (in minutes) <span id="star">*</span></label>
                         <input id="time-spent" type="text" name="timeSpent"><br>
-                        <label for="what-i-learned">What I Learned <span>*</span></label>
+                        <label for="what-i-learned">What I Learned <span id="star">*</span></label>
                         <textarea id="what-i-learned" rows="5" name="whatILearned"></textarea>
                         <label for="resources-to-remember">Resources to Remember</label>
                         <textarea id="resources-to-remember" rows="5" name="ResourcesToRemember"></textarea>
