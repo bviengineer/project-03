@@ -41,16 +41,16 @@
                 <div class="edit-entry">
                     <h2>Edit Entry</h2>
                     <form method="POST" action="#">
-                        <label for="title"> Title</label>
+                        <label for="title"> Title <span id="star">*</span></label>
                         <input id="title" type="text" name="title" value="<?php echo $edit_entry['title']; ?> "><br>
                         
-												<label for="date">Date</label>
+												<label for="date">Date <span id="star">*</span></label>
                         <input id="date" type="date" name="date" value="<?php echo $edit_entry['date']; ?>"><br>
                         
-												<label for="time-spent"> Time Spent (in minutes)</label>
+												<label for="time-spent"> Time Spent (in minutes) <span id="star">*</span></label>
                         <input id="time-spent" type="text" name="timeSpent" value="<?php echo $edit_entry['time_spent']; ?>"><br>
                         
-												<label for="what-i-learned">What I Learned</label>
+												<label for="what-i-learned">What I Learned <span id="star">*</span></label>
                         <textarea id="what-i-learned" rows="5" name="whatILearned"><?php echo $edit_entry['learned']; ?></textarea>
                         
 												<label for="resources-to-remember">Resources to Remember</label>
