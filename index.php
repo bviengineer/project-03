@@ -14,18 +14,16 @@
         </header>
         <section>
             <div class="container">
-							<h4>
+							<h6>
 								<?php
 									if (isset($_GET['msg'])) {
-										echo "<h3>";
 										echo $_GET['msg'];
-										echo "</h3>";
-									} else {
+										} else {
 											echo '';
-									}
-								?>
-							</h4>
-                <div class="entry-list">
+										}
+									?>
+							</h6>
+							<div class="entry-list">
                     <article>
 											<?php 
 												// Will print the journal entries from the database, to the page
