@@ -128,8 +128,8 @@ function delete_single_entry($id) {
 	return true;
 }
 
-// ERROR NOTIFICATION: Will halt a request & print error message if submitted journal entry form is missing the title
-function print_blank_err_msg($message) {
+// ERROR NOTIFICATION: Will halt a request & print an error message if submitted journal entry form data is invalid
+function print_err_msg($message) {
 	$blank_title_err = $message;
 	return $blank_title_err;
 }
