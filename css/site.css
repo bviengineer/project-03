@@ -232,30 +232,23 @@ input[type=submit] {
 	margin-right: 5px;
 }
 .delete-btn {
-	font-size: 1.2em;
-	background-color: indianred;
+	font-size: 1.3em;
+	background-color: firebrick;
 	color: white;
 	font-weight: bold;
-	border-radius: 20px solid rosybrown;
+	border: none;
 } 
 .delete-btn:hover {
-	background-color: firebrick;
+	background-color: white;
+	color: firebrick;
+	font-weight: bold;
+	text-transform: uppercase;;
 }
 .delete-form {
-	/* background-color: lightsteelblue; */
-	width: 50%;
-	margin-left: 25%;
+	background-color: firebrick;
+	font-weight: bold;
+	color: white;
+	border-radius: 10px;
+	width: 30%;
+	margin-left: 35%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
