@@ -25,8 +25,8 @@
 														$learned = trim(filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING));
 														$resources = trim(filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING));
 													
-														$dateMatch = explode("/", $date);
-														//var_dump($dateMatch);
+														$dateMatch = explode('-',$date);
+														var_dump($dateMatch);
 													
 														// Will ensure required fileds are completed before adding entry to the database
 														if (empty($title) || empty($date) || empty($time_spent) || empty($learned)) {
