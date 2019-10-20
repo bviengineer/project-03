@@ -116,7 +116,7 @@
 								<!-- From with delete button -->
 								<form class='delete-form' 
 								method="POST" action="">
-									<label for="delete-entry">&#128073 CANNOT BE UNDONE &#128400;</label>
+									<label for="delete-entry">&#128073; CANNOT BE UNDONE &#128400;</label>
 									<input type="submit" class="delete-btn" name="deleteEntry" value="Delete Entry"> 
 								</form>
             </div>
