@@ -17,8 +17,7 @@ function get_journal_entries() {
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
-// PRINT JOURNAL ENTRIES: will print journal entries on the [index] page & creates hyperlinks to respective entries 
+// PRINT ALL JOURNAL ENTRIES: will print journal entries on the [index] page & creates hyperlinks to respective entries 
 function print_journal_entries() {
 
 	foreach (get_journal_entries() as $entry) {
@@ -33,6 +32,27 @@ function print_journal_entries() {
 	}
 }
 
+// RETRIEVE A SINGLE JOURNAL ENTRY: Will retrieve the specific journal entry that was selected [while on the index page]
+function get_single_entry($id) {
+	include 'inc/dbconnection.php';
+
+	// Retrieve single entry & related details from database
+	$get_entry = "SELECT id, title, date, time_spent, learned, resources 
+								FROM entries 
+								WHERE id = ?"; 
+	
+	if (isset($_GET['id'])) {
+		try {
+			$results = $db->prepare($get_entry);
+			$results->bindValue(1, $id, PDO::PARAM_INT);
+			$results->execute();
+		} catch (Connection $e) {
+				$e->getMessage();
+				return array();
+		}
+	}
+	return $results->fetch(PDO::FETCH_ASSOC);
+}
 
 // ADD JOURNAL ENTRY: will add a new journal entry to the database
 function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
@@ -56,36 +76,6 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 		} 
 		// Will return true if no error is encountered & pass the value to the call of add_journal_entry inside new.php
 		return true; 
-}
-
-
-// ERROR NOTIFICATION: Will halt a request & print error message if submitted journal entry form is missing the title
-function print_blank_err_msg($message) {
-	$blank_title_err = $message;
-	return $blank_title_err;
-}
-
-
-// RETRIEVE SINGLE JOURNAL ENTRY: Will retrieve the specific journal entry that was selected [while on the index page]
-function get_single_entry($id) {
-	include 'inc/dbconnection.php';
-
-	// Retrieve single entry & related details from database
-	$get_entry = "SELECT id, title, date, time_spent, learned, resources 
-								FROM entries 
-								WHERE id = ?"; 
-	
-	if (isset($_GET['id'])) {
-		try {
-			$results = $db->prepare($get_entry);
-			$results->bindValue(1, $id, PDO::PARAM_INT);
-			$results->execute();
-		} catch (Connection $e) {
-				$e->getMessage();
-				return array();
-		}
-	}
-	return $results->fetch(PDO::FETCH_ASSOC);
 }
 
 
@@ -136,4 +126,10 @@ function delete_single_entry($id) {
 		}
 	}
 	return true;
+}
+
+// ERROR NOTIFICATION: Will halt a request & print error message if submitted journal entry form is missing the title
+function print_blank_err_msg($message) {
+	$blank_title_err = $message;
+	return $blank_title_err;
 }
