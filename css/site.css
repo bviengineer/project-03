@@ -123,6 +123,17 @@ h5 {
 	text-align: center;
 	border-radius: 10px;
 }
+h6 {
+	background-color: firebrick;
+	color: white;
+	font-size: 1.4em;
+	text-align: center;
+	border-radius: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+
+}
 p {
 	line-height: 1.8em;
 	font-size: 18px;
