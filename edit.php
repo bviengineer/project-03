@@ -8,7 +8,7 @@
 	}
 
 	// Checks whether a journal entry has been submitted for update via a form or POST 	request
-	if ($_POST) {
+	if ($_POST && $_POST['class'] = "button") {
 		$_POST['id'] = $edit_entry['id']; // Passes the journal entry ID to the POST method 
 
 		// Checks to ensure the title & ID of the edited journal entry isset before executing the update
@@ -25,7 +25,7 @@
 						exit;
 				}
 			} 
-		}
+		} 
 ?>
     <body>
         <header>
@@ -55,8 +55,11 @@
                         
 												<label for="resources-to-remember">Resources to Remember</label>
                         <textarea id="resources-to-remember" rows="5" name="ResourcesToRemember"><?php echo $edit_entry['resources']; ?></textarea>
-                       
-											  <input type="submit" value="Publish Entry" class="button">
+											 
+												<!-- Publish Entry button -->
+												<input type="submit" value="Publish Entry" class="button"> 
+												
+												<!-- Cancel button -->
                         <a href="#" class="button button-secondary">Cancel</a>
                     </form>
                 </div>
