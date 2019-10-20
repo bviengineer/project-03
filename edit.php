@@ -24,7 +24,7 @@
 						header('Location: detail.php?id=' . $_POST['id']);
 						exit;
 				}
-			}
+			} 
 		}
 ?>
     <body>
@@ -40,12 +40,6 @@
             <div class="container">
                 <div class="edit-entry">
                     <h2>Edit Entry</h2>
-										<!-- Will print error message to the screen if title field of the form is blank -->
-										<?php 
-											if ($_POST &&	empty($_POST['title'])) {
-												echo print_blank_err_msg("Your entry needs a title before you can submit the changes.");
-											}
-										?>
                     <form method="POST" action="#">
                         <label for="title"> Title</label>
                         <input id="title" type="text" name="title" value="<?php echo $edit_entry['title']; ?> "><br>
