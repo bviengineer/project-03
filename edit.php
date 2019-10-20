@@ -21,7 +21,7 @@
 		
 				// Calls the function to update the database, executes the update & redirects to index page
 				if (update_journal_entry($title, $date, $time_spent, $learned, $resources)) { 
-						header('Location: index.php?msg=Entry+updated+!');
+						header('Location: detail.php?id=' . $_POST['id']);
 						exit;
 				}
 			}
