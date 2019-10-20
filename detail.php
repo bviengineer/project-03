@@ -55,8 +55,9 @@
                 <p><a href="edit.php?id=<?php echo $single_entry['id'];?>">Edit Entry</a></p>
 
 								<!-- From with delete button -->
-								<form class='delete-form' method="POST" action="">
-									<label for="delete-entry"></label>
+								<form class='delete-form' 
+								method="POST" action="">
+									<label for="delete-entry">CANNOT BE UNDONE &#128400;</label>
 									<input type="submit" class="delete-btn" name="deleteEntry" value="Delete Entry"> 
 								</form>
             </div>
