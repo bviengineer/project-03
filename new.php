@@ -40,9 +40,9 @@
 																
 																			echo print_err_msg("Invalid Date");
 														}*/ else {
-																if (add_journal_entry($title, $date, $time_spent, $learned, $resources)) {
-																	header('Location: index.php?msg=Cool!+I+added+that+journal+entry+for+you!');
-																	exit;
+																	if (add_journal_entry($title, $date, $time_spent, $learned, $resources)) {
+																		header('Location: index.php?msg=Cool!+I+added+that+journal+entry+for+you!');
+																		exit;
 															} else {
 																	echo print__err_msg("Could not add journal entry. Please try again!");
 															}
