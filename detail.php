@@ -8,8 +8,10 @@
 	// Will check whether the form with the delete button was submitted & delete the journal entry 
 	if ($_POST) {
 		$_POST['id'] = $single_entry['id'];
+		$_POST['title'] = $single_entry['title'];
+
 		if (delete_single_entry($_POST['id'])) {
-				header("Location: index.php?msg=Okie+dokie!+I+deleted+that+journal+entry+as+requested!");
+				header("Location: index.php?msg=Okie+dokie!+I+deleted+the+'" . $_POST['title'] . "'+journal+entry+as+requested!");
 				exit;
 		} else {
 				header("Location: index.php?msg=Entry+was+NOT+deleted!");
