@@ -83,10 +83,10 @@ function print_journal_entries() {
 		echo $entry['id'] . " '> ";
 		echo $entry['title'];
 		echo "</a></h2>";
-		var_dump($entry['tags']);
 		echo "<time>";
 		echo $month . ' ' . $day . ', ' . $year; 
 		echo "</time>";
+		echo "<h2 class='tags'>Tag(s): " . $entry['tags'] . "</h2>";
 		echo "<hr>";
 	}
 }
