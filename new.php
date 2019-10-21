@@ -18,7 +18,7 @@
 										<h2>New Entry</h2>
 										<h5>
 											<?php 
-													if ($_POST) {
+													if ($_POST && $_POST['addEntry']) {
 														$title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING));
 														$date = trim(filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING));
 														$time_spent = trim(filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT));
@@ -47,6 +47,8 @@
 																	echo print__err_msg("Could not add journal entry. Please try again!");
 															}
 														}
+													} elseif ($_POST && $_POST['cancelEntry']) { 
+														header('Location: index.php?msg=OK!+That+entry+was+discarded!');
 													}
 											?>
 										</h5>
@@ -61,8 +63,8 @@
                         <textarea id="what-i-learned" rows="5" name="whatILearned"></textarea>
                         <label for="resources-to-remember">Resources to Remember</label>
                         <textarea id="resources-to-remember" rows="5" name="ResourcesToRemember"></textarea>
-                        <input type="submit" value="Publish Entry" class="button">
-                        <a href="#" class="button button-secondary">Cancel</a>
+                        <input type="submit" value="Publish Entry" name="addEntry" class="button">
+                        <input type="submit" value="Cancel" name="cancelEntry" class="button button-secondary">
                     </form>
                 </div>
             </div>
