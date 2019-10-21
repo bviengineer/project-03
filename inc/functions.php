@@ -5,7 +5,7 @@
 // RETRIEVE ALL JOURNAL ENTRIES: will retrieve all journal entries from database 
 function get_journal_entries() {
 	include 'inc/dbconnection.php';
-	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources 
+	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, tags.tags 
 					FROM entries  
 					LEFT JOIN tags ON entries.tag_id = tags.tag_id
 					ORDER BY date DESC";
@@ -16,6 +16,9 @@ function get_journal_entries() {
 		echo $e->getMessage();
 		return array();
 	}
+	// echo "<pre>";
+	// var_dump($results->fetchAll(PDO::FETCH_ASSOC));
+	// echo "</pre>";
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
 // PRINT ALL JOURNAL ENTRIES: will print journal entries on the [index] page & creates hyperlinks to respective entries 
@@ -80,7 +83,7 @@ function print_journal_entries() {
 		echo $entry['id'] . " '> ";
 		echo $entry['title'];
 		echo "</a></h2>";
-		//echo "<h2>".$entry[] . "</h2>";
+		var_dump($entry['tags']);
 		echo "<time>";
 		echo $month . ' ' . $day . ', ' . $year; 
 		echo "</time>";
