@@ -86,7 +86,9 @@ function print_journal_entries() {
 		echo "<time>";
 		echo $month . ' ' . $day . ', ' . $year; 
 		echo "</time>";
-		echo "<h2 class='tags'>Tag(s): " . $entry['tags'] . "</h2>";
+		echo "<h2 class='tags'><a href=detail.php?id=";
+		echo $entry['id'] . " '> Tag(s): ";
+		echo $entry['tags'] . "</a></h2>";
 		echo "<hr>";
 	}
 }
