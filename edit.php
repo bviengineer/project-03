@@ -8,24 +8,26 @@
 	}
 
 	// Checks whether a journal entry has been submitted for update via a form or POST 	request
-	if ($_POST && $_POST['class'] = "button") {
-		$_POST['id'] = $edit_entry['id']; // Passes the journal entry ID to the POST method 
+	if ($_POST && $_POST['saveEdit']) {
+			$_POST['id'] = $edit_entry['id']; // Passes the journal entry ID to the POST method 
 
-		// Checks to ensure the title & ID of the edited journal entry isset before executing the update
-		if (!empty($edit_entry['title']) && isset($_POST['id'])) {
-			$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-			$date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
-			$time_spent = filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT);
-			$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
-			$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
-		
+			// Checks to ensure the title & ID of the edited journal entry isset before executing the update
+			if (!empty($edit_entry['title']) && isset($_POST['id'])) {
+				$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+				$date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
+				$time_spent = filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT);
+				$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
+				$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
+			
 				// Calls the function to update the database, executes the update & redirects to index page
 				if (update_journal_entry($title, $date, $time_spent, $learned, $resources)) { 
 						header('Location: detail.php?id=' . $_POST['id']);
 						exit;
 				}
 			} 
-		} 
+		 } //elseif ($_POST && $_POST['cancelEdit']) {
+		 		//header('Location: detail.php?id=' . $_POST['id']);
+		 //	}
 ?>
     <body>
         <header>
@@ -40,7 +42,7 @@
             <div class="container">
                 <div class="edit-entry">
                     <h2>Edit Entry</h2>
-                    <form method="POST" action="#">
+                    <form method="POST" action="">
                         <label for="title"> Title <span id="star">*</span></label>
                         <input id="title" type="text" name="title" value="<?php echo $edit_entry['title']; ?> "><br>
                         
@@ -57,10 +59,10 @@
                         <textarea id="resources-to-remember" rows="5" name="ResourcesToRemember"><?php echo $edit_entry['resources']; ?></textarea>
 											 
 												<!-- Publish Entry button -->
-												<input type="submit" value="Publish Entry" class="button"> 
+												<input type="submit" value="Publish Entry" name="saveEdit" class="button"> 
 												
 												<!-- Cancel button -->
-                        <a href="#" class="button button-secondary">Cancel</a>
+                        <input type="submit" value="Cancel" name="cancelEdit" class="button button-secondary">
                     </form>
                 </div>
             </div>
