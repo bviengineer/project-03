@@ -7,6 +7,7 @@ function get_journal_entries() {
 	include 'inc/dbconnection.php';
 	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources 
 					FROM entries  
+					LEFT JOIN tags ON entries.tag_id = tags.tag_id
 					ORDER BY date DESC";
 	
 	try {
