@@ -5,9 +5,8 @@
 // RETRIEVE ALL JOURNAL ENTRIES: will retrieve all journal entries from database 
 function get_journal_entries() {
 	include 'inc/dbconnection.php';
-	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, entry_tag.tags 
+	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources 
 					FROM entries  
-					LEFT JOIN ON entries.id = entry_tag.entry_id
 					ORDER BY date DESC";
 	
 	try {
