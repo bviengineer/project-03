@@ -1,12 +1,17 @@
 <?php
-/* 
-	This file will hold all functions needed to run the application
+/* This file will hold all functions needed to run the application
 */
+
 // RETRIEVE ALL JOURNAL ENTRIES: will retrieve all journal entries from database 
 function get_journal_entries() {
 	include 'inc/dbconnection.php';
+	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, entry_tag.tags 
+					FROM entries  
+					LEFT JOIN ON entries.id = entry_tag.entry_id
+					ORDER BY date DESC";
+	
 	try {
-		$results = $db->query("SELECT * FROM entries ORDER BY date DESC"); //TRY ADDING LIMIT 2 
+		$results = $db->query($sql); //TRY ADDING LIMIT 2 
 	} catch (Exception $e) {
 		echo $e->getMessage();
 		return array();
@@ -75,6 +80,7 @@ function print_journal_entries() {
 		echo $entry['id'] . " '> ";
 		echo $entry['title'];
 		echo "</a></h2>";
+		//echo "<h2>".$entry[] . "</h2>";
 		echo "<time>";
 		echo $month . ' ' . $day . ', ' . $year; 
 		echo "</time>";
@@ -146,8 +152,7 @@ function update_journal_entry($title, $date = NULL, $time_spent = NULL, $learned
 						return array();
 		} 
 	}
-	// Will return true if no error is encountered & pass the return value to the call of update_journal_entry inside edit.php
-	return true; 
+	return true; // ReturnS true if no error is encountered & pass the return value to the call of update_journal_entry inside edit.php
 }
 // DELETE JOURNAL ENTRY: Will get the associated ID & delete the specified journal entry
 function delete_single_entry($id) {
