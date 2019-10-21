@@ -25,9 +25,9 @@
 						exit;
 				}
 			} 
-		 } //elseif ($_POST && $_POST['cancelEdit']) {
-		 		//header('Location: detail.php?id=' . $_POST['id']);
-		 //	}
+		 } elseif ($_POST && $_POST['cancelEdit']) {
+		 		header('Location: detail.php?id=' . $edit_entry['id']);
+		 	}
 ?>
     <body>
         <header>
