@@ -4,9 +4,8 @@
 	
 	// Variable will hold selected journal entry
 	$single_entry = get_single_entry($_GET['id']);
-
+	
 	$date_convert= explode("-", $single_entry['date']); // Converts date of type string to an array, - is the separator 
-
 		$month = ''; // At index 1 of $date_conversion is the month
 		$day = $date_convert[2]; // At index 2 of $date_conversion is the day
 		$year = $date_convert[0]; // At index 0 of $date_conversion is the year
