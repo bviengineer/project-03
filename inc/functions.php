@@ -2,14 +2,15 @@
 /* This file will hold all functions needed to run the application
 */
 
-// RETRIEVE ALL JOURNAL ENTRIES: will retrieve all journal entries from database 
+// RETRIEVE ALL JOURNAL ENTRIES
 function get_journal_entries() {
 	include 'inc/dbconnection.php';
-	 	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, tags.tags
-		 				FROM entries  
-		 				LEFT JOIN entry_tag ON entries.id = entry_tag.entry_id
-		 				LEFT JOIN tags ON tags.tag_id = entry_tag.tag_id
-		 				ORDER BY date DESC";
+
+	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, tags.tags
+					FROM entries  
+					LEFT JOIN entry_tag ON entries.id = entry_tag.entry_id
+					LEFT JOIN tags ON tags.tag_id = entry_tag.tag_id
+					ORDER BY date DESC";
 	
 	// PREVIOUS QUERY 
 	// "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, tags.tags 
@@ -18,7 +19,7 @@ function get_journal_entries() {
 	// 				ORDER BY date DESC";
 	
 	try {
-		$results = $db->query($sql); //TRY ADDING LIMIT 2 
+		$results = $db->query($sql); 
 	} catch (Exception $e) {
 		echo $e->getMessage();
 		return array();
@@ -28,8 +29,9 @@ function get_journal_entries() {
 	// echo "</pre>";
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
-// PRINT ALL JOURNAL ENTRIES: will print journal entries on the [index] page & creates hyperlinks to respective entries 
+// PRINT ALL JOURNAL ENTRIES: on the [index] page & creates hyperlinks to respective entries 
 function print_journal_entries() {
+
 	foreach (get_journal_entries() as $entry) {
 		$date_conversion = explode("-", $entry['date']); // Converts date of type string to an array, - is the separator 
 		$month = ''; // At index 1 of $date_conversion is the month
@@ -99,11 +101,10 @@ function print_journal_entries() {
 		echo "<hr>";
 	}
 }
-// RETRIEVE A SINGLE JOURNAL ENTRY: Will retrieve the specific journal entry that was selected [while on the index page]
+// RETRIEVE A SINGLE JOURNAL ENTRY
 function get_single_entry($id) {
 	include 'inc/dbconnection.php';
 
-	// Retrieve single entry & related details from database
 	$get_entry = "SELECT id, title, date, time_spent, learned, resources 
 								FROM entries 
 								WHERE id = ?"; 
@@ -120,11 +121,10 @@ function get_single_entry($id) {
 	}
 	return $results->fetch(PDO::FETCH_ASSOC);
 }
-// ADD JOURNAL ENTRY: will add a new journal entry to the database
+// ADD JOURNAL ENTRY
 function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
     include 'inc/dbconnection.php';
     
-    // Insert journal entry into database sql statement 
     $add_entry = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUES(?, ?, ?, ?, ?)";
     try {
         $results = $db->prepare($add_entry); // Prepare sql statement & assigns results to the variable $results
@@ -141,11 +141,10 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 		// Will return true if no error is encountered & pass the value to the call of add_journal_entry inside new.php
 		return true; 
 }
-// UPDATE JOURNAL ENTRY: will update a given journal entry
+// UPDATE JOURNAL ENTRY
 function update_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL) {
 	include 'inc/dbconnection.php';
 	
-	// Update journal entry in database sql statement 
 	$update_entry = "UPDATE entries SET title = ?, date = ?, time_spent = ?, learned = ?, resources = ? WHERE id = ?";
 	
 	// Verifies that the ID of the journal entry isset before updating the database 
@@ -164,13 +163,12 @@ function update_journal_entry($title, $date = NULL, $time_spent = NULL, $learned
 						return array();
 		} 
 	}
-	return true; // ReturnS true if no error is encountered & pass the return value to the call of update_journal_entry inside edit.php
+	return true; // ReturnS true if no error encountered & pass the return value to the call of update_journal_entry inside edit.php
 }
-// DELETE JOURNAL ENTRY: Will get the associated ID & delete the specified journal entry
+// DELETE JOURNAL ENTRY
 function delete_single_entry($id) {
 	include 'inc/dbconnection.php';
 
-	// Retrieve single entry & related details from database
 	$delete_entry = "DELETE FROM entries WHERE id = ?"; 
 
 	if (isset($_GET['id'])) {
