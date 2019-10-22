@@ -3,7 +3,8 @@
 	include 'inc/head.php';
 	include 'inc/functions.php';
 
-	$filtered_entries = get_filtered_entries($_GET['tag']);
+	$filtered_entries = get_filtered_entries($_GET);
+	//var_dump($filtered_entries);
 ?>
   <body>
     <header>

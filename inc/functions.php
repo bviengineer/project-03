@@ -37,23 +37,25 @@ function get_single_entry($id) {
 	return $results->fetch(PDO::FETCH_ASSOC);
 }
 // RETRIEVE JOURNAL ENTRIES BY TAG(S)
-function get_filtered_entries($tag) {
+function get_filtered_entries($tags) {
 	include 'inc/dbconnection.php';
 	$get_tag = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, tags.tags
 								FROM entries  
 								LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
 								LEFT OUTER JOIN tags ON tags.tag_id = entry_tag.tag_id
-								WHERE tags LIKE ?"; 
-	 if (isset($_GET['tag'])) {
-		 echo $_GET['tag']; // testing tag selected by user 
+								ORDER BY tags ?"; 
+	 if (isset($_GET['tags'])) {
+		 echo "<br>".$_GET['tags'] . "<br>"; // testing tag selected by user 
 		try {
 			$results = $db->prepare($get_tag);
-			$results->bindValue(1, $tag, PDO::PARAM_INT);
+			$results->bindValue(1, $tags, PDO::PARAM_INT);
 			$results->execute();
 		} catch (Connection $e) {
 				$e->getMessage();
 				return array();
 		}
+		echo "<br> tag after result set is returned: " . $_GET['tags'] . "<br>";
+		var_dump($results->fetchAll(PDO::FETCH_ASSOC));
 	}
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -67,7 +69,7 @@ function print_journal_entries() {
 		echo "<time>"; 
 		echo date('F d, Y', strtotime($entry['date']));
 		echo "</time>";
-		echo "<h4 class='tags'><a href=filtered_entries.php?tag=";
+		echo "<h4 class='tags'><a href=filtered_entries.php?tags=";
 		echo  $entry['tags'] . " '> Tag(s): ";
 		echo $entry['tags'] . "</a></h4>";
 		echo "<hr>";
