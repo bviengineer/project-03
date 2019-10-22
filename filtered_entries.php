@@ -25,8 +25,8 @@
           <article>
 						<?php 
 							// Will print the journal entries from the database, based on the tag the user selected 
-							 echo $filtered_entries;
-							 //print_journal_entries();
+							 //echo $filtered_entries;
+							 print_filtered_entries($filtered_entries);
 						?>	
 					</article>
         </div>
