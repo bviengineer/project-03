@@ -3,30 +3,30 @@
 	include 'inc/head.php';
 	include 'inc/functions.php';
 ?>
-  <body>
-    <header>
-      <div class="container">
-        <div class="site-header">
-					<a class="logo" href="index.php"><i class="material-icons">library_books</i></a>
-					<a class="button icon-right" href="new.php"><span>New Entry</span> <i class="material-icons">add</i></a>
-      	</div>
-      </div>
-  	</header>
-    <section>
-    	<div class="container">
-				<h1>
-					<?php
-						echo "<strong><i>" . strtoupper($_GET['tag']) . "</i></strong> Journal Entries";
-					?>
-				</h1>
-				<div class="entry-list">
-          <article>
-						<?php 	
-							// Will print the journal entries from the database, based on the tag the user selected 							
-							 print_filtered_entries($_GET['tag']);
-						?>	
-					</article>
-        </div>
-      </div>
-    </section>
+<body>
+<header>
+	<div class="container">
+		<div class="site-header">
+			<a class="logo" href="index.php"><i class="material-icons">library_books</i></a>
+			<a class="button icon-right" href="new.php"><span>New Entry</span> <i class="material-icons">add</i></a>
+		</div>
+		</div>
+</header>
+<section>
+	<div class="container">
+		<h1>
+			<?php
+				echo "<strong><i>" . strtoupper($_GET['tag']) . "</i></strong> Journal Entries";
+			?>
+		</h1>
+		<div class="entry-list">
+			<article>
+				<?php 	
+					// Will print the journal entries from the database, based on the tag the user selected 							
+					print_filtered_entries($_GET['tag']);
+				?>	
+			</article>
+    </div>
+  </div>
+</section>
 <?php include 'inc/footer.php';?>
