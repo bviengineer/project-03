@@ -48,8 +48,9 @@
 						<h3>Resources to Remember:</h3>
 						<p><?php echo $single_entry['resources']; ?></p>
 					</div>
+					<!-- Tag implementation -->
 					<div> 
-						<p class="tags">Tags: <a href="filtered_entries.php?tag="><?php ?>tags</p>
+						<p class="tags">Tags: <?php echo $single_entry['tags']; ?></p>
 					</div>
 				</article>
 			</div>
