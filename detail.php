@@ -2,10 +2,10 @@
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
 	
-	// Variable will hold selected journal entry
+	// Holds selected journal entry passed to the detail.php page from index.php via $_GET
 	$single_entry = get_single_entry($_GET['id']);
-		
-	// Will check whether the form with the delete button was submitted & delete the journal entry 
+
+	// Verifies the form [content] was submitted for deletion or cancel's the deletion 
 	if ($_POST) {
 		$_POST['id'] = $single_entry['id'];
 		$_POST['title'] = $single_entry['title'];
