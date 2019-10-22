@@ -124,7 +124,7 @@ h5 {
 	border-radius: 10px;
 }
 h6 {
-	background-color: firebrick;
+	background-color: rgb(48, 36, 141); /*#678F88 */
 	color: white;
 	font-size: 1.4em;
 	text-align: center;
