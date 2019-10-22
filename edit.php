@@ -2,14 +2,14 @@
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
 
-	// Get the ID of the journal entry to be edited and aids in displaying it 
+	// Get the ID of the journal entry to be edited [from details.php] and aids in displaying it 
 	if (isset($_GET['id'])) {
 		$edit_entry = get_single_entry($_GET['id']);
 	}
 
-	// Checks whether a journal entry has been submitted for update via a form or POST 	request
+	// Checks whether a journal entry has been submitted for update via POST with a name of saveEdit 
 	if ($_POST && $_POST['saveEdit']) {
-			$_POST['id'] = $edit_entry['id']; // Passes the journal entry ID to the POST method 
+			$_POST['id'] = $edit_entry['id']; // Passing the journal entry ID to the POST method 
 
 			// Checks to ensure the title & ID of the edited journal entry isset before executing the update
 			if (!empty($edit_entry['title']) && isset($_POST['id'])) {
@@ -19,7 +19,7 @@
 				$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
 				$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
 			
-				// Calls the function to update the database, executes the update & redirects to index page
+				// Update the entry & redirects to details.php, displaying the updated entry
 				if (update_journal_entry($title, $date, $time_spent, $learned, $resources)) { 
 						header('Location: detail.php?id=' . $_POST['id']);
 						exit;
