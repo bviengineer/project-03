@@ -13,7 +13,7 @@
 		if (delete_single_entry($_POST['id'])) {
 				header("Location: index.php?msg=Okie+dokie!+I+deleted+the+'" . $_POST['title'] . "'+journal+entry+as+requested!");
 				exit;
-		// Cancel's the deletion & redirects
+		// Redirects to the index page if something goes wrong with the deletion request 
 		} else {
 				header("Location: index.php?msg=Entry+was+NOT+deleted!");
 				exit;
