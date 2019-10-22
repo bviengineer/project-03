@@ -16,6 +16,9 @@ function get_journal_entries() {
 		echo $e->getMessage();
 		return array();
 	}
+	// echo "<pre>";	
+	// var_dump($results->fetchAll(PDO::FETCH_ASSOC));
+	// echo "</pre>";
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
 // RETRIEVE A SINGLE JOURNAL ENTRY
@@ -26,12 +29,7 @@ function get_single_entry($id) {
 								LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
 								LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id 
 								WHERE id = ?";
-								
-	// $sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags
-	// FROM entries  
-	// LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
-	// LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id
-	// ORDER BY date DESC";
+
 	if (isset($_GET['id'])) {
 		try {
 			$results = $db->prepare($get_entry);
@@ -77,7 +75,7 @@ function print_journal_entries() {
 		echo "<time>"; 
 		echo date('F d, Y', strtotime($entry['date']));
 		echo "</time>";
-		echo "<h4 class='tags'><a href=filtered_entries.php?tag=";
+		echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
 		echo  $entry['tags'] . " '> Tag(s): ";
 		echo $entry['tags'] . "</a></h4>";
 		echo "<hr>";
