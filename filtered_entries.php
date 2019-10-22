@@ -2,6 +2,8 @@
 	// Inclusion of files containing header tags and all functions needed to run the application
 	include 'inc/head.php';
 	include 'inc/functions.php';
+
+	$filtered_entries = get_filtered_entries($_GET['tag']);
 ?>
   <body>
     <header>
@@ -22,8 +24,9 @@
 				<div class="entry-list">
           <article>
 						<?php 
-							// Will print the journal entries from the database, to the page
-							// print_journal_entries();
+							// Will print the journal entries from the database, based on the tag the user selected 
+							 echo filtered_entries($tag);
+							 //print_journal_entries();
 						?>	
 					</article>
         </div>
