@@ -50,7 +50,7 @@
 					</div>
 					<!-- Tag implementation -->
 					<div> 
-						<p class="tags">Tags: <a href="filtered_entries.php?tag=<?php echo $single_entry['tags']; ?>"><?php echo $single_entry['tags']; ?></p>
+						<p class="tags">Tag(s): <a href="filtered_entries.php?tag=<?php echo $single_entry['tags']; ?>"><?php echo $single_entry['tags']; ?></p>
 					</div>
 				</article>
 			</div>
