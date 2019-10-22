@@ -18,22 +18,6 @@ function get_journal_entries() {
 	}
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
-// PRINT ALL JOURNAL ENTRIES: on the [index] page & creates hyperlinks to respective entries 
-function print_journal_entries() {
-	foreach (get_journal_entries() as $entry) {
-		echo "<h2><a href='detail.php?id=";
-		echo $entry['id'] . " '> ";
-		echo $entry['title'];
-		echo "</a></h2>";
-		echo "<time>"; 
-		echo date('F d, Y', strtotime($entry['date']));
-		echo "</time>";
-		echo "<h4 class='tags'><a href=filtered_entries.php?tag=";
-		echo  $entry['tags'] . " '> Tag(s): ";
-		echo $entry['tags'] . "</a></h4>";
-		echo "<hr>";
-	}
-}
 // RETRIEVE A SINGLE JOURNAL ENTRY
 function get_single_entry($id) {
 	include 'inc/dbconnection.php';
@@ -72,6 +56,38 @@ function get_filtered_entries($tag) {
 		}
 	}
 	return $results->fetchAll(PDO::FETCH_ASSOC);
+}
+// PRINT ALL JOURNAL ENTRIES: on the [index] page & creates hyperlinks to respective entries 
+function print_journal_entries() {
+	foreach (get_journal_entries() as $entry) {
+		echo "<h2><a href='detail.php?id=";
+		echo $entry['id'] . " '> ";
+		echo $entry['title'];
+		echo "</a></h2>";
+		echo "<time>"; 
+		echo date('F d, Y', strtotime($entry['date']));
+		echo "</time>";
+		echo "<h4 class='tags'><a href=filtered_entries.php?tag=";
+		echo  $entry['tags'] . " '> Tag(s): ";
+		echo $entry['tags'] . "</a></h4>";
+		echo "<hr>";
+	}
+}
+// PRINT JOURNAL ENTRIES BY TAG: on the [filtered_entries] page 
+function print_filtered_entries($tag) {
+	foreach (get_filtered_entries($tag) as $entry) {
+		echo "<h2><a href='detail.php?id=";
+		echo $entry['id'] . " '> ";
+		echo $entry['title'];
+		echo "</a></h2>";
+		echo "<time>"; 
+		echo date('F d, Y', strtotime($entry['date']));
+		echo "</time>";
+		echo "<h4 class='tags'><a href=filtered_entries.php?tag=";
+		echo  $entry['tags'] . " '> Tag(s): ";
+		echo $entry['tags'] . "</a></h4>";
+		echo "<hr>";
+	}
 }
 // ADD JOURNAL ENTRY
 function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
