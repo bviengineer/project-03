@@ -5,13 +5,11 @@
 // RETRIEVE ALL JOURNAL ENTRIES
 function get_journal_entries() {
 	include 'inc/dbconnection.php';
-
 	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, tags.tags
 					FROM entries  
 					LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
 					LEFT OUTER JOIN tags ON tags.tag_id = entry_tag.tag_id
 					ORDER BY date DESC";
-					
 	try {
 		$results = $db->query($sql); 
 	} catch (Exception $e) {
@@ -22,7 +20,6 @@ function get_journal_entries() {
 }
 // PRINT ALL JOURNAL ENTRIES: on the [index] page & creates hyperlinks to respective entries 
 function print_journal_entries() {
-
 	foreach (get_journal_entries() as $entry) {
 		echo "<h2><a href='detail.php?id=";
 		echo $entry['id'] . " '> ";
@@ -40,11 +37,9 @@ function print_journal_entries() {
 // RETRIEVE A SINGLE JOURNAL ENTRY
 function get_single_entry($id) {
 	include 'inc/dbconnection.php';
-
 	$get_entry = "SELECT id, title, date, time_spent, learned, resources 
 								FROM entries 
 								WHERE id = ?"; 
-	
 	if (isset($_GET['id'])) {
 		try {
 			$results = $db->prepare($get_entry);
@@ -60,13 +55,11 @@ function get_single_entry($id) {
 // RETRIEVE JOURNAL ENTRIES BY TAGS
 function get_filtered_entries($tag) {
 	include 'inc/dbconnection.php';
-
 	$get_tag = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, tags.tags
 								FROM entries  
 								LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
 								LEFT OUTER JOIN tags ON tags.tag_id = entry_tag.tag_id
 								WHERE tags LIKE ?"; 
-	
 	 if (isset($_GET['tag'])) {
 		 echo $_GET['tag'];
 		try {
@@ -83,7 +76,6 @@ function get_filtered_entries($tag) {
 // ADD JOURNAL ENTRY
 function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
     include 'inc/dbconnection.php';
-    
     $add_entry = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUES(?, ?, ?, ?, ?)";
     try {
         $results = $db->prepare($add_entry); // Prepare sql statement & assigns results to the variable $results
@@ -102,7 +94,6 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 // UPDATE JOURNAL ENTRY
 function update_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL) {
 	include 'inc/dbconnection.php';
-	
 	$update_entry = "UPDATE entries SET title = ?, date = ?, time_spent = ?, learned = ?, resources = ? WHERE id = ?";
 	
 	// Verifies that the ID of the journal entry isset before updating the database 
@@ -121,14 +112,12 @@ function update_journal_entry($title, $date = NULL, $time_spent = NULL, $learned
 						return array();
 		} 
 	}
-	return true; // ReturnS true if no error encountered & pass the return value to the call of update_journal_entry inside edit.php
+	return true;
 }
 // DELETE JOURNAL ENTRY
 function delete_single_entry($id) {
 	include 'inc/dbconnection.php';
-
 	$delete_entry = "DELETE FROM entries WHERE id = ?"; 
-
 	if (isset($_GET['id'])) {
 		try {
 			$results = $db->prepare($delete_entry);
@@ -141,7 +130,8 @@ function delete_single_entry($id) {
 	}
 	return true;
 }
-// ERROR NOTIFICATION: Will halt a request & print an error message if submitted journal entry form data is invalid
+// ERROR NOTIFICATION FUNCTION 
+	//Will halt a request & print an error message if submitted journal entry form data is invalid
 function print_err_msg($message) {
 	$blank_title_err = $message;
 	return $blank_title_err;
