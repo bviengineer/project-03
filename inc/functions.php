@@ -67,26 +67,6 @@ function get_filtered_entries($tag) {
 	}
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
-// RETRIEVE A SINGLE JOURNAL ENTRY BASED ON TAG(S)
-function get_filtered_entry($tag) {
-	include 'inc/dbconnection.php';
-	$get_tag = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags
-								FROM entries  
-								LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
-								LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id
-								WHERE my_tags LIKE ?"; 
-	 if (isset($_GET['tag'])) {
-		try {
-			$results = $db->prepare($get_tag);
-			$results->bindValue(1, $_GET['tag'], PDO::PARAM_STR);
-			$results->execute();
-		} catch (Connection $e) {
-				$e->getMessage();
-				return array();
-		}
-	}
-	return $results->fetch(PDO::FETCH_ASSOC);
-}
 // PRINT ALL JOURNAL ENTRIES: on index.php & creates hyperlinks to respective entries 
 function print_journal_entries() {
 	foreach (get_journal_entries() as $entry) {
