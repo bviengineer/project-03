@@ -25,21 +25,10 @@
 														$learned = trim(filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING));
 														$resources = trim(filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING));
 													
-														// To handle date validation but browser already has it built in
-														// $dateMatch = explode('-',$date);
-														// var_dump($dateMatch);
-													
 														// Will ensure required fileds are completed before adding entry to the database
 														if (empty($title) || empty($date) || empty($time_spent) || empty($learned)) {
 																echo print_err_msg("Please ensure the:<br> Title, Date, Time Spent & What I learned fields <br> are completed in order to save this entry");
-														} /*elseif (count($dateMatch) !=3 || 
-																			strlen($dateMatch[0]) != 4 || //year
-																			strlen($dateMatch[1]) != 2 || //month
-																			strlen($dateMatch[2]) != 2 || //day
-																			!checkdate($dateMatch[1], $dateMatch[2], $dateMatch[0])) {
-																
-																			echo print_err_msg("Invalid Date");
-														}*/ else {
+														} else {
 																	if (add_journal_entry($title, $date, $time_spent, $learned, $resources)) {
 																		header('Location: index.php?msg=Cool!+I+added+that+journal+entry+for+you!');
 																		exit;
