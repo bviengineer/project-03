@@ -10,21 +10,21 @@
 	// Checks whether a journal entry has been submitted for update via POST with a name of saveEdit 
 	if ($_POST && $_POST['saveEdit']) {
 			$_POST['id'] = $edit_entry['id']; // Passing the journal entry ID to the POST method 
+			$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+			$date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
+			$time_spent = filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT);
+			$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
+			$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
 
-			// Checks to ensure the title & ID of the edited journal entry isset before executing the update
-			if (!empty($edit_entry['title']) && isset($_POST['id'])) {
-				$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-				$date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
-				$time_spent = filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT);
-				$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
-				$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
-			
-				// Update the entry & redirects to details.php, displaying the updated entry
-				if (update_journal_entry($title, $date, $time_spent, $learned, $resources)) { 
-						header('Location: detail.php?id=' . $_POST['id']);
-						exit;
+			// Will ensure required fileds are completed before adding entry to the database
+			if (empty($title) || empty($date) || empty($time_spent) || empty($learned)) {
+					echo print_err_msg("Please ensure the:<br> Title, Date, Time Spent & What I learned fields <br> are completed in order to save this entry");
+			} else {
+					if (update_journal_entry($title, $date, $time_spent, $learned, $resources)) { 
+							header('Location: detail.php?id=' . $_POST['id']);
+							exit;
+					}
 				}
-			} 
 		 } elseif ($_POST && $_POST['cancelEdit']) {
 		 		header('Location: detail.php?id=' . $edit_entry['id']);
 		 	}
