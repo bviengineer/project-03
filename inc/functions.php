@@ -39,10 +39,10 @@ function get_single_entry($id) {
 // RETRIEVE JOURNAL ENTRIES BY TAG(S)
 function get_filtered_entries($tag) {
 	include 'inc/dbconnection.php';
-	$get_tag = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, tags.tags
+	$get_tag = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags
 								FROM entries  
 								LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
-								LEFT OUTER JOIN tags ON tags.tag_id = entry_tag.tag_id
+								LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id
 								WHERE tags LIKE ?"; 
 	 if (isset($_GET['tag'])) {
 		 echo "<br>".$_GET['tag'] . "<br>"; // testing tag selected by user 
