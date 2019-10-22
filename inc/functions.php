@@ -8,8 +8,8 @@ function get_journal_entries() {
 
 	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, tags.tags
 					FROM entries  
-					LEFT JOIN entry_tag ON entries.id = entry_tag.entry_id
-					LEFT JOIN tags ON tags.tag_id = entry_tag.tag_id
+					LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
+					LEFT OUTER JOIN tags ON tags.tag_id = entry_tag.tag_id
 					ORDER BY date DESC";
 	
 	// PREVIOUS QUERY 
