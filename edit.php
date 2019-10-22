@@ -33,7 +33,7 @@
 
 								// Will ensure required fileds are completed before adding entry to the database
 								if (empty($title) || empty($date) || empty($time_spent) || empty($learned)) {
-										echo print_err_msg("Please ensure the:<br> Title, Date, Time Spent & What I learned fields <br> are completed in order to save this entry");
+										echo print_err_msg("I returned the initival values<br>because one or more of the required fields were blank<br><br> Please ensure the:<br> Title, Date, Time Spent & What I learned fields <br> are completed in order to update this entry");
 										$_POST['title'] = '';
 								} else {
 										if (update_journal_entry($title, $date, $time_spent, $learned, $resources)) { 
