@@ -21,9 +21,17 @@ function get_journal_entries() {
 // RETRIEVE A SINGLE JOURNAL ENTRY
 function get_single_entry($id) {
 	include 'inc/dbconnection.php';
-	$get_entry = "SELECT id, title, date, time_spent, learned, resources 
-								FROM entries 
-								WHERE id = ?"; 
+	$get_entry = "SELECT entries.id, entries.title, entries.date, entries.time_spent, entries.learned, entries.resources, my_tags.tags 
+								FROM entries
+								LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
+								LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id 
+								WHERE id = ?";
+								
+	// $sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags
+	// FROM entries  
+	// LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
+	// LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id
+	// ORDER BY date DESC";
 	if (isset($_GET['id'])) {
 		try {
 			$results = $db->prepare($get_entry);
@@ -58,6 +66,26 @@ function get_filtered_entries($tag) {
 		//var_dump($results->fetchAll(PDO::FETCH_ASSOC));
 	}
 	return $results->fetchAll(PDO::FETCH_ASSOC);
+}
+// RETRIEVE A SINGLE JOURNAL ENTRY BASED ON TAG(S)
+function get_filtered_entry($tag) {
+	include 'inc/dbconnection.php';
+	$get_tag = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags
+								FROM entries  
+								LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
+								LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id
+								WHERE my_tags LIKE ?"; 
+	 if (isset($_GET['tag'])) {
+		try {
+			$results = $db->prepare($get_tag);
+			$results->bindValue(1, $_GET['tag'], PDO::PARAM_STR);
+			$results->execute();
+		} catch (Connection $e) {
+				$e->getMessage();
+				return array();
+		}
+	}
+	return $results->fetch(PDO::FETCH_ASSOC);
 }
 // PRINT ALL JOURNAL ENTRIES: on index.php & creates hyperlinks to respective entries 
 function print_journal_entries() {
