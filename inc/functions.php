@@ -11,83 +11,25 @@ function get_journal_entries() {
 					LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
 					LEFT OUTER JOIN tags ON tags.tag_id = entry_tag.tag_id
 					ORDER BY date DESC";
-
+					
 	try {
 		$results = $db->query($sql); 
 	} catch (Exception $e) {
 		echo $e->getMessage();
 		return array();
 	}
-	// echo "<pre>";
-	// var_dump($results->fetchAll(PDO::FETCH_ASSOC));
-	// echo "</pre>";
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
 // PRINT ALL JOURNAL ENTRIES: on the [index] page & creates hyperlinks to respective entries 
 function print_journal_entries() {
 
 	foreach (get_journal_entries() as $entry) {
-		$date_conversion = explode("-", $entry['date']); // Converts date of type string to an array, - is the separator 
-		$month = ''; // At index 1 of $date_conversion is the month
-		$day = $date_conversion[2]; // At index 2 of $date_conversion is the day
-		$year = $date_conversion[0]; // At index 0 of $date_conversion is the year
-
-		// Will assign the month [in words] to the $month variable before printing to the page
-		switch ($date_conversion[1]) {
-			case '1':
-			$month = 'January';
-			break;
-
-			case '2':
-				$month = 'February';
-				break;
-			
-				case '3':
-				$month = 'March';
-				break;
-
-				case '4':
-				$month = 'April';
-				break;
-
-				case '5':
-				$month = 'May';
-				break;
-
-				case '6':
-				$month = 'June';
-				break;
-
-				case '7':
-				$month = 'July';
-				break;
-
-				case '8':
-				$month = 'August';
-				break;
-
-				case '9':
-				$month = 'September';
-				break;
-
-				case '10':
-				$month = 'October';
-				break;
-
-				case '11':
-				$month = 'November';
-				break;
-
-				case '12':
-				$month = 'December';
-				break;
-		}
 		echo "<h2><a href='detail.php?id=";
 		echo $entry['id'] . " '> ";
 		echo $entry['title'];
 		echo "</a></h2>";
-		echo "<time>";
-		echo $month . ' ' . $day . ', ' . $year; 
+		echo "<time>"; 
+		echo date('F d, Y', strtotime($entry['date']));
 		echo "</time>";
 		echo "<h4 class='tags'><a href=filtered_entries.php?tag=";
 		echo  $entry['tags'] . " '> Tag(s): ";
