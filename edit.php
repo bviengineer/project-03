@@ -1,8 +1,23 @@
 <?php 
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
-
-	// Get the ID of the journal entry to be edited [from details.php] and aids in displaying it 
+?>
+    <body>
+        <header>
+            <div class="container">
+                <div class="site-header">
+                    <a class="logo" href="index.php"><i class="material-icons">library_books</i></a>
+                    <a class="button icon-right" href="new.php"><span>New Entry</span> <i class="material-icons">add</i></a>
+                </div>
+            </div>
+        </header>
+        <section>
+            <div class="container">
+                <div class="edit-entry">
+										<h2>Edit Entry</h2>
+										<h5>
+											<?php
+										// Get the ID of the journal entry to be edited [from details.php] and aids in displaying it 
 	if (isset($_GET['id'])) {
 		$edit_entry = get_single_entry($_GET['id']);
 	}
@@ -29,19 +44,7 @@
 		 		header('Location: detail.php?id=' . $edit_entry['id']);
 		 	}
 ?>
-    <body>
-        <header>
-            <div class="container">
-                <div class="site-header">
-                    <a class="logo" href="index.php"><i class="material-icons">library_books</i></a>
-                    <a class="button icon-right" href="new.php"><span>New Entry</span> <i class="material-icons">add</i></a>
-                </div>
-            </div>
-        </header>
-        <section>
-            <div class="container">
-                <div class="edit-entry">
-                    <h2>Edit Entry</h2>
+										</h5>
                     <form method="POST" action="">
                         <label for="title"> Title <span id="star">*</span></label>
                         <input id="title" type="text" name="title" value="<?php echo $edit_entry['title']; ?> "><br>
