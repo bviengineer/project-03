@@ -2,9 +2,6 @@
 	// Inclusion of files containing header tags and all functions needed to run the application
 	include 'inc/head.php';
 	include 'inc/functions.php';
-
-	$filtered_entries = get_filtered_entries($_GET);
-	//var_dump($filtered_entries);
 ?>
   <body>
     <header>
@@ -17,17 +14,16 @@
   	</header>
     <section>
     	<div class="container">
-				<h6>
+				<h1>
 					<?php
-						echo "On filtered_entries page";
+						echo "<strong><i>" . strtoupper($_GET['tag']) . "</i></strong> Journal Entries";
 					?>
-				</h6>
+				</h1>
 				<div class="entry-list">
           <article>
-						<?php 
-							// Will print the journal entries from the database, based on the tag the user selected 
-							 //echo $filtered_entries;
-							 print_filtered_entries($filtered_entries);
+						<?php 	
+							// Will print the journal entries from the database, based on the tag the user selected 							
+							 print_filtered_entries($_GET['tag']);
 						?>	
 					</article>
         </div>
