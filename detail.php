@@ -5,7 +5,7 @@
 	// Holds selected journal entry passed to the detail.php page from index.php via $_GET
 	$single_entry = get_single_entry($_GET['id']);
 
-	// Verifies the form [content] was submitted for deletion or cancel's the deletion 
+	// Verifies the form [content] was submitted for deletion 
 	if ($_POST) {
 		$_POST['id'] = $single_entry['id'];
 		$_POST['title'] = $single_entry['title'];
@@ -13,6 +13,7 @@
 		if (delete_single_entry($_POST['id'])) {
 				header("Location: index.php?msg=Okie+dokie!+I+deleted+the+'" . $_POST['title'] . "'+journal+entry+as+requested!");
 				exit;
+		// Cancel's the deletion & redirects
 		} else {
 				header("Location: index.php?msg=Entry+was+NOT+deleted!");
 				exit;
