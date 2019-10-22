@@ -110,9 +110,11 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 // UPDATE JOURNAL ENTRY
 function update_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL) {
 	include 'inc/dbconnection.php';
-	$update_entry = "UPDATE entries SET title = ?, date = ?, time_spent = ?, learned = ?, resources = ? WHERE id = ?";
-	
-	// Verifies that the ID of the journal entry isset before updating the database 
+
+	$update_entry = "UPDATE entries 
+									SET title = ?, date = ?, time_spent = ?, learned = ?, resources = ? 
+									WHERE id = ?";
+
 	if (isset($_POST['id'])) {
 		try {
 				$results = $db->prepare($update_entry); // Prepare sql statement & assigns results to the variable $results
