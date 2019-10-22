@@ -36,7 +36,7 @@ function get_single_entry($id) {
 	}
 	return $results->fetch(PDO::FETCH_ASSOC);
 }
-// RETRIEVE JOURNAL ENTRIES BY TAGS
+// RETRIEVE JOURNAL ENTRIES BY TAG(S)
 function get_filtered_entries($tag) {
 	include 'inc/dbconnection.php';
 	$get_tag = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, tags.tags
