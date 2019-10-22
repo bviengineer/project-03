@@ -52,6 +52,13 @@
 						<textarea id="what-i-learned" rows="5" name="whatILearned"></textarea>
 						<label for="resources-to-remember">Resources to Remember</label>
 						<textarea id="resources-to-remember" rows="5" name="ResourcesToRemember"></textarea>
+						<fieldset>      
+        			<legend>Tag Your Journal Entry?</legend>      
+							<input type="checkbox" name="software development" value="Cats">Cats<br>      
+							<input type="checkbox" name="favorite_pet" value="Dogs">Dogs<br>      
+							<input type="checkbox" name="favorite_pet" value="Birds">Birds<br>      
+							<br>            
+    				</fieldset>   
 						<input type="submit" value="Publish Entry" name="addEntry" class="button">
 						<input type="submit" value="Cancel" name="cancelEntry" class="button button-secondary">
 				</form>
