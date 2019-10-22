@@ -45,7 +45,7 @@ function get_filtered_entries($tag) {
 								LEFT OUTER JOIN tags ON tags.tag_id = entry_tag.tag_id
 								WHERE tags LIKE ?"; 
 	 if (isset($_GET['tag'])) {
-		 echo $_GET['tag'];
+		 echo $_GET['tag']; // testing tag selected by user 
 		try {
 			$results = $db->prepare($get_tag);
 			$results->bindValue(1, $tag, PDO::PARAM_INT);
@@ -57,7 +57,7 @@ function get_filtered_entries($tag) {
 	}
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
-// PRINT ALL JOURNAL ENTRIES: on the [index] page & creates hyperlinks to respective entries 
+// PRINT ALL JOURNAL ENTRIES: on index.php & creates hyperlinks to respective entries 
 function print_journal_entries() {
 	foreach (get_journal_entries() as $entry) {
 		echo "<h2><a href='detail.php?id=";
@@ -73,7 +73,7 @@ function print_journal_entries() {
 		echo "<hr>";
 	}
 }
-// PRINT JOURNAL ENTRIES BY TAG: on the [filtered_entries] page 
+// PRINT JOURNAL ENTRIES BY TAG: on filtered_entries.php
 function print_filtered_entries($tag) {
 	foreach (get_filtered_entries($tag) as $entry) {
 		echo "<h2><a href='detail.php?id=";
@@ -108,7 +108,7 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 		return true; 
 }
 // UPDATE JOURNAL ENTRY
-function update_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL) {
+function update_journal_entry($title, $date, $time_spent, $learned, $resources = NULL) {
 	include 'inc/dbconnection.php';
 
 	$update_entry = "UPDATE entries 
