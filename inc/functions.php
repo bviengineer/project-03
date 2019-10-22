@@ -43,7 +43,7 @@ function get_filtered_entries($tags) {
 								FROM entries  
 								LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
 								LEFT OUTER JOIN tags ON tags.tag_id = entry_tag.tag_id
-								ORDER BY tags ?"; 
+								WHERE tags LIKE ?"; 
 	 if (isset($_GET['tags'])) {
 		 echo "<br>".$_GET['tags'] . "<br>"; // testing tag selected by user 
 		try {
