@@ -11,13 +11,7 @@ function get_journal_entries() {
 					LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
 					LEFT OUTER JOIN tags ON tags.tag_id = entry_tag.tag_id
 					ORDER BY date DESC";
-	
-	// PREVIOUS QUERY 
-	// "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, tags.tags 
-	// 				FROM entries  
-	// 				LEFT JOIN tags ON entries.tag_id = tags.tag_id
-	// 				ORDER BY date DESC";
-	
+
 	try {
 		$results = $db->query($sql); 
 	} catch (Exception $e) {
@@ -95,8 +89,8 @@ function print_journal_entries() {
 		echo "<time>";
 		echo $month . ' ' . $day . ', ' . $year; 
 		echo "</time>";
-		echo "<h4 class='tags'><a href=filtered_entries.php";
-		echo  " '> Tag(s): ";
+		echo "<h4 class='tags'><a href=filtered_entries.php?tag=";
+		echo  $entry['tags'] . " '> Tag(s): ";
 		echo $entry['tags'] . "</a></h4>";
 		echo "<hr>";
 	}
@@ -121,6 +115,29 @@ function get_single_entry($id) {
 	}
 	return $results->fetch(PDO::FETCH_ASSOC);
 }
+// RETRIEVE JOURNAL ENTRIES BY TAGS
+function get_filtered_entries($tag) {
+	include 'inc/dbconnection.php';
+
+	$get_tag = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, tags.tags
+								FROM entries  
+								LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
+								LEFT OUTER JOIN tags ON tags.tag_id = entry_tag.tag_id
+								WHERE tags LIKE ?"; 
+	
+	 if (isset($_GET['tag'])) {
+		 echo $_GET['tag'];
+		try {
+			$results = $db->prepare($get_tag);
+			$results->bindValue(1, $tag, PDO::PARAM_INT);
+			$results->execute();
+		} catch (Connection $e) {
+				$e->getMessage();
+				//return array();
+		}
+	}
+	return $results->fetchAll(PDO::FETCH_ASSOC);
+}
 // ADD JOURNAL ENTRY
 function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
     include 'inc/dbconnection.php';
@@ -138,7 +155,6 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
             $e->getMessage();
             return array();
 		} 
-		// Will return true if no error is encountered & pass the value to the call of add_journal_entry inside new.php
 		return true; 
 }
 // UPDATE JOURNAL ENTRY
