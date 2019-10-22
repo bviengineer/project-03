@@ -43,19 +43,19 @@ function get_filtered_entries($tag) {
 								FROM entries  
 								LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
 								LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id
-								WHERE my_tags.tags LIKE ?"; 
+								WHERE my_tags.tags LIKE ? ORDER BY date DESC"; 
 	 if (isset($_GET['tag'])) {
-		 echo "<br>".$_GET['tag'] . "<br>"; // testing tag selected by user 
+		 //echo "<br>".$_GET['tag'] . "<br>"; // testing tag selected by user 
 		try {
 			$results = $db->prepare($get_tag);
-			$results->bindValue(1, $tag, PDO::PARAM_INT);
+			$results->bindValue(1, $_GET['tag'], PDO::PARAM_STR);
 			$results->execute();
 		} catch (Connection $e) {
 				$e->getMessage();
 				return array();
 		}
-		echo "<br> tag after result set is returned: " . $_GET['tag'] . "<br>";
-		var_dump($results->fetchAll(PDO::FETCH_ASSOC));
+		//echo "<br> tag after result set is returned: " . $_GET['tag'] . "<br>";
+		//var_dump($results->fetchAll(PDO::FETCH_ASSOC));
 	}
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
