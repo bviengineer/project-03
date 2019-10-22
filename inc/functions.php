@@ -52,7 +52,7 @@ function get_filtered_entries($tag) {
 			$results->execute();
 		} catch (Connection $e) {
 				$e->getMessage();
-				//return array();
+				return array();
 		}
 	}
 	return $results->fetchAll(PDO::FETCH_ASSOC);
