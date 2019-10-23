@@ -54,10 +54,11 @@
 						<textarea id="resources-to-remember" rows="5" name="ResourcesToRemember"></textarea>
 						<fieldset>      
         			<legend>Tag Your Journal Entry?</legend>      
-							<input type="checkbox" name="software development" value="Cats">Cats<br>      
-							<input type="checkbox" name="favorite_pet" value="Dogs">Dogs<br>      
-							<input type="checkbox" name="favorite_pet" value="Birds">Birds<br>      
-							<br>            
+							<input type="checkbox" name="software development" value="Software Development"> Software Development<br>      
+							<input type="checkbox" name="favorite_pet" value="Travel"> Travel<br>      
+							<input type="checkbox" name="favorite_pet" value="Personal"> Personal<br>
+							<input type="checkbox" name="favorite_pet" value="Health & Wellness"> Health & Wellness<br>
+							<input type="checkbox" name="favorite_pet" value="Other"> Other      
     				</fieldset>   
 						<input type="submit" value="Publish Entry" name="addEntry" class="button">
 						<input type="submit" value="Cancel" name="cancelEntry" class="button button-secondary">
