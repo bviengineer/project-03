@@ -42,23 +42,28 @@
 					?>
 				</h5>
 				<form method="POST" action="">
-						<label for="title"> Title <span id="star">*</span></label>
+						<label for="title"> Title <span class="star">*</span></label>
 						<input id="title" type="text" name="title"><br>
-						<label for="date">Date <span id="star">*</span></label>
+						<label for="date">Date <span class="star">*</span></label>
 						<input id="date" type="date" name="date"><br>
-						<label for="time-spent"> Time Spent (in minutes) <span id="star">*</span></label>
+						<label for="time-spent"> Time Spent (in minutes) <span class="star">*</span></label>
 						<input id="time-spent" type="text" name="timeSpent"><br>
-						<label for="what-i-learned">What I Learned <span id="star">*</span></label>
+						<label for="what-i-learned">What I Learned <span class="star">*</span></label>
 						<textarea id="what-i-learned" rows="5" name="whatILearned"></textarea>
 						<label for="resources-to-remember">Resources to Remember</label>
 						<textarea id="resources-to-remember" rows="5" name="ResourcesToRemember"></textarea>
 						<fieldset>      
-        			<legend>Tag Your Journal Entry?</legend>      
-							<input type="checkbox" name="tags" value="Software Development"> Software Development<br>      
-							<input type="checkbox" name="tags" value="Travel"> Travel<br>      
-							<input type="checkbox" name="tags" value="Personal"> Personal<br>
-							<input type="checkbox" name="tags" value="Health & Wellness"> Health & Wellness<br>
-							<input type="checkbox" name="tags" value="Other"> Other      
+        			<legend>Tag Your Journal Entry <span class="star">*</span></legend>      
+							<label for="softwareDevelopment"></label>
+							<input type="checkbox" name="tags" value="Software Development" id="softwareDevelopment"> Software Development<br>      
+							<label for="travel"></label>
+							<input type="checkbox" name="tags" value="Travel" id="travel"> Travel<br>      
+							<label for="personal"></label>
+							<input type="checkbox" name="tags" value="Personal" id="personal"> Personal<br>
+							<label for="healthWellness"></label>
+							<input type="checkbox" name="tags" value="Health & Wellness" id="healthWellness"> Health and Wellness
+							<label for="other"></label>
+							<input type="checkbox" name="tags" value="Other" id="other"> Other      
     				</fieldset>   
 						<input type="submit" value="Publish Entry" name="addEntry" class="button">
 						<input type="submit" value="Cancel" name="cancelEntry" class="button button-secondary">
