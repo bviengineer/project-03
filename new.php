@@ -19,26 +19,28 @@
 					<h5>
 						<?php 
 							if ($_POST && $_POST['addEntry']) {
-								$title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING));
-								$date = trim(filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING));
-								$time_spent = trim(filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT));
-								$learned = trim(filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING));
-								$resources = trim(filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING));
-								$tags = filter_input(INPUT_POST, 'tags', FILTER_SANITIZE_STRING);
+							// 	$title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING));
+							// 	$date = trim(filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING));
+							// 	$time_spent = trim(filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT));
+							// 	$learned = trim(filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING));
+							// 	$resources = trim(filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING));
+							// 	$tags = filter_input(INPUT_POST, 'tags', FILTER_SANITIZE_STRING);
 													
-								// Will ensure required fileds are completed before adding entry to the database
-								if (empty($title) || empty($date) || empty($time_spent) || empty($learned) || empty($tags)) {
-										echo print_err_msg("Please ensure the:<br> Title, Date, Time Spent & What I learned fields are completed <br> & select at least 1 tag <br> in order to save this entry");
-								} else {
-											if (add_journal_entry($title, $date, $time_spent, $learned, $resources)) {
-												header('Location: index.php?msg=Cool!+I+added+that+journal+entry+for+you!');
-												exit;
-								} else {
-											echo print__err_msg("Could not add journal entry. Please try again!");
-									}
-								}
-							} elseif ($_POST && $_POST['cancelEntry']) { 
-								header('Location: index.php?msg=OK!+That+entry+was+discarded!');
+							// 	// Will ensure required fileds are completed before adding entry to the database
+							// 	if (empty($title) || empty($date) || empty($time_spent) || empty($learned) || empty($tags)) {
+							// 			echo print_err_msg("Please ensure the:<br> Title, Date, Time Spent & What I learned fields are completed <br> & select at least 1 tag <br> in order to save this entry");
+							// 	} else {
+							// 				if (add_journal_entry($title, $date, $time_spent, $learned, $resources, $tags)) {
+							// 					header('Location: index.php?msg=Cool!+I+added+that+journal+entry+for+you!');
+							// 					exit;
+							// 	} else {
+							// 				echo print_err_msg("Could not add journal entry. Please try again!");
+							// 		}
+							// 	}
+							// } elseif ($_POST && $_POST['cancelEntry']) { 
+							// 	header('Location: index.php?msg=OK!+That+entry+was+discarded!');
+
+							var_dump($_POST['tags']);
 							}
 					?>
 				</h5>
@@ -56,15 +58,15 @@
 						<fieldset>      
         			<legend>Tag Your Journal Entry <span class="star">*</span></legend>      
 							<label for="softwareDevelopment"></label>
-							<input type="checkbox" name="tags" value="Software Development" id="softwareDevelopment"> Software Development<br>      
+							<input type="checkbox" name="tags[]" value="Software Development" id="softwareDevelopment"> Software Development<br>      
 							<label for="travel"></label>
-							<input type="checkbox" name="tags" value="Travel" id="travel"> Travel<br>      
+							<input type="checkbox" name="tags[]" value="Travel" id="travel"> Travel<br>      
 							<label for="personal"></label>
-							<input type="checkbox" name="tags" value="Personal" id="personal"> Personal<br>
+							<input type="checkbox" name="tags[]" value="Personal" id="personal"> Personal<br>
 							<label for="healthWellness"></label>
-							<input type="checkbox" name="tags" value="Health & Wellness" id="healthWellness"> Health and Wellness
+							<input type="checkbox" name="tags[]" value="Health & Wellness" id="healthWellness"> Health and Wellness
 							<label for="other"></label>
-							<input type="checkbox" name="tags" value="Other" id="other"> Other      
+							<input type="checkbox" name="tags[]" value="Other" id="other"> Other      
     				</fieldset>   
 						<input type="submit" value="Publish Entry" name="addEntry" class="button">
 						<input type="submit" value="Cancel" name="cancelEntry" class="button button-secondary">
