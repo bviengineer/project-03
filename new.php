@@ -24,10 +24,11 @@
 								$time_spent = trim(filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT));
 								$learned = trim(filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING));
 								$resources = trim(filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING));
+								$tags = filter_input(INPUT_POST, 'tags', FILTER_SANITIZE_STRING);
 													
 								// Will ensure required fileds are completed before adding entry to the database
-								if (empty($title) || empty($date) || empty($time_spent) || empty($learned)) {
-										echo print_err_msg("Please ensure the:<br> Title, Date, Time Spent & What I learned fields <br> are completed in order to save this entry");
+								if (empty($title) || empty($date) || empty($time_spent) || empty($learned) || empty($tags)) {
+										echo print_err_msg("Please ensure the:<br> Title, Date, Time Spent & What I learned fields are completed <br> & select at least 1 tag <br> in order to save this entry");
 								} else {
 											if (add_journal_entry($title, $date, $time_spent, $learned, $resources)) {
 												header('Location: index.php?msg=Cool!+I+added+that+journal+entry+for+you!');
