@@ -91,7 +91,7 @@ function print_filtered_entries($tag) {
 		echo "<time>"; 
 		echo date('F d, Y', strtotime($entry['date']));
 		echo "</time>";
-		echo "<h4 class='tags'><a href=filtered_entries.php?tag=";
+		echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
 		echo  $entry['tags'] . " '> Tag(s): ";
 		echo $entry['tags'] . "</a></h4>";
 		echo "<hr>";
