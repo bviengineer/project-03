@@ -16,7 +16,7 @@
 	<div class="container">
 		<h1 class='page-heading'>
 			<?php
-				echo "<strong><i>" . strtoupper($_GET['tag']) . "</i></strong> Journal Entries";
+				echo "<h1><span class='index-title'> " . strtoupper($_GET['tag']) . "</span> <span class='index-title2'> Journal Entries</span>";
 			?>
 		</h1>
 		<div class="entry-list">
