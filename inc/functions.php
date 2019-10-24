@@ -25,10 +25,10 @@ function get_journal_entries() {
 function get_single_entry($id) {
 	include 'inc/dbconnection.php';
 	$get_entry = "SELECT entries.id, entries.title, entries.date, entries.time_spent, entries.learned, entries.resources, my_tags.tags 
-								FROM entries
-								LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
-								LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id 
-								WHERE id = ?";
+				FROM entries
+				LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
+				LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id 
+				WHERE id = ?";
 
 	if (isset($_GET['id'])) {
 		try {
@@ -98,17 +98,34 @@ function print_filtered_entries($tag) {
 	}
 }
 // ADD JOURNAL ENTRY
-function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
-    include 'inc/dbconnection.php';
-    $add_entry = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUES(?, ?, ?, ?, ?)";
-    try {
-        $results = $db->prepare($add_entry); // Prepare sql statement & assigns results to the variable $results
-        $results->bindValue(1, $title, PDO::PARAM_STR); // Associates the 1st ? with the $title var
-        $results->bindValue(2, $date, PDO::PARAM_STR); // Associates the 2nd ? with the $date var
-        $results->bindValue(3, $time_spent, PDO::PARAM_INT); // Associates the 3rd ? with the $time_spent var
-        $results->bindValue(4, $learned, PDO::PARAM_STR); // Associates the 4th ? with the $learned var
-        $results->bindValue(5, $resources, PDO::PARAM_STR); // Associates the 5th ? with the $resources var
-        $results->execute(); // Executes the insert query after filtering & binding the inputs
+function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL, $tags){
+	include 'inc/dbconnection.php';
+	
+$add_entry = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags
+							FROM entries  
+							LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
+							LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id 
+							INSERT INTO entries (entries.title, entries.date, entries.time_spent, entries.learned, entries.resources, entry_tag.tag_id) 
+							WHERE entry_tag.tag_id IN ('1', '2', '3', '4', '5') 
+							VALUES(?, ?, ?, ?, ?, ?)";
+					
+	// $add_entry = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUES(?, ?, ?, ?, ?, ?)";
+	// $add_tags = "INSERT INTO entry_tag (entry_id, tag_id) VALUES(?, ?)";
+
+  try {
+		$results = $db->prepare($add_entry); // Prepare sql statement & assigns results to the variable $results
+		$results->bindValue(1, $title, PDO::PARAM_STR); // Associates the 1st ? with the $title var
+		$results->bindValue(2, $date, PDO::PARAM_STR); // Associates the 2nd ? with the $date var
+		$results->bindValue(3, $time_spent, PDO::PARAM_INT); // Associates the 3rd ? with the $time_spent var
+		$results->bindValue(4, $learned, PDO::PARAM_STR); // Associates the 4th ? with the $learned var
+		$results->bindValue(5, $resources, PDO::PARAM_STR); // Associates the 5th ? with the $resources var
+		$results->bindValue(5, $tags, PDO::PARAM_STR);
+		$results->execute(); // Executes the insert query after filtering & binding the inputs
+		
+		// $results2 = $db-prepare($add_tags);
+		// $results2->bindValue(1, $_POST['id'], PDO::PARAM_STR);
+		// $results2->bindValue(2, $_POST['tags'], PDO::PARAM_STR);
+		// $results2->execute();
     } catch (Exception $e) {
             $e->getMessage();
             return array();
@@ -120,8 +137,8 @@ function update_journal_entry($title, $date, $time_spent, $learned, $resources =
 	include 'inc/dbconnection.php';
 
 	$update_entry = "UPDATE entries 
-									SET title = ?, date = ?, time_spent = ?, learned = ?, resources = ? 
-									WHERE id = ?";
+						SET title = ?, date = ?, time_spent = ?, learned = ?, resources = ? 
+						WHERE id = ?";
 
 	if (isset($_POST['id'])) {
 		try {
