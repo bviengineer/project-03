@@ -104,7 +104,8 @@ h2 {
 }
 h2 a {
 	text-decoration: none;
-	color: #000;
+	/* color: #000; */
+	color: rgb(66, 38, 38);
 }
 h3 {
 	font-size: 18px;
@@ -159,7 +160,7 @@ ul li a {
 	color: firebrick;
 }
 .tags {
-	background-color: rgb(109, 98, 189);
+	background-color: rgb(87, 73, 191);
 	color: white;
 	margin: auto 38% auto 38%;
 	border-radius: 5px;
@@ -190,6 +191,9 @@ a, .tags:-webkit-any-link {
 }
 .index-title2 {
 	font-family: 'Zilla Slab Highlight', cursive;
+	color: rgb(66, 38, 38);
+}
+h2 {
 	color: rgb(66, 38, 38);
 }
 
