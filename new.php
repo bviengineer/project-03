@@ -24,10 +24,8 @@
 								$time_spent = trim(filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT));
 								$learned = trim(filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING));
 								$resources = trim(filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING));
-								$tags = filter_input(INPUT_POST, 'tags', FILTER_SANITIZE_STRING); 
-													
 								// Will ensure required fileds are completed before adding entry to the database
-								if (empty($title) || empty($date) || empty($time_spent) || empty($learned) || empty($tags)) {
+								if (empty($title) || empty($date) || empty($time_spent) || empty($learned)) {
 										echo print_err_msg("Please ensure the:<br> Title, Date, Time Spent & What I learned fields are completed <br> & select 1 tag <br> in order to save this entry");
 								} else {
 											if (add_journal_entry($title, $date, $time_spent, $learned, $resources, $tags)) {
@@ -52,20 +50,7 @@
 						<label for="what-i-learned">What I Learned <span class="star">*</span></label>
 						<textarea id="what-i-learned" rows="5" name="whatILearned"></textarea>
 						<label for="resources-to-remember">Resources to Remember</label>
-						<textarea id="resources-to-remember" rows="5" name="ResourcesToRemember"></textarea>
-						<fieldset>      
-        			<legend>Tag Your Journal Entry <span class="star">*</span></legend>      
-							<label for="softwareDevelopment"></label>
-							<input type="checkbox" name="tags" value="1"> Technology<br>      
-							<label for="travel"></label>
-							<input type="checkbox" name="tags" value="2"> Travel<br>      
-							<label for="personal"></label>
-							<input type="checkbox" name="tags" value="3"> Personal<br>
-							<label for="healthWellness"></label>
-							<input type="checkbox" name="tags" value="5" id=""> Health and Wellness
-							<label for="other"></label>
-							<input type="checkbox" name="tags" value="4"> Other      
-    				</fieldset>   
+						<textarea id="resources-to-remember" rows="5" name="ResourcesToRemember"></textarea>   
 						<input type="submit" value="Publish Entry" name="addEntry" class="button">
 						<input type="submit" value="Cancel" name="cancelEntry" class="button button-secondary">
 				</form>
