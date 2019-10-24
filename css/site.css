@@ -159,19 +159,29 @@ ul li a {
 	color: firebrick;
 }
 .tags {
-	color: darkred!important;
+	background-color: rgb(109, 98, 189);
+	color: white;
+	margin: auto 38% auto 38%;
+	border-radius: 5px;
+	padding: 5px;
 	font-size: 1em;
 	font-style: italic; 
 	font-weight: 300;
 }
-.tags:hover {
+/* .tags:hover {
 	color: purple;
 	font-size: 1em;
 	font-style: italic; 
 	font-weight: 300;
+} */
+/* user agent style */
+a, .tags:-webkit-any-link {
+	color: white;
+	cursor: pointer;
+	text-decoration: none;
 }
 .page-heading {
-	margin: 0 0 0 50%;
+	margin: 0 0 0 30%;
 	color: rgb(66, 38, 38);
 }
 .index-title {
