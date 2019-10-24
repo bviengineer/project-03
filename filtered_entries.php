@@ -14,7 +14,7 @@
 </header>
 <section>
 	<div class="container">
-		<h1 class='filtered-entries-heading'>
+		<h1 class='page-heading'>
 			<?php
 				echo "<strong><i>" . strtoupper($_GET['tag']) . "</i></strong> Journal Entries";
 			?>
