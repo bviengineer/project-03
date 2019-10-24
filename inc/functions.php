@@ -93,9 +93,7 @@ function print_filtered_entries($tag) {
 // ADD JOURNAL ENTRY
 function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
 	include 'inc/dbconnection.php';
-	
-	$add_entry = $add_entry = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUES(?, ?, ?, ?, ?, ?)";
-
+	$add_entry = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUES(?, ?, ?, ?, ?)";
   try {
 		$results = $db->prepare($add_entry); // Prepare sql statement & assigns results to the variable $results
 		$results->bindValue(1, $title, PDO::PARAM_STR); // Associates the 1st ? with the $title var
