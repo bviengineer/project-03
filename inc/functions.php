@@ -101,7 +101,7 @@ function print_filtered_entries($tag) {
 function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL, $tags){
 	include 'inc/dbconnection.php';
 	
-$add_entry = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags
+$add_entry = "SELECT entries.id, entries.title, entries.time_spent, entries.date, entries.learned, entries.resources, my_tags.tags
 							FROM entries  
 							LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
 							LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id 
