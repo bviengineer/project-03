@@ -1,18 +1,15 @@
 <?php 
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
-	
-	// Holds selected journal entry passed to the detail.php page from index.php via $_GET
+	// Holds selected journal entry passed to detail.php page from index.php via $_GET
 	$single_entry = get_single_entry($_GET['id']);
-
 	// Verifies the form [content] was submitted for deletion 
 	if ($_POST) {
 		$_POST['id'] = $single_entry['id'];
 		$_POST['title'] = $single_entry['title'];
-
 		if (delete_single_entry($_POST['id'])) {
-				header("Location: index.php?msg=Okie+dokie!+I+deleted+the+'" . $_POST['title'] . "'+journal+entry+as+requested!");
-				exit;
+			header("Location: index.php?msg=Okie+dokie!+I+deleted+the+'" . $_POST['title'] . "'+journal+entry+as+requested!");
+			exit;
 		// Redirects to the index page if something goes wrong with the deletion request 
 		} else {
 				header("Location: index.php?msg=Entry+was+NOT+deleted!");
@@ -48,7 +45,7 @@
 						<h3>Resources to Remember:</h3>
 						<p><?php echo $single_entry['resources']; ?></p>
 					</div>
-					<!-- Tag implementation -->
+					<!-- Print tag name & hyerlink to page with entries filtered by selected tag -->
 					<div> 
 						<p class="tags">Tag(s): <a href="filtered_entries.php?tag=<?php echo $single_entry['tags']; ?>"><?php echo $single_entry['tags']; ?></p>
 					</div>
