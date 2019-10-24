@@ -19,18 +19,16 @@
 					<?php
 						// Get the ID of the journal entry to be edited [from details.php] and aids in displaying it 
 						if (isset($_GET['id'])) {
-							$edit_entry = get_single_entry($_GET['id']);
+								$edit_entry = get_single_entry($_GET['id']);
 						}
-
 						// Checks whether a journal entry has been submitted for update via POST with a name of saveEdit 
 						if ($_POST && $_POST['saveEdit']) {
-								$_POST['id'] = $edit_entry['id']; // Passing the journal entry ID to the POST method 
-								$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-								$date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
-								$time_spent = filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT);
-								$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
-								$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
-
+							$_POST['id'] = $edit_entry['id']; // Passing the journal entry ID to the POST method 
+							$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+							$date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
+							$time_spent = filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT);
+							$learned = filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING);
+							$resources = filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING);
 								// Will ensure required fileds are completed before adding entry to the database
 								if (empty($title) || empty($date) || empty($time_spent) || empty($learned)) {
 										echo print_err_msg("I returned the initival values<br>because one or more of the required fields were blank<br><br> Please ensure the:<br> Title, Date, Time Spent & What I learned fields <br> are completed in order to update this entry");
