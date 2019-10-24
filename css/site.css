@@ -171,14 +171,16 @@ ul li a {
 	font-weight: 300;
 }
 .page-heading {
-	margin: 0 0 0 30%;
+	margin: 0 0 0 50%;
 	color: rgb(66, 38, 38);
 }
 .index-title {
 	font-family: 'Mansalva', cursive;
+	color: rgb(66, 38, 38);
 }
 .index-title2 {
 	font-family: 'Zilla Slab Highlight', cursive;
+	color: rgb(66, 38, 38);
 }
 
 /* ==========================================================================
