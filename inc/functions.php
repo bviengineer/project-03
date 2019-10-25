@@ -101,19 +101,36 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 		$results->bindValue(3, $time_spent, PDO::PARAM_INT); // Associates the 3rd ? with the $time_spent var
 		$results->bindValue(4, $learned, PDO::PARAM_STR); // Associates the 4th ? with the $learned var
 		$results->bindValue(5, $resources, PDO::PARAM_STR); // Associates the 5th ? with the $resources var
-		$results->bindValue(5, $tags, PDO::PARAM_STR);
 		$results->execute(); // Executes the insert query after filtering & binding the inputs
   } catch (Exception $e) {
 			$e->getMessage();
 			return array();
 	} 
-			return true; 
+	return true; 
+}
+// ADD TAG(S) FOR A NEW ENTRY TO THE DATABASE
+function add_tags() {
+	include 'inc/dbconnection.php';
+	$id = get_last_entry(); // Gets ID of most recent entry entered into the dbase
+	$entry_id = intval($id['id']); // extracts ID from associative array & converts the ID from a string to an int
+	foreach ($_POST['tags'] as $tag) {
+		$tag_id = intval($tag);
+		try {
+			$results = $db->prepare("INSERT INTO entry_tag (entry_id, tag_id) VALUES(?, ?)");
+			$results->bindValue(1, $entry_id, PDO::PARAM_STR);
+			$results->bindValue(2, $tag_id, PDO::PARAM_STR);
+			$results->execute();
+		} catch(Exception $e) {
+				$e->getMessage();
+				return array();
+		}	
+	}
+	return true;
 }
 // RETRIEVE MOST RECENT JOURNAL ENTRY ADDED
 function get_last_entry() {
 	include 'inc/dbconnection.php';
-
-	$select_last_entry = "SELECT * FROM entries ORDER BY id DESC LIMIT 1";
+	$select_last_entry = "SELECT id FROM entries ORDER BY id DESC LIMIT 1";
 	try {
 		$results = $db->query($select_last_entry);
 	} catch (Exception $e) {
