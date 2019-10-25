@@ -109,12 +109,18 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 	} 
 			return true; 
 }
-// ADD TAG TO JOURNAL ENTRY
-function add_tag($entry_id, $tags) {
+// RETRIEVE LAST JOURNAL ENTRY
+function get_last_entry() {
 	include 'inc/dbconnection.php';
 
 	$select_last_entry = "SELECT * FROM entries ORDER BY id DESC LIMIT 1";
-
+	try {
+		$results = $db->query($select_last_entry);
+	} catch (Exception $e) {
+		$e->getMessage();
+		return array();
+	}
+	return $results->fetch(PDO::FETCH_ASSOC);
 }
 // UPDATE JOURNAL ENTRY
 function update_journal_entry($title, $date, $time_spent, $learned, $resources = NULL) {
