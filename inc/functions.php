@@ -5,7 +5,7 @@
 // RETRIEVE ALL JOURNAL ENTRIES
 function get_journal_entries() {
 	include 'inc/dbconnection.php';
-	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags
+	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags, entry_tag.tag_id
 					FROM entries  
 					LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
 					LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id
@@ -21,7 +21,7 @@ function get_journal_entries() {
 // RETRIEVE A SINGLE JOURNAL ENTRY
 function get_single_entry($id) {
 	include 'inc/dbconnection.php';
-	$get_entry = "SELECT entries.id, entries.title, entries.date, entries.time_spent, entries.learned, entries.resources, my_tags.tags 
+	$get_entry = "SELECT entries.id, entries.title, entries.date, entries.time_spent, entries.learned, entries.resources, my_tags.tags, entry_tag.tag_id 
 								FROM entries
 								LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
 								LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id 
@@ -41,7 +41,7 @@ function get_single_entry($id) {
 // RETRIEVE JOURNAL ENTRIES BY TAG(S)
 function get_filtered_entries($tag) {
 	include 'inc/dbconnection.php';
-	$get_tag = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags
+	$get_tag = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags, entry_tag.tag_id
 								FROM entries  
 								LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
 								LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id
@@ -70,7 +70,15 @@ function print_journal_entries() {
 		echo "</time>";
 		echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
 		echo  $entry['tags'] . " '> Tag(s): ";
-		echo $entry['tags'] . "</a></h4>";
+		echo $entry['tag_id'];
+		// if (count($entry['id']) > 1) {
+		// 		if ($entry['tag_id'] = 1) {
+		// 			echo "Personal" . "</a></h4>";			
+		// 		}
+		// 	echo $entry['tags'] . "</a></h4>";
+		// } else {
+			echo $entry['tags'] . "</a></h4>";
+		//}
 		echo "<hr>";
 	}
 }
@@ -111,8 +119,10 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 // ADD TAG(S) FOR A NEW ENTRY TO THE DATABASE
 function add_tags() {
 	include 'inc/dbconnection.php';
-	$id = get_last_entry(); // Gets ID of most recent entry entered into the dbase
-	$entry_id = intval($id['id']); // extracts ID from associative array & converts the ID from a string to an int
+	// Gets ID of most recent entry entered added to the dbase
+	$id = get_last_entry();
+	// Assigns the id returned from get_last_entry (which is an associative array) & converts the ID from a str to an int
+	$entry_id = intval($id['id']); 
 	foreach ($_POST['tags'] as $tag) {
 		$tag_id = intval($tag);
 		try {
