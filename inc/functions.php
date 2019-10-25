@@ -70,7 +70,7 @@ function print_journal_entries() {
 		echo "</time>";
 		echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
 		echo  $entry['tags'] . " '> Tag(s): ";
-		echo $entry['tag_id'] . " ";
+	//	echo $entry['tag_id'] . " ";
 		echo $entry['tags'] . "</a></h4>";
 		echo "<hr>";
 		// if (count($entry['entry_id']) >= 1) {
