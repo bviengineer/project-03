@@ -19,26 +19,30 @@
 					<h5>
 						<?php 
 							if ($_POST && $_POST['addEntry']) {
-								// $title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING));
-								// $date = trim(filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING));
-								// $time_spent = trim(filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT));
-								// $learned = trim(filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING));
-								// $resources = trim(filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING));
-								// $tags = $_POST['tags'];
-								//Will ensure required fileds are completed before adding entry to the database
-								if (empty($title) || empty($date) || empty($time_spent) || empty($learned) || !isset($_POST['tags'])) {
-										var_dump($_POST['tags']);
+								$title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING));
+								$date = trim(filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING));
+								$time_spent = trim(filter_input(INPUT_POST, 'timeSpent', FILTER_SANITIZE_NUMBER_INT));
+								$learned = trim(filter_input(INPUT_POST, 'whatILearned', FILTER_SANITIZE_STRING));
+								$resources = trim(filter_input(INPUT_POST, 'ResourcesToRemember', FILTER_SANITIZE_STRING));
+								// Will ensure required fileds are completed before adding entry to the database
+								if (empty($title) || empty($date) || empty($time_spent) || empty($learned)) {
 										echo print_err_msg("Please ensure the:<br> Title, Date, Time Spent & What I learned fields are completed in order to save this entry");
-								} //else {
-								// 		if (add_journal_entry($title, $date, $time_spent, $learned, $resources)) {
-								// 			header('Location: index.php?msg=Cool!+I+added+that+journal+entry+for+you!');
-								// 			exit;
-								// } else {
-								// 		echo print_err_msg("Could not add journal entry. Please try again!");
-								// 	}
-								// }
-							// } elseif ($_POST && $_POST['cancelEntry']) { 
-							// 	header('Location: index.php?msg=OK!+That+entry+was+discarded!');
+								} else { 
+								 		if (add_journal_entry($title, $date, $time_spent, $learned, $resources)) {
+											header('Location: index.php?msg=Cool!+I+added+that+journal+entry+for+you!');
+											exit;
+									} else {
+											echo print_err_msg("Could not add journal entry. Please try again!");
+									} 
+								}
+								// Verifies whether tags were selected when adding an entry 
+								if (isset($_POST['tags'])) {
+										$tags = $_POST['tags'];                                  
+										var_dump($tags);
+										// call function to add tags to the db
+								}
+							} elseif ($_POST && $_POST['cancelEntry']) { 
+								header('Location: index.php?msg=OK!+That+entry+was+discarded!');
 							}
 					?>
 				</h5>
@@ -54,7 +58,7 @@
 						<label for="resources-to-remember">Resources to Remember</label>
 						<textarea id="resources-to-remember" rows="5" name="ResourcesToRemember"></textarea>
 						<fieldset>
-							<legend>Choose at least 1 tag for your entry <span class="star">*</span></legend>
+							<legend>You may choose one or more tags for your entry</legend>
 							<input type="checkbox" name="tags[]" value="1">Technology<br>
 							<input type="checkbox" name="tags[]" value="2">Travel<br>
 							<input type="checkbox" name="tags[]" value="3">Personal<br>
