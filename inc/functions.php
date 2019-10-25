@@ -109,7 +109,7 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 	} 
 			return true; 
 }
-// RETRIEVE LAST JOURNAL ENTRY
+// RETRIEVE MOST RECENT JOURNAL ENTRY ADDED
 function get_last_entry() {
 	include 'inc/dbconnection.php';
 
