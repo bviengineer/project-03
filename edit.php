@@ -35,6 +35,11 @@
 										$_POST['title'] = '';
 								} else {
 										if (update_journal_entry($title, $date, $time_spent, $learned, $resources)) { 
+											if (isset($_POST['tags'])) {                                 
+													update_tags($_GET['id']);
+												// var_dump($_GET['id']);
+												// var_dump($edit_entry['id']);
+											}
 												header('Location: detail.php?id=' . $_POST['id']);
 												exit;
 										}
