@@ -5,7 +5,7 @@
 // RETRIEVE ALL JOURNAL ENTRIES
 function get_journal_entries() {
 	include 'inc/dbconnection.php';
-	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags, entry_tag.tag_id
+	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags,entry_tag.entry_id, entry_tag.tag_id
 					FROM entries  
 					LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
 					LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id
@@ -21,7 +21,7 @@ function get_journal_entries() {
 // RETRIEVE A SINGLE JOURNAL ENTRY
 function get_single_entry($id) {
 	include 'inc/dbconnection.php';
-	$get_entry = "SELECT entries.id, entries.title, entries.date, entries.time_spent, entries.learned, entries.resources, my_tags.tags, entry_tag.tag_id 
+	$get_entry = "SELECT entries.id, entries.title, entries.date, entries.time_spent, entries.learned, entries.resources, my_tags.tags, entry_tag.entry_id, entry_tag.tag_id 
 								FROM entries
 								LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
 								LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id 
@@ -41,7 +41,7 @@ function get_single_entry($id) {
 // RETRIEVE JOURNAL ENTRIES BY TAG(S)
 function get_filtered_entries($tag) {
 	include 'inc/dbconnection.php';
-	$get_tag = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags, entry_tag.tag_id
+	$get_tag = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags, entry_tag.entry_id, entry_tag.tag_id
 								FROM entries  
 								LEFT OUTER JOIN entry_tag ON entries.id = entry_tag.entry_id
 								LEFT OUTER JOIN my_tags ON my_tags.tag_id = entry_tag.tag_id
@@ -70,16 +70,17 @@ function print_journal_entries() {
 		echo "</time>";
 		echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
 		echo  $entry['tags'] . " '> Tag(s): ";
-		echo $entry['tag_id'];
-		// if (count($entry['id']) > 1) {
-		// 		if ($entry['tag_id'] = 1) {
-		// 			echo "Personal" . "</a></h4>";			
-		// 		}
-		// 	echo $entry['tags'] . "</a></h4>";
-		// } else {
-			echo $entry['tags'] . "</a></h4>";
-		//}
+		echo $entry['tag_id'] . " ";
+		echo $entry['tags'] . "</a></h4>";
 		echo "<hr>";
+		// if (count($entry['entry_id']) >= 1) {
+		// 	echo "This entry has " . $entry['entry_id'] . " tags";
+		// } else {
+			// echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
+			// echo  "none'> Tag(s): ";
+			// echo "none</a></h4>";
+			// echo "<hr>";
+		//}
 	}
 }
 // PRINT JOURNAL ENTRIES BY TAG: on filtered_entries.php
@@ -93,7 +94,7 @@ function print_filtered_entries($tag) {
 		echo date('F d, Y', strtotime($entry['date']));
 		echo "</time>";
 		echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
-		echo  $entry['tags'] . " '> Tag(s): ";
+		echo $entry['tags'] . " '> Tag(s): ";
 		echo $entry['tags'] . "</a></h4>";
 		echo "<hr>";
 	}
