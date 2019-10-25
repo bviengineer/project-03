@@ -173,6 +173,24 @@ function update_journal_entry($title, $date, $time_spent, $learned, $resources =
 	}
 	return true;
 }
+// UPDATE TAGS FOR A GIVEN JOURNAL ENTRY
+function update_tags($id) {
+	include 'inc/dbconnection.php';
+		$entry_id = intval($id);
+		$update_tags = "UPDATE entry_tag SET tag_id = ? WHERE entry_id = ?";
+		foreach ($_POST['tags'] as $tag) {
+			try {
+				$results = $db->prepare($update_tags);
+				$results->bindValue(1, intval($tag), PDO::PARAM_STR);
+				$results->bindValue(2, $entry_id, PDO::PARAM_STR);
+				$results->execute();
+			} catch(Exception $e) {
+					$e->getMessage();
+					return array();
+				}	
+		}
+		return true;
+	}
 // DELETE JOURNAL ENTRY
 function delete_single_entry($id) {
 	include 'inc/dbconnection.php';
