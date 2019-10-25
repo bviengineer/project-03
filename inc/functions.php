@@ -109,6 +109,13 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 	} 
 			return true; 
 }
+// ADD TAG TO JOURNAL ENTRY
+function add_tag($entry_id, $tags) {
+	include 'inc/dbconnection.php';
+
+	$select_last_entry = "SELECT * FROM entries ORDER BY id DESC LIMIT 1";
+
+}
 // UPDATE JOURNAL ENTRY
 function update_journal_entry($title, $date, $time_spent, $learned, $resources = NULL) {
 	include 'inc/dbconnection.php';
