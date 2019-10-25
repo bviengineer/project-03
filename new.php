@@ -29,17 +29,14 @@
 										echo print_err_msg("Please ensure the:<br> Title, Date, Time Spent & What I learned fields are completed in order to save this entry");
 								} else { 
 								 		if (add_journal_entry($title, $date, $time_spent, $learned, $resources)) {
-											header('Location: index.php?msg=Cool!+I+added+that+journal+entry+for+you!');
-											exit;
+												if (isset($_POST['tags'])) {                                 
+													add_tags();
+												}	
+												header('Location: index.php?msg=Cool!+I+added+that+journal+entry+for+you!');
+												exit;
 									} else {
 											echo print_err_msg("Could not add journal entry. Please try again!");
 									} 
-								}
-								// Verifies whether tags were selected when adding an entry 
-								if (isset($_POST['tags'])) {
-										$tags = $_POST['tags'];                                  
-										var_dump($tags);
-										// call function to add tags to the db
 								}
 							} elseif ($_POST && $_POST['cancelEntry']) { 
 								header('Location: index.php?msg=OK!+That+entry+was+discarded!');
