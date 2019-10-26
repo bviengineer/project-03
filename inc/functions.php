@@ -83,6 +83,24 @@ function print_journal_entries() {
 		//}
 	}
 }
+// PRINT TAGS BY ENTRY: on index.php
+function print_tags() {
+	include 'inc/dbconnection.php';
+
+	$get_tags = "SELECT my_tags.tags, entries.title
+							FROM my_tags 
+							LEFT OUTER JOIN entry_tag 
+							ON entry_tag.tag_id = my_tags.tag_id
+							LEFT OUTER JOIN entries 
+							ON entries.id = entry_tag.entry_id";
+	try {
+		$results = $db->query($get_tags);
+	} catch (Exception $e) {
+			$e->getMessage();
+			return array();
+	}
+	return $results->fetchAll(PDO::FETCH_ASSOC);
+}
 // PRINT JOURNAL ENTRIES BY TAG: on filtered_entries.php
 function print_filtered_entries($tag) {
 	foreach (get_filtered_entries($tag) as $entry) {
