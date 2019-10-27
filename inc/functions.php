@@ -176,12 +176,12 @@ function update_journal_entry($title, $date, $time_spent, $learned, $resources =
 function update_tags($id) {
 	include 'inc/dbconnection.php';
 		$entry_id = intval($id);
-		$update_tags = "UPDATE entry_tag SET tag_id = ? WHERE entry_id = ?";
+		$update_tags = "INSERT INTO entry_tag (entry_id, tag_id) VALUES(?, ?)";
 		foreach ($_POST['tags'] as $tag) {
 			try {
 				$results = $db->prepare($update_tags);
-				$results->bindValue(1, intval($tag), PDO::PARAM_STR);
-				$results->bindValue(2, $entry_id, PDO::PARAM_STR);
+				$results->bindValue(1, $entry_id, PDO::PARAM_STR);
+				$results->bindValue(2, intval($tag), PDO::PARAM_STR);
 				$results->execute();
 			} catch(Exception $e) {
 					$e->getMessage();
