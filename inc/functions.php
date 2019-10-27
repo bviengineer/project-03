@@ -229,6 +229,7 @@ function delete_tags($id) {
 /*========================
  	DISPLAY / OTHER FUNCTIONS
 =========================*/
+// PRINTS ALL JOURNAL ENTRIES $ THEIR TAGS: on index.php
 function print_entries_tags() {
 	foreach (get_journal_entries_table() as $entries) {
 		echo "<h2><a href='detail.php?id=";
@@ -250,6 +251,11 @@ function print_entries_tags() {
 		echo "<hr>";	
 	}
 }
+// ERROR NOTIFICATION
+function print_err_msg($message) {
+	$blank_title_err = $message;
+	return $blank_title_err;
+}
 // PRINT JOURNAL ENTRIES BY TAG: on filtered_entries.php
 function print_filtered_entries($tag) {
 	foreach (get_filtered_entries($tag) as $entry) {
@@ -265,9 +271,4 @@ function print_filtered_entries($tag) {
 		echo $entry['tags'] . "</a></h4>";
 		echo "<hr>";
 	}
-}
-// ERROR NOTIFICATION
-function print_err_msg($message) {
-	$blank_title_err = $message;
-	return $blank_title_err;
 }
