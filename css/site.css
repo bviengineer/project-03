@@ -185,11 +185,11 @@ a, .tags:-webkit-any-link {
 	margin: 0 0 0 30%;
 	color: rgb(66, 38, 38);
 }
-.index-title {
+.pg-title-font {
 	font-family: 'Mansalva', cursive;
 	color: rgb(66, 38, 38);
 }
-.index-title2 {
+.pg-title-font2 {
 	font-family: 'Zilla Slab Highlight', cursive;
 	color: rgb(66, 38, 38);
 }

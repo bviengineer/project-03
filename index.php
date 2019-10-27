@@ -14,7 +14,7 @@
   </header>
 	<section>
 		<div class="container">
-		<h1 class='page-heading'><span class='index-title'>The Minimalistic</span> <span class="index-title2">Journal...</span></h1>
+		<h1 class='page-heading'><span class='pg-title-font'>The Minimalistic</span> <span class="pg-title-font2">Journal...</span></h1>
 			<h6>
 				<?php
 					if (isset($_GET['msg'])) {
