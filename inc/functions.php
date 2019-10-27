@@ -250,6 +250,7 @@ function print_entries_tags() {
 					echo $details['tags'] . "</a>" . ' ';
 			}
 		}
+		echo "<br><br>";
 		echo "<hr>";	
 	}
 }
@@ -273,6 +274,7 @@ function print_filtered_entries($tag) {
 		echo "<a class='tags' href='filtered_entries.php?tag=";
 		echo $entry['tags'] . " '>";
 		echo $entry['tags'] . "</a>" . ' ';
+		echo "<br><br>";
 		echo "<hr>";
 	}
 }
