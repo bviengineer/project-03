@@ -2,7 +2,19 @@
 /* This file will hold all functions needed to run the application
 */
 
-// RETRIEVE ALL JOURNAL ENTRIES
+// RETRIEVE ALL JOURNAL ENTRIES FROM ENTRIES TABLE ONLY
+function get_journal_entries_table() {
+	include 'inc/dbconnection.php';
+	$sql = "SELECT * FROM entries";
+	try {
+		$results = $db->query($sql); 
+	} catch (Exception $e) {
+		echo $e->getMessage();
+		return array();
+	}
+	return $results->fetchAll(PDO::FETCH_ASSOC);
+}
+// RETRIEVE ALL JOURNAL ENTRIES & TAGS (SQL JOIN)
 function get_journal_entries() {
 	include 'inc/dbconnection.php';
 	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags,entry_tag.entry_id, entry_tag.tag_id
@@ -18,7 +30,7 @@ function get_journal_entries() {
 	}
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
-// RETRIEVE A SINGLE JOURNAL ENTRY
+// RETRIEVE A SINGLE JOURNAL ENTRY (SQL JOIN)
 function get_single_entry($id) {
 	include 'inc/dbconnection.php';
 	$get_entry = "SELECT entries.id, entries.title, entries.date, entries.time_spent, entries.learned, entries.resources, my_tags.tags, entry_tag.entry_id, entry_tag.tag_id 
@@ -38,7 +50,7 @@ function get_single_entry($id) {
 	}
 	return $results->fetch(PDO::FETCH_ASSOC);
 }
-// RETRIEVE JOURNAL ENTRIES BY TAG(S)
+// RETRIEVE JOURNAL ENTRIES BY TAG(S) (SQL JOIN)
 function get_filtered_entries($tag) {
 	include 'inc/dbconnection.php';
 	$get_tag = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags, entry_tag.entry_id, entry_tag.tag_id
@@ -67,27 +79,37 @@ function print_journal_entries() {
 		echo "</a></h2>";
 		echo "<time>"; 
 		echo date('F d, Y', strtotime($entry['date']));
-		echo "</time>";
+		echo "</time>"; 
 		echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
 		echo  $entry['tags'] . " '> Tag(s): ";
-	//	echo $entry['tag_id'] . " ";
 		echo $entry['tags'] . "</a></h4>";
 		echo "<hr>";
-		// if (count($entry['entry_id']) >= 1) {
-		// 	echo "This entry has " . $entry['entry_id'] . " tags";
-		// } else {
-			// echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
-			// echo  "none'> Tag(s): ";
-			// echo "none</a></h4>";
-			// echo "<hr>";
-		//}
+	}
+}
+// RETRIEVES ENTRY_IDs FOR EACH JOURNAL ITEM & CONVERTS THE VALUE TO AN INT
+function get_journal_entries_ids() {
+	foreach (get_journal_entries() as $entry) {
+		//var_dump($entry['title']);
+		echo intval($entry['id']);
+	}
+}
+// PAIRS JOURNAL ENTIRES WITH RESPECTIVE TAGS
+// entries appear once in the entires table so loop through the pure entries table & then call print ags
+function pair_entries_tags() {
+	foreach (get_journal_entries_table() as $entries) {
+		echo $entries['title'] . "<br>";
+		foreach (print_tags() as $details) {
+			if ($entries['id'] == $details['id'])
+			//echo $details['id'] . " ";
+			// echo $details['title'] . "<br>";
+			echo $details['tags'] . " <br>";
+		}	
 	}
 }
 // PRINT TAGS BY ENTRY: on index.php
 function print_tags() {
 	include 'inc/dbconnection.php';
-
-	$get_tags = "SELECT my_tags.tags, entries.title
+	$get_tags = "SELECT my_tags.tag_id, entries.id, my_tags.tags, entries.title
 							FROM my_tags 
 							LEFT OUTER JOIN entry_tag 
 							ON entry_tag.tag_id = my_tags.tag_id
@@ -138,6 +160,7 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 // ADD TAG(S) FOR A NEW ENTRY TO THE DATABASE
 function add_tags() {
 	include 'inc/dbconnection.php';
+	
 	// Gets ID of most recent entry entered added to the dbase
 	$id = get_last_entry();
 	// Assigns the id returned from get_last_entry (which is an associative array) & converts the ID from a str to an int
