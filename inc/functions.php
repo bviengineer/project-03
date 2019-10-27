@@ -25,7 +25,7 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 	} 
 	return true; 
 }
-// ADD TAG(S) FOR A NEW JOURNAL ENTRY
+// ADD TAG(S) FOR A NEW JOURNAL ENTRY: called in new.php
 function add_tags() {
 	include 'inc/dbconnection.php';
 	// Gets ID of most recent entry entered added to the dbase
