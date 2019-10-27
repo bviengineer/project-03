@@ -14,7 +14,7 @@
 		} else {
 				header("Location: index.php?msg=Entry+was+NOT+deleted!");
 				exit;
-		}
+			}
 	}
 ?>
 <body>
