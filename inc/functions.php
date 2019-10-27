@@ -198,16 +198,16 @@ function delete_single_entry($id) {
 	include 'inc/dbconnection.php';
 	$delete_entry = "DELETE FROM entries WHERE id = ?"; 
 	if (isset($_GET['id'])) {
-		try {
-			$results = $db->prepare($delete_entry);
-			$results->bindValue(1, $id, PDO::PARAM_INT);
-			$results->execute();
-		} catch (Connection $e) {
-				$e->getMessage();
-				return array();
-		}
-	}
-	return true;
+			try {
+				$results = $db->prepare($delete_entry);
+				$results->bindValue(1, $id, PDO::PARAM_INT);
+				$results->execute();
+			} catch (Connection $e) {
+					$e->getMessage();
+					return array();
+			}
+	}	
+		return true;
 }
 // PRINT ALL JOURNAL ENTRIES: on index.php & creates hyperlinks to respective entries 
 // function print_journal_entries() {
