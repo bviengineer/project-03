@@ -26,9 +26,8 @@
 			</h6>
 			<div class="entry-list">
 				<article>
-					<?php 
-						// Will print the journal entries from the database, to the page
-						print_journal_entries();
+					<?php 				
+						print_entries_tags();
 					?>	
 				</article>
 			</div>
