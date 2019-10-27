@@ -3,6 +3,7 @@
 	include 'inc/functions.php';
 	// Holds selected journal entry passed to detail.php page from index.php via $_GET
 	$single_entry = get_single_entry($_GET['id']);
+	echo "<pre>"; var_dump($single_entry); echo "</pre>";
 	// Verifies the form [content] was submitted for deletion 
 	if ($_POST) {
 		$_POST['id'] = $single_entry['id'];
@@ -47,7 +48,28 @@
 					</div>
 					<!-- Print tag name & hyerlink to page with entries filtered by selected tag -->
 					<div> 
-						<p class="tags">Tag(s): <a href="filtered_entries.php?tag=<?php echo $single_entry['tags']; ?>"><?php echo $single_entry['tags']; ?></p>
+						<p class="tags">Tag(s): <a href="filtered_entries.php?tag=
+								<?php 
+									foreach (get_tags() as $details) {
+										if ($single_entry['id'] == $details['id']) {
+												echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
+												echo $details['tags'] . " '>";
+												echo $details['tags'] . "</a></h4>";
+										}
+									}
+								//echo $single_entry['tags']; ?>
+						">
+							<?php 
+									foreach (get_tags() as $details) {
+										if ($single_entry['id'] == $details['id']) {
+											echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
+											echo $details['tags'] . " '>";
+											echo $details['tags'] . "</a></h4>";
+										}
+									}
+									//echo $single_entry['tags']; 
+							?>
+					</p>
 					</div>
 				</article>
 			</div>
