@@ -30,7 +30,7 @@
 								} else { 
 								 		if (add_journal_entry($title, $date, $time_spent, $learned, $resources)) {
 												if (isset($_POST['tags'])) {                                 
-													add_tags();
+														add_tags();
 												}	
 												header('Location: index.php?msg=Cool!+I+added+that+journal+entry+for+you!');
 												exit;
