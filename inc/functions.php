@@ -1,10 +1,20 @@
 <?php
 /*========================
- 	> This file contains all functions needed to run the application.
-	> Functions are listed or categorized based on the acronym: CRUD.
+ 	> This file contains all functions needed to run the application
+	> Functions are listed or categorized based on the acronym: CRUD
+	> Functions that do not apply to the CRUD model are listed after
 =========================*/
 
-// RETRIEVE ALL JOURNAL ENTRIES FROM ENTRIES TABLE ONLY
+
+/*========================
+ 	CREATE
+=========================*/
+
+/*========================
+ 	READ
+=========================*/
+// Retrieve all journal entires form entires table 
+// RETRIEVE ALL JOURNAL ENTRIES FROM ENTRIES TABLE
 function get_journal_entries_table() {
 	include 'inc/dbconnection.php';
 	$sql = "SELECT * FROM entries ORDER BY date DESC";
@@ -14,9 +24,9 @@ function get_journal_entries_table() {
 		echo $e->getMessage();
 		return array();
 	}
-	return $results->fetchAll(PDO::FETCH_ASSOC);
+		return $results->fetchAll(PDO::FETCH_ASSOC);
 }
-// RETRIEVE ALL JOURNAL ENTRIES & TAGS (SQL JOIN)
+// Retrieve all journal entires and tags (SQL JOIN) RETRIEVE ALL JOURNAL ENTRIES & TAGS (SQL JOIN)
 function get_journal_entries() {
 	include 'inc/dbconnection.php';
 	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags,entry_tag.entry_id, entry_tag.tag_id
@@ -72,6 +82,15 @@ function get_filtered_entries($tag) {
 	}
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
+
+/*========================
+ 	UPDATE
+=========================*/
+/*========================
+ 	DELETE
+=========================*/
+
+
 // PRINT ALL JOURNAL ENTRIES: on index.php & creates hyperlinks to respective entries 
 // function print_journal_entries() {
 // 	foreach (pair_entries_tags() as $entry) {
