@@ -1,9 +1,9 @@
 <?php
-/*========================
+/*=======================================================================================
  	> This file contains all functions needed to run the application
 	> Functions are listed or categorized based on the acronym: CRUD
 	> Functions that do not apply to the CRUD model are listed after in alphabetical order 
-=========================*/
+=========================================================================================*/
 /*========================
  	CRUD => CREATE
 =========================*/
