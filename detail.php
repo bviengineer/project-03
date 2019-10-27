@@ -1,7 +1,7 @@
 <?php 
 	include 'inc/head.php'; 
 	include 'inc/functions.php';
-	// Holds selected journal entry passed to detail.php page from index.php via $_GET
+	// Var holds selected journal entry passed to detail.php page from index.php via $_GET
 	$single_entry = get_single_entry($_GET['id']);
 	// Verifies the form [content] was submitted for deletion 
 	if ($_POST) {
