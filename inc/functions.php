@@ -5,7 +5,7 @@
 	> Functions that do not apply to the CRUD model are listed after in alphabetical order 
 =========================*/
 /*========================
- 	CREATE
+ 	CREATE => CREATE
 =========================*/
 // ADD A JOURNAL ENTRY
 function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
@@ -47,7 +47,7 @@ function add_tags() {
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
 /*========================
- 	READ
+ 	CRUD => READ
 =========================*/
 // RETRIEVE ALL JOURNAL JOURNAL ENTIRES [from entries table]
 function get_journal_entries_table() {
@@ -147,7 +147,7 @@ function get_last_entry() {
 	return $results->fetch(PDO::FETCH_ASSOC);
 }
 /*========================
- 	UPDATE
+ 	CURD => UPDATE
 =========================*/
 // UPDATE JOURNAL ENTRY
 function update_journal_entry($title, $date, $time_spent, $learned, $resources = NULL) {
@@ -191,8 +191,24 @@ function update_tags($id) {
 		return true;
 	}
 /*========================
- 	DELETE
+ 	CRUD => DELETE
 =========================*/
+// DELETE A JOURNAL ENTRY
+function delete_single_entry($id) {
+	include 'inc/dbconnection.php';
+	$delete_entry = "DELETE FROM entries WHERE id = ?"; 
+	if (isset($_GET['id'])) {
+			try {
+				$results = $db->prepare($delete_entry);
+				$results->bindValue(1, $id, PDO::PARAM_INT);
+				$results->execute();
+			} catch (Connection $e) {
+					$e->getMessage();
+					return array();
+			}
+	}	
+		return true;
+}
 // DELETE TAGS 
 function delete_tags($id) {
 	include 'inc/dbconnection.php';
@@ -210,48 +226,6 @@ function delete_tags($id) {
 		}
 		return true;
 	}
-// DELETE JOURNAL ENTRY
-function delete_single_entry($id) {
-	include 'inc/dbconnection.php';
-	$delete_entry = "DELETE FROM entries WHERE id = ?"; 
-	if (isset($_GET['id'])) {
-			try {
-				$results = $db->prepare($delete_entry);
-				$results->bindValue(1, $id, PDO::PARAM_INT);
-				$results->execute();
-			} catch (Connection $e) {
-					$e->getMessage();
-					return array();
-			}
-	}	
-		return true;
-}
-// PRINT ALL JOURNAL ENTRIES: on index.php & creates hyperlinks to respective entries 
-// function print_journal_entries() {
-// 	foreach (pair_entries_tags() as $entry) {
-// 		echo "<h2><a href='detail.php?id=";
-// 		echo $entry['id'] . " '> ";
-// 		echo $entry['title'];
-// 		echo "</a></h2>";
-// 		echo "<time>"; 
-// 		echo date('F d, Y', strtotime($entry['date']));
-// 		echo "</time>"; 
-// 		echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
-// 		echo  $entry['tags'] . " '> Tag(s): ";
-// 		echo $entry['tags'] . "</a></h4>";
-// 		echo "<hr>";
-// 	}
-// }
-// RETRIEVES ENTRY_IDs FOR EACH JOURNAL ITEM & CONVERTS THE VALUE TO AN INT
-// function get_journal_entries_ids() {
-// 	foreach (get_journal_entries() as $entry) {
-// 		//var_dump($entry['title']);
-// 		echo intval($entry['id']);
-// 	}
-// }
-// PAIRS & PRINTS JOURNAL ENTIRES WITH RESPECTIVE TAGS
-	// since journal entries appear once in the entires table
-	// loop through the pure entries table & then call print tags that match a single entry 
 /*========================
  	DISPLAY / OTHER FUNCTIONS
 =========================*/
@@ -292,8 +266,7 @@ function print_filtered_entries($tag) {
 		echo "<hr>";
 	}
 }
-// ERROR NOTIFICATION FUNCTION 
-	//Will halt a request & print an error message if submitted journal entry form data is invalid
+// ERROR NOTIFICATION
 function print_err_msg($message) {
 	$blank_title_err = $message;
 	return $blank_title_err;
