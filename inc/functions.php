@@ -235,6 +235,9 @@ function delete_single_entry($id) {
 // PAIRS & PRINTS JOURNAL ENTIRES WITH RESPECTIVE TAGS
 	// since journal entries appear once in the entires table
 	// loop through the pure entries table & then call print tags that match a single entry 
+/*========================
+ 	DISPLAY ENTRIES 
+=========================*/
 function print_entries_tags() {
 	foreach (get_journal_entries_table() as $entries) {
 		echo "<h2><a href='detail.php?id=";
