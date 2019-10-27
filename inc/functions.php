@@ -2,14 +2,12 @@
 /*========================
  	> This file contains all functions needed to run the application
 	> Functions are listed or categorized based on the acronym: CRUD
-	> Functions that do not apply to the CRUD model are listed after
+	> Functions that do not apply to the CRUD model are listed after in alphabetical order 
 =========================*/
-
-
 /*========================
  	CREATE
 =========================*/
-// ADD JOURNAL ENTRY
+// ADD A JOURNAL ENTRY
 function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
 	include 'inc/dbconnection.php';
 	$add_entry = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUES(?, ?, ?, ?, ?)";
@@ -27,12 +25,12 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 	} 
 	return true; 
 }
-// ADD TAG(S) FOR A NEW ENTRY TO THE DATABASE
+// ADD TAG(S) FOR A NEW JOURNAL ENTRY
 function add_tags() {
 	include 'inc/dbconnection.php';
 	// Gets ID of most recent entry entered added to the dbase
 	$id = get_last_entry();
-	// Assigns returned id from get_last_entry (which is an associative array) & converts the ID from a str to an int
+	// Assigns returned id, which is an associative array & converts the ID from a str to an int
 	$entry_id = intval($id['id']); 
 	foreach ($_POST['tags'] as $tag) {
 		$tag_id = intval($tag);
@@ -44,14 +42,14 @@ function add_tags() {
 		} catch(Exception $e) {
 				$e->getMessage();
 				return array();
-		}	
+			}	
 	}
-	return true;
+	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
 /*========================
  	READ
 =========================*/
-// Retrieve all journal entires form entires table 
+// RETRIEVE ALL JOURNAL JOURNAL ENTIRES [from entries table]
 function get_journal_entries_table() {
 	include 'inc/dbconnection.php';
 	$sql = "SELECT * FROM entries ORDER BY date DESC";
@@ -63,7 +61,7 @@ function get_journal_entries_table() {
 	}
 		return $results->fetchAll(PDO::FETCH_ASSOC);
 }
-// Retrieve all journal entires and tags (SQL JOIN)
+// RETRIEVES ALL JOURNAL ENTRIES & TAGS [SQL join]
 function get_journal_entries() {
 	include 'inc/dbconnection.php';
 	$sql = "SELECT entries.id, entries.title, entries.date, entries.learned, entries.resources, my_tags.tags,entry_tag.entry_id, entry_tag.tag_id
@@ -79,7 +77,7 @@ function get_journal_entries() {
 	}
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
-// RETRIEVE A SINGLE JOURNAL ENTRY (SQL JOIN)
+// RETRIEVE A SINGLE JOURNAL ENTRY & ITS TAGS (SQL join)
 function get_single_entry($id) {
 	include 'inc/dbconnection.php';
 	$get_entry = "SELECT entries.id, entries.title, entries.date, entries.time_spent, entries.learned, entries.resources, my_tags.tags, entry_tag.entry_id, entry_tag.tag_id 
