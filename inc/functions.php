@@ -49,7 +49,7 @@ function add_tags() {
 /*========================
  	CRUD => READ
 =========================*/
-// RETRIEVE ALL JOURNAL JOURNAL ENTIRES [from entries table]
+// RETRIEVE ALL JOURNAL ENTIRES [from entries table]
 function get_journal_entries_table() {
 	include 'inc/dbconnection.php';
 	$sql = "SELECT * FROM entries ORDER BY date DESC";
