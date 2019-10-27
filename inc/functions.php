@@ -105,16 +105,16 @@ function print_entries_tags() {
 		echo date('F d, Y', strtotime($entries['date']));
 		echo "</time>";
 		echo "<br>"; 
+		echo "Tags: ";
 		foreach (print_tags() as $details) {
 			if ($entries['id'] == $details['id']) {
-					//echo $details['tags'] . " ";
 					echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
-					echo $details['tags'] . " '> Tag(s): ";
+					echo $details['tags'] . " '>";
 					echo $details['tags'] . "</a></h4>";
 			}
-		}	
+		}
+		echo "<hr>";	
 	}
-		echo "<hr>";
 }
 // PRINT TAGS BY ENTRY: on index.php
 function print_tags() {
