@@ -5,7 +5,7 @@
 	> Functions that do not apply to the CRUD model are listed after in alphabetical order 
 =========================*/
 /*========================
- 	CREATE => CREATE
+ 	CRUD => CREATE
 =========================*/
 // ADD A JOURNAL ENTRY
 function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = NULL, $resources = NULL){
@@ -147,7 +147,7 @@ function get_last_entry() {
 	return $results->fetch(PDO::FETCH_ASSOC);
 }
 /*========================
- 	CURD => UPDATE
+ 	CRUD => UPDATE
 =========================*/
 // UPDATE JOURNAL ENTRY
 function update_journal_entry($title, $date, $time_spent, $learned, $resources = NULL) {
@@ -239,13 +239,13 @@ function print_entries_tags() {
 		echo "<time>"; 
 		echo date('F d, Y', strtotime($entries['date']));
 		echo "</time>";
-		echo "<br>"; 
-		echo "Tags: ";
+		echo "<br><br>"; 
+		echo "<h2 class='tags-heading'>Tags: </h2>";
 		foreach (get_tags() as $details) {
 			if ($entries['id'] == $details['id']) {
-					echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
+					echo "<a class='tags' href='filtered_entries.php?tag=";
 					echo $details['tags'] . " '>";
-					echo $details['tags'] . "</a></h4>";
+					echo $details['tags'] . "</a>" . ' ';
 			}
 		}
 		echo "<hr>";	
