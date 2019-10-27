@@ -162,7 +162,7 @@ ul li a {
 .tags {
 	background-color: rgb(87, 73, 191);
 	color: white;
-	margin: auto 38% auto 38%;
+	margin: auto;
 	border-radius: 5px;
 	padding: 5px;
 	font-size: 1em;
@@ -193,8 +193,11 @@ a, .tags:-webkit-any-link {
 	font-family: 'Zilla Slab Highlight', cursive;
 	color: rgb(66, 38, 38);
 }
-h2 {
+h2, .tags-heading {
 	color: rgb(66, 38, 38);
+}
+.tags-heading {
+	font-size: 1em;
 }
 
 /* ==========================================================================
