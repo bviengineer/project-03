@@ -1,6 +1,8 @@
 <?php
-/* This file will hold all functions needed to run the application
-*/
+/*========================
+ 	> This file contains all functions needed to run the application.
+	> Functions are listed or categorized based on the acronym: CRUD.
+=========================*/
 
 // RETRIEVE ALL JOURNAL ENTRIES FROM ENTRIES TABLE ONLY
 function get_journal_entries_table() {
@@ -71,30 +73,31 @@ function get_filtered_entries($tag) {
 	return $results->fetchAll(PDO::FETCH_ASSOC);
 }
 // PRINT ALL JOURNAL ENTRIES: on index.php & creates hyperlinks to respective entries 
-function print_journal_entries() {
-	foreach (pair_entries_tags() as $entry) {
-		echo "<h2><a href='detail.php?id=";
-		echo $entry['id'] . " '> ";
-		echo $entry['title'];
-		echo "</a></h2>";
-		echo "<time>"; 
-		echo date('F d, Y', strtotime($entry['date']));
-		echo "</time>"; 
-		echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
-		echo  $entry['tags'] . " '> Tag(s): ";
-		echo $entry['tags'] . "</a></h4>";
-		echo "<hr>";
-	}
-}
+// function print_journal_entries() {
+// 	foreach (pair_entries_tags() as $entry) {
+// 		echo "<h2><a href='detail.php?id=";
+// 		echo $entry['id'] . " '> ";
+// 		echo $entry['title'];
+// 		echo "</a></h2>";
+// 		echo "<time>"; 
+// 		echo date('F d, Y', strtotime($entry['date']));
+// 		echo "</time>"; 
+// 		echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
+// 		echo  $entry['tags'] . " '> Tag(s): ";
+// 		echo $entry['tags'] . "</a></h4>";
+// 		echo "<hr>";
+// 	}
+// }
 // RETRIEVES ENTRY_IDs FOR EACH JOURNAL ITEM & CONVERTS THE VALUE TO AN INT
-function get_journal_entries_ids() {
-	foreach (get_journal_entries() as $entry) {
-		//var_dump($entry['title']);
-		echo intval($entry['id']);
-	}
-}
+// function get_journal_entries_ids() {
+// 	foreach (get_journal_entries() as $entry) {
+// 		//var_dump($entry['title']);
+// 		echo intval($entry['id']);
+// 	}
+// }
 // PAIRS & PRINTS JOURNAL ENTIRES WITH RESPECTIVE TAGS
-// entries appear once in the entires table so loop through the pure entries table & then call print ags
+	// since journal entries appear once in the entires table
+	// loop through the pure entries table & then call print tags that match a single entry 
 function print_entries_tags() {
 	foreach (get_journal_entries_table() as $entries) {
 		echo "<h2><a href='detail.php?id=";
@@ -106,7 +109,7 @@ function print_entries_tags() {
 		echo "</time>";
 		echo "<br>"; 
 		echo "Tags: ";
-		foreach (print_tags() as $details) {
+		foreach (get_tags() as $details) {
 			if ($entries['id'] == $details['id']) {
 					echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
 					echo $details['tags'] . " '>";
@@ -116,8 +119,8 @@ function print_entries_tags() {
 		echo "<hr>";	
 	}
 }
-// PRINT TAGS BY ENTRY: on index.php
-function print_tags() {
+// RETRIEVE TAGS BY ENTRY
+function get_tags() {
 	include 'inc/dbconnection.php';
 	$get_tags = "SELECT my_tags.tag_id, entries.id, my_tags.tags, entries.title
 							FROM my_tags 
@@ -154,13 +157,13 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 	include 'inc/dbconnection.php';
 	$add_entry = "INSERT INTO entries (title, date, time_spent, learned, resources) VALUES(?, ?, ?, ?, ?)";
   try {
-		$results = $db->prepare($add_entry); // Prepare sql statement & assigns results to the variable $results
-		$results->bindValue(1, $title, PDO::PARAM_STR); // Associates the 1st ? with the $title var
-		$results->bindValue(2, $date, PDO::PARAM_STR); // Associates the 2nd ? with the $date var
-		$results->bindValue(3, $time_spent, PDO::PARAM_INT); // Associates the 3rd ? with the $time_spent var
-		$results->bindValue(4, $learned, PDO::PARAM_STR); // Associates the 4th ? with the $learned var
-		$results->bindValue(5, $resources, PDO::PARAM_STR); // Associates the 5th ? with the $resources var
-		$results->execute(); // Executes the insert query after filtering & binding the inputs
+		$results = $db->prepare($add_entry);
+		$results->bindValue(1, $title, PDO::PARAM_STR);
+		$results->bindValue(2, $date, PDO::PARAM_STR);
+		$results->bindValue(3, $time_spent, PDO::PARAM_INT);
+		$results->bindValue(4, $learned, PDO::PARAM_STR);
+		$results->bindValue(5, $resources, PDO::PARAM_STR);
+		$results->execute();
   } catch (Exception $e) {
 			$e->getMessage();
 			return array();
@@ -170,10 +173,9 @@ function add_journal_entry($title, $date = NULL, $time_spent = NULL, $learned = 
 // ADD TAG(S) FOR A NEW ENTRY TO THE DATABASE
 function add_tags() {
 	include 'inc/dbconnection.php';
-	
 	// Gets ID of most recent entry entered added to the dbase
 	$id = get_last_entry();
-	// Assigns the id returned from get_last_entry (which is an associative array) & converts the ID from a str to an int
+	// Assigns returned id from get_last_entry (which is an associative array) & converts the ID from a str to an int
 	$entry_id = intval($id['id']); 
 	foreach ($_POST['tags'] as $tag) {
 		$tag_id = intval($tag);
@@ -209,14 +211,14 @@ function update_journal_entry($title, $date, $time_spent, $learned, $resources =
 										WHERE id = ?";
 	if (isset($_POST['id'])) {
 		try {
-				$results = $db->prepare($update_entry); // Prepare sql statement & assigns results to the variable $results
-				$results->bindValue(1, $title, PDO::PARAM_STR); // Associates the 1st ? with the $title var
-				$results->bindValue(2, $date, PDO::PARAM_STR); // Associates the 2nd ? with the $date var
-				$results->bindValue(3, $time_spent, PDO::PARAM_INT); // Associates the 3rd ? with the $time_spent var
-				$results->bindValue(4, $learned, PDO::PARAM_STR); // Associates the 4th ? with the $learned var
-				$results->bindValue(5, $resources, PDO::PARAM_STR); // Associates the 5th ? with the $resources var
-				$results->bindValue(6, $_POST['id'], PDO::PARAM_INT); // Associates the 6th ? with the $id var
-				$results->execute(); // Executes the insert query after filtering & binding the inputs
+				$results = $db->prepare($update_entry);
+				$results->bindValue(1, $title, PDO::PARAM_STR);
+				$results->bindValue(2, $date, PDO::PARAM_STR);
+				$results->bindValue(3, $time_spent, PDO::PARAM_INT);
+				$results->bindValue(4, $learned, PDO::PARAM_STR);
+				$results->bindValue(5, $resources, PDO::PARAM_STR);
+				$results->bindValue(6, $_POST['id'], PDO::PARAM_INT);
+				$results->execute();
 		} catch (Exception $e) {
 				$e->getMessage();
 			return array();
