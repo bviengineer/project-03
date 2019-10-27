@@ -30,7 +30,7 @@
 		<div class="container">
 			<div class="entry-list single">
 				<article>
-					<!-- Printing of journal entry details to the page  -->
+					<!-- Printing of journal entry details on the page  -->
 					<h1><?php echo $single_entry['title']; ?></h1>
 					<time datetime="2016-01-31"><?php echo date('F d, Y', strtotime($single_entry['date'])); ?></time>
 					<div class="entry">
@@ -56,7 +56,7 @@
 												echo $details['tags'] . "</a>";
 										}
 									}
-								//echo $single_entry['tags']; ?>
+								?>
 						">
 							<?php 
 									foreach (get_tags() as $details) {
@@ -66,7 +66,6 @@
 											echo $details['tags'] . "</a></h4>";
 										}
 									}
-									//echo $single_entry['tags']; 
 							?>
 					</p>
 					</div>
