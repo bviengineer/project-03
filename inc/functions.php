@@ -72,7 +72,7 @@ function get_filtered_entries($tag) {
 }
 // PRINT ALL JOURNAL ENTRIES: on index.php & creates hyperlinks to respective entries 
 function print_journal_entries() {
-	foreach (get_journal_entries() as $entry) {
+	foreach (pair_entries_tags() as $entry) {
 		echo "<h2><a href='detail.php?id=";
 		echo $entry['id'] . " '> ";
 		echo $entry['title'];
@@ -95,14 +95,12 @@ function get_journal_entries_ids() {
 }
 // PAIRS JOURNAL ENTIRES WITH RESPECTIVE TAGS
 // entries appear once in the entires table so loop through the pure entries table & then call print ags
-function pair_entries_tags() {
+function print_entries_tags() {
 	foreach (get_journal_entries_table() as $entries) {
 		echo $entries['title'] . "<br>";
 		foreach (print_tags() as $details) {
 			if ($entries['id'] == $details['id'])
-			//echo $details['id'] . " ";
-			// echo $details['title'] . "<br>";
-			echo $details['tags'] . " <br>";
+			echo $details['tags'] . " ";
 		}	
 	}
 }
