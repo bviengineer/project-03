@@ -5,7 +5,7 @@
 // RETRIEVE ALL JOURNAL ENTRIES FROM ENTRIES TABLE ONLY
 function get_journal_entries_table() {
 	include 'inc/dbconnection.php';
-	$sql = "SELECT * FROM entries";
+	$sql = "SELECT * FROM entries ORDER BY date DESC";
 	try {
 		$results = $db->query($sql); 
 	} catch (Exception $e) {
@@ -97,11 +97,19 @@ function get_journal_entries_ids() {
 // entries appear once in the entires table so loop through the pure entries table & then call print ags
 function print_entries_tags() {
 	foreach (get_journal_entries_table() as $entries) {
-		echo $entries['title'] . "<br>";
-		foreach (print_tags() as $details) {
-			if ($entries['id'] == $details['id'])
-			echo $details['tags'] . " ";
-		}	
+		echo "<h2><a href='detail.php?id=";
+		echo $entries['id'] . " '> ";
+		echo $entries['title'];
+		echo "</a></h2>";
+		echo "<time>"; 
+		echo date('F d, Y', strtotime($entry['date']));
+		echo "</time>"; 
+
+		// echo $entries['title'] . "<br>";
+		// foreach (print_tags() as $details) {
+		// 	if ($entries['id'] == $details['id'])
+		// 	echo $details['tags'] . " ";
+		// }	
 	}
 }
 // PRINT TAGS BY ENTRY: on index.php
