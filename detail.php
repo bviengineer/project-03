@@ -3,7 +3,6 @@
 	include 'inc/functions.php';
 	// Holds selected journal entry passed to detail.php page from index.php via $_GET
 	$single_entry = get_single_entry($_GET['id']);
-	echo "<pre>"; var_dump($single_entry); echo "</pre>";
 	// Verifies the form [content] was submitted for deletion 
 	if ($_POST) {
 		$_POST['id'] = $single_entry['id'];
@@ -52,9 +51,9 @@
 								<?php 
 									foreach (get_tags() as $details) {
 										if ($single_entry['id'] == $details['id']) {
-												echo "<h4 class='tags'><a href='filtered_entries.php?tag=";
+												echo "<a class='tags' href='filtered_entries.php?tag=";
 												echo $details['tags'] . " '>";
-												echo $details['tags'] . "</a></h4>";
+												echo $details['tags'] . "</a>";
 										}
 									}
 								//echo $single_entry['tags']; ?>
