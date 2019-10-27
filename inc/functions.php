@@ -193,6 +193,23 @@ function update_tags($id) {
 /*========================
  	DELETE
 =========================*/
+// DELETE TAGS 
+function delete_tags($id) {
+	include 'inc/dbconnection.php';
+		$entry_id = intval($id);
+		$delete_tags = "DELETE FROM entry_tag WHERE entry_id = ?";
+		foreach ($_POST['tags'] as $tag) {
+			try {
+				$results = $db->prepare($delete_tags);
+				$results->bindValue(1, $entry_id, PDO::PARAM_STR);
+				$results->execute();
+			} catch(Exception $e) {
+					$e->getMessage();
+					return array();
+				}	
+		}
+		return true;
+	}
 // DELETE JOURNAL ENTRY
 function delete_single_entry($id) {
 	include 'inc/dbconnection.php';
