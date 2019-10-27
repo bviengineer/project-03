@@ -185,9 +185,12 @@ a, .tags:-webkit-any-link {
 	margin: 0 0 0 30%;
 	color: rgb(66, 38, 38);
 }
-.pg-title-font {
+.pg-title-font, .filtered-title-font {
 	font-family: 'Mansalva', cursive;
 	color: rgb(66, 38, 38);
+}
+.filtered-title-font {
+	margin-left: -3em;
 }
 .pg-title-font2 {
 	font-family: 'Zilla Slab Highlight', cursive;
