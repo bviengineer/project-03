@@ -3,7 +3,7 @@
 
 # About Project
 ### Under the Hood
-The PHP Personal Learning Journal is constructed using HTML, CSS, PHP and MySQL. Base files were provided and included HTML, CSS and a database with sample about four sample entries. Two tables were added for use with this project.
+The PHP Personal Learning Journal is constructed using HTML, CSS, PHP and MySQL. Base files were provided and included HTML, CSS and a database with about four sample entries. Two tables were added for use with this project.
 
 
 ### I'll Show You Around
