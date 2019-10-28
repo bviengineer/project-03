@@ -11,7 +11,7 @@
 				<a class="button icon-right" href="new.php"><span>New Entry</span> <i class="material-icons">add</i></a>
 			</div>
     </div>
-  </header>
+  </header> 
 	<section>
 		<div class="container">
 		<h1 class='page-heading'><span class='pg-title-font'>The Minimalistic</span> <span class="pg-title-font2">Journal...</span></h1>
