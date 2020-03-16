@@ -58,13 +58,47 @@
 							<textarea id="what-i-learned" rows="5" name="whatILearned"><?php echo $edit_entry['learned']; ?></textarea>
 							<label for="resources-to-remember">Resources to Remember</label>
 							<textarea id="resources-to-remember" rows="5" name="ResourcesToRemember"><?php echo $edit_entry['resources']; ?></textarea>
-							<fieldset>
+							<fieldset> 
 								<legend>You may choose one or more tags for your entry</legend>
-								<input type="checkbox" name="tags[]" value="1">Technology<br>
-								<input type="checkbox" name="tags[]" value="2">Travel<br>
-								<input type="checkbox" name="tags[]" value="3">Personal<br>
-								<input type="checkbox" name="tags[]" value="4">Other<br>
-								<input type="checkbox" name="tags[]" value="5">Health and Wellness<br>
+								<?php
+									// Print tags as checked or unchecked
+									$tags = [];
+									foreach (get_tags() as $details) {
+										if ($edit_entry['id'] == $details['id']) {
+											$tags[] = $details['tag_id'];
+										}
+									}
+									// Technology tag
+									if ($tags['0'] == "1") {
+										echo "<input type=\"checkbox\" name=\"tags[]\" value=\"1\" checked>Technology<br>";
+									} else {
+										echo "<input type=\"checkbox\" name=\"tags[]\" value=\"1\">Technology<br>";
+									}
+									// Travel tag
+									if ($tags['0'] == "2" || $tags['1'] == "2") {
+										echo "<input type=\"checkbox\" name=\"tags[]\" value=\"2\" checked>Travel<br>";
+									} else {
+										echo "<input type=\"checkbox\" name=\"tags[]\" value=\"2\">Travel<br>";
+									}
+									// Personal tag
+									if ($tags['0'] == "3" || $tags['1'] == "3" || $tags['2'] == "3") {
+										echo "<input type=\"checkbox\" name=\"tags[]\" value=\"3\" checked>Personal<br>";
+									} else {
+										echo "<input type=\"checkbox\" name=\"tags[]\" value=\"3\">Personal<br>";
+									}
+									// Other tag
+									if ($tags['0'] == "4" || $tags['1'] == "4" || $tags['2'] == "4" || $tags['3'] == "4") {
+										echo "<input type=\"checkbox\" name=\"tags[]\" value=\"4\" checked>Other<br>";
+									} else {
+										echo "<input type=\"checkbox\" name=\"tags[]\" value=\"4\">Other<br>";
+									}
+									// Health and Welness tag
+									if ($tags['0'] == "5" || $tags['1'] == "5" || $tags['2'] == "5" || $tags['3'] == "5" || $tags['4'] == "5") {
+										echo "<input type=\"checkbox\" name=\"tags[]\" value=\"5\" checked>Health and Wellness<br>";
+									} else {
+										echo "<input type=\"checkbox\" name=\"tags[]\" value=\"5\">Health and Wellness<br>";
+									}
+								?>
 							</fieldset>
 							<input type="submit" value="Publish Entry" name="saveEdit" class="button"> 									
 							<input type="submit" value="Cancel" name="cancelEdit" class="button button-secondary">
