@@ -5,7 +5,6 @@
 	> Functions that do not apply to the CRUD model are listed after in alphabetical order 
 =========================================================================================*/
 
-
 /*========================
  	CRUD => CREATE
 =========================*/
@@ -96,7 +95,7 @@ function get_single_entry($id) {
 				$e->getMessage();
 				return array();
 		}
-	}
+	
 	return $results->fetch(PDO::FETCH_ASSOC);
 }
 // RETRIEVE JOURNAL ENTRIES BY TAG(S) (SQL JOIN)
